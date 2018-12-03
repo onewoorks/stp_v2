@@ -956,12 +956,6 @@ public class PermohonanController {
 		ArrayList<Permohonan> permohonan = new ArrayList<>();
 
 		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
-		//
-		// Permohonan permohonan = (Permohonan)
-		// permohonanService.findByNama(user.getNamaStaff());
-
-		// pembelianForm = (ArrayList<Pembelian>)
-		// pembelianService.findByPermohonan(permohonan);
 		for (Permohonan prJb : permohonan) {
 			penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(prJb);
 
@@ -995,7 +989,6 @@ public class PermohonanController {
 						outStream.flush();
 						inStrem.close();
 					}
-					// ServletOutputStream out = response.getOutputStream();
 				}
 			}
 		}
