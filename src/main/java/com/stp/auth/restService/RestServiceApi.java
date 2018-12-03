@@ -21,15 +21,30 @@ public class RestServiceApi {
 	@RequestMapping("/kemasKiniUpdate")
 	public String greeting(@RequestParam(value = "id") Long id) {
 		
-		List<Penerbangan> p = penerbanganService.findByPenerbanganId(id);
+		List<Penerbangan> p = penerbanganService.getAll();
+		ArrayList<PenerbanganPOJO> pData = new ArrayList<PenerbanganPOJO>();
 		
-		ArrayList<String> pData = new ArrayList<String>();
-		pData.add(p.get(0).getPenerbanganId().toString());
-		pData.add(p.get(0).getDariLokasi().toString());
-		pData.add(p.get(0).getJenisPesawat());
-		pData.add(p.get(0).getNoPesawat());
-		pData.add(p.get(0).getWaktuBerlepas());
-		pData.add(p.get(0).getDestinasi());
+		for (int i = 0; i < p.size(); i++) {
+			System.out.println(p.get(i).getPermohonan().getId());
+			if(p.get(i).getPermohonan().getId() == id) {
+				
+				PenerbanganPOJO pojo = new PenerbanganPOJO();
+				pojo.setPenerbanganId(p.get(i).getPenerbanganId());
+				pojo.setPenerbangan(p.get(i).getPenerbangan());
+				pojo.setTarikhPergi(p.get(i).getTarikhPergi());
+				pojo.setWaktuBerlepas(p.get(i).getWaktuBerlepas());
+				pojo.setWaktuTiba(p.get(i).getWaktuTiba());
+				pojo.setJenisPesawat(p.get(i).getJenisPesawat());
+				pojo.setNoPesawat(p.get(i).getNoPesawat());
+				pojo.setDariLokasi(p.get(i).getDariLokasi());
+				pojo.setDestinasi(p.get(i).getDestinasi());
+				pojo.setNoPesawat(p.get(i).getNoPesawat());
+				
+				pData.add(pojo);
+			}
+		}
+		
+
 		
 		String json = new Gson().toJson(pData);
 		

@@ -12,6 +12,9 @@
 	});
 </script>
 <script>
+
+	var kemasKiniClicked = false;
+
 	$(function() {
 		// Get the form fields and hidden div
 		var checkbox2 = $("#wakil2");
@@ -47,6 +50,44 @@
 	})
 </script>
 <script>
+function kemasKini(id,penerbanganId) {
+
+	var pId = penerbanganId;
+	
+	$.get("/kemasKiniUpdate?id="+id, function (data){
+		var listPenerbanganDetails = JSON.parse(data);
+		for(var i = 0;i<listPenerbanganDetails.length;i++){
+			if(listPenerbanganDetails[i].penerbanganId == pId){
+				var destinasi = document.getElementById('destinasi2');
+				var dariLokasi = document.getElementById('dariLokasi2');
+				var noPesawat = document.getElementById('noPesawat2');
+				var jenisPesawat = document.getElementById('jenisPesawat2');
+				var waktuTiba = document.getElementById('waktuTiba2');
+				var tarikhPergi = document.getElementById('tarikhPergi2');
+				var waktuBerlepas = document.getElementById('waktuBerlepas2');
+				var penerbanganId = document.getElementById('penerbanganId2');
+
+				penerbanganId.value = listPenerbanganDetails[i].penerbangan;
+				tarikhPergi.value = listPenerbanganDetails[i].tarikhPergi;
+				waktuBerlepas.value = listPenerbanganDetails[i].waktuBerlepas;
+				waktuTiba.value = listPenerbanganDetails[i].waktuTiba;
+				jenisPesawat.value = listPenerbanganDetails[i].jenisPesawat;
+				noPesawat.value = listPenerbanganDetails[i].noPesawat;
+				dariLokasi.value = listPenerbanganDetails[i].dariLokasi;
+				destinasi.value = listPenerbanganDetails[i].destinasi;
+			}			
+		}
+
+	});
+
+	kemasKiniClicked = true;
+
+	var btnTambah = document.getElementById('btnTambahDlmTable2');
+	btnTambah.innerText = "Kemaskini";
+	
+}
+</script>
+<script>
 	function changeTab3() {
 		$('[href="#timeline20"]').tab('show');
 	}
@@ -54,9 +95,6 @@
 		$('[href="#settings20"]').tab('show');
 	}
 
-	function kemasKini(element) {
-		 console.log(element);
-	}
 </script>
 
 <script>
@@ -150,6 +188,12 @@
 		tarikhPergi2.value = "";
 		waktuBerlepas2.value = "";
 		penerbanganId2.value = "";
+
+		if(kemasKiniClicked){
+			var btnTambah = document.getElementById('btnTambahDlmTable2');
+			btnTambah.innerText = "Tambah";
+			kemasKiniClicked = false;
+		}
 	}
 
 </script>
@@ -604,7 +648,7 @@
 															<td><spring:bind path="destinasi">
 																	${Penerbangan.destinasi}
 																</spring:bind></td>
-															<td><button type="button" value="${Penerbangan}" onclick="kemasKini(${Penerbangan.penerbanganId})" id="tambah"
+															<td><button type="button" value="${Penerbangan}" onclick="kemasKini(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})" id="tambah"
 																	class="btn btn-info pull-right">Kemaskini</button></td>
 															<!--  <td><input type="text" class="form-control"
 																		id="bom"></td>
