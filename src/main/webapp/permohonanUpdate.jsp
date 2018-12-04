@@ -507,10 +507,15 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="peruntukan">
 														<form:select path="peruntukan" class="form-control"
-															id="peruntukanId2" onchange="show2()" value="${permohonan.peruntukan}">
-															<option></option>
-															<option value="Operasi">Operasi</option>
-															<option value="Pembangunan">Pembangunan</option>
+															id="peruntukanId2" onchange="show2()">
+															    <c:if test="${permohonan.peruntukan == 'Pembangunan'}">
+															        <option value="Operasi">Operasi</option>
+																	<option value="Pembangunan" selected>Pembangunan</option>
+															    </c:if>
+															    <c:if test="${permohonan.peruntukan == 'Operasi'}">
+															    	<option value="Operasi" selected>Operasi</option>
+																	<option value="Pembangunan">Pembangunan</option>
+															    </c:if>
 														</form:select>
 													</spring:bind>
 												</div>
@@ -537,8 +542,16 @@ function kemasKini(id,penerbanganId) {
 														<spring:bind path="pembangunan">
 															<form:select path="pembangunan" class="form-control">
 																<c:forEach var="peruntukan" items="${peruntukan}">
-																	<option value="${peruntukan.peruntukanDesc}"><c:out
+																
+																 <c:if test="${permohonan.pembangunan == peruntukan.peruntukanDesc}">
+															        <option value="${peruntukan.peruntukanDesc}" selected><c:out
 																			value="${peruntukan.peruntukanDesc}" /></option>
+															    </c:if>
+															    <c:if test="${permohonan.pembangunan != peruntukan.peruntukanDesc}">
+															    	<option value="${peruntukan.peruntukanDesc}"><c:out
+																			value="${peruntukan.peruntukanDesc}" /></option>
+															    </c:if>
+																			
 																</c:forEach>
 															</form:select>
 														</spring:bind>
@@ -851,4 +864,10 @@ function kemasKini(id,penerbanganId) {
 		</div>
 	</div>
 </div>
+<script>
+	show2();
+
+	$.get("/kemasKiniPeruntukan",function (data){ console.log(data)});
+	
+</script>
 <!-- /.modal-content -->

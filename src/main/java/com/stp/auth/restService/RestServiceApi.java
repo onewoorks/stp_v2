@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,20 @@ public class RestServiceApi {
 
 	@Autowired
 	private PenerbanganService penerbanganService;
+	
+	String kemasKiniPeruntukan = "";
+	
+	@RequestMapping(value = "/kemasKiniPeruntukanPost")
+	public void initKemasKiniPeruntkan(@RequestParam(value = "peruntukan") String peruntukan){
+		
+		kemasKiniPeruntukan = peruntukan;
+	}
+	
+	@RequestMapping("/kemasKiniPeruntukan")
+	public String getKemasKiniPeruntukan(){
+		 
+		return kemasKiniPeruntukan;
+	}
 	
 	@RequestMapping("/kemasKiniUpdate")
 	public String greeting(@RequestParam(value = "id") Long id) {

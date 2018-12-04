@@ -2,19 +2,26 @@ package com.stp.auth.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.management.Notification;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +30,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +47,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -110,6 +127,9 @@ public class PermohonanController {
 	ArrayList<PenerbanganTemp> pt = new ArrayList<PenerbanganTemp>();
 	ArrayList<BaranganTemp> barangant = new ArrayList<BaranganTemp>();
 	ArrayList<Permohonan> permohonan = new ArrayList<>();
+	
+	String kemasKiniPeruntukan = "";
+	
 
 	@RequestMapping(value = "/permohonanTiket", method = RequestMethod.GET)
 	public String permohonan(Model model, HttpSession session, Long id) {
@@ -288,7 +308,7 @@ public class PermohonanController {
 	}
 
 	@RequestMapping(value = "/permohonanKemaskiniTemp", method = RequestMethod.GET)
-	public String permohonanKemaskiniTemp(@RequestParam("id") Long id, Model model, HttpSession session) {
+	public String permohonanKemaskiniTemp(@RequestParam("id") Long id, Model model, HttpSession session,HttpServletRequest req) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userService.findByUsername(username);
@@ -297,7 +317,7 @@ public class PermohonanController {
 		Permohonan permohonan = permohonanService.findById(id);
 		session.setAttribute("permohonan", permohonan);
 		
-
+		
 		Long id3 = id;
 
 		PermohonanTemp temp = new PermohonanTemp();
@@ -1661,5 +1681,8 @@ public class PermohonanController {
 		return "redirect:/maintenancePageUnit";
 
 	}
+	
+
+	
 
 }
