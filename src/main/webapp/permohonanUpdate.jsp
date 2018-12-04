@@ -159,6 +159,10 @@ function kemasKini(id,penerbanganId) {
 		var table1 = document.getElementById('tableBarangan1');
 		totalAnggaran1 = totalAnggaran1 + parseInt(anggaranBerat1, 10);
 
+		if(total1.value != null){
+			totalAnggaran1 = totalAnggaran1 + parseInt(total1.value,10);
+		}
+		
 		$(
 				"<tr><td>" + baranganCount1 + "</td><td>" + baranganDibawa1
 						+ "</td><td>" + jumlah1 + "</td><td>" + anggaranBerat1
@@ -821,7 +825,7 @@ function kemasKini(id,penerbanganId) {
 												<spring:bind path="total">
 													<form:input type="number" id="total1" class="form-control"
 														path="total" placeholder="Jumlah Anggaran Berat"
-														disabled="true"></form:input>
+														disabled="true" value="${anggaranTotalBerat}"></form:input>
 												</spring:bind>
 											</div>
 									

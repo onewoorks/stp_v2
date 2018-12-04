@@ -297,16 +297,13 @@ public class PermohonanController {
 		Permohonan permohonan = permohonanService.findById(id);
 		session.setAttribute("permohonan", permohonan);
 		
-		// List<Permohonan> permohonan1 = permohonanService.getAll();
 
 		Long id3 = id;
 
 		PermohonanTemp temp = new PermohonanTemp();
-
 		temp.setId(id3);
 
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
-
 		penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(permohonan);
 
 		Penerbangan contoh = null;
@@ -321,10 +318,7 @@ public class PermohonanController {
 
 		model.addAttribute("penerbangan", list);
 
-		System.out.println("penerbangan :" + list);
-
 		ArrayList<Barangan> barangan = new ArrayList<>();
-
 		List<Barangan> list2 = new ArrayList<>();
 
 		barangan = (ArrayList<Barangan>) baranganService.findByPermohonan(permohonan);
@@ -332,11 +326,11 @@ public class PermohonanController {
 		for (Barangan jb2 : barangan) {
 			if (jb2.getBaranganId() != null) {
 				list2.add(jb2);
+				session.setAttribute("anggaranTotalBerat", jb2.getTotal());
 			}
 		}
 
 		model.addAttribute("barangan", list2);
-
 		// model.addAttribute("welcome", permohonanService.getAll());
 		model.addAttribute("welcome", permohonanService.findByNama(user.getNamaStaff()));
 		model.addAttribute("lokasi", dariLokasiService.getAll());
