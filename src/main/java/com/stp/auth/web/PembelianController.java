@@ -1,6 +1,7 @@
 package com.stp.auth.web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,8 @@ import com.stp.auth.model.PenerbanganTemp;
 import com.stp.auth.model.Pengguna;
 import com.stp.auth.model.Permohonan;
 import com.stp.auth.model.PermohonanTemp;
+import com.stp.auth.model.RefJawatan;
+import com.stp.auth.model.RefRole;
 import com.stp.auth.model.User;
 import com.stp.auth.service.DaftarPenggunaService;
 import com.stp.auth.service.DariLokasiService;
@@ -27,6 +30,7 @@ import com.stp.auth.service.PenerbanganService;
 import com.stp.auth.service.PermohonanService;
 import com.stp.auth.service.RefPeruntukanService;
 import com.stp.auth.service.RefPesawatService;
+import com.stp.auth.service.RefRoleService;
 import com.stp.auth.service.UserService;
 
 @Controller
@@ -52,6 +56,9 @@ public class PembelianController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RefRoleService refRoleService;
 
 	@Autowired
 	private DaftarPenggunaService penggunaService;
@@ -62,6 +69,31 @@ public class PembelianController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Pengguna pengguna = penggunaService.findByUsername(username);
 		session.setAttribute("user", pengguna);
+
+		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
+
+		pengguna2 = (ArrayList<Pengguna>) penggunaService.findByNoKP(pengguna.getNoKP());
+
+		for (Pengguna jb : pengguna2) {
+
+			if (jb.getUsername().equals(pengguna.getUsername())) {
+				Long idRole = jb.getRefJawatan().getRefRole().getRoleId();
+				pengguna.getRefJawatan().getJawatanDesc();
+
+				Long idRole2 = idRole;
+				System.out.println(idRole2);
+				ArrayList<RefRole> listRole = new ArrayList<>();
+
+				listRole = (ArrayList<RefRole>) refRoleService.getAll();
+				for (RefRole jb2 : listRole) {
+					if (jb2.getRoleId().equals(idRole2)) {
+						model.addAttribute("role", jb2.getRoleDesc());
+						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					}
+				}
+			}
+		}
+
 		// User user = userService.findByUsername(username);
 		// session.setAttribute("user", user);
 		model.addAttribute("welcome", permohonanService.findByStatusPermohonan("Proses"));
@@ -94,9 +126,9 @@ public class PembelianController {
 		model.addAttribute("kemaskiniPermohon", new PermohonanTemp());
 		model.addAttribute("updatePembelian", new Pembelian());
 		model.addAttribute("updateKemaskiniTiket", new Penerbangan());
+		model.addAttribute("namaStaff", pengguna.getNamaStaff());
 		// model.addAttribute("kemaskiniPermohon", new Permohonan());
-		model.addAttribute("jawatan", pengguna.getJawatan());
-		System.out.println(username + "=============================" + pengguna.getJawatan());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 
 		return "pembelian";
 	}

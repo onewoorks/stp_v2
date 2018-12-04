@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.stp.auth.model.Pengguna;
+import com.stp.auth.model.RefJawatan;
 import com.stp.auth.repository.DaftarPenggunaRepository;
 import com.stp.auth.repository.RoleRepository;
 
@@ -63,4 +64,20 @@ public class DaftarPenggunaImpl implements DaftarPenggunaService {
 	public void remove(Pengguna daftarPenggunaForm) {
 		daftarPenggunaRepo.delete(daftarPenggunaForm.getId());
 	}
+	
+	@Override
+	public List<Pengguna> findByRefJawatan(RefJawatan ref) {
+		// TODO Auto-generated method stub
+		return daftarPenggunaRepo.findByRefJawatan(ref);
+	}
+	
+	@Override
+	public List<Pengguna> findByNoKP(String noKP) {
+		// TODO Auto-generated method stub
+		return daftarPenggunaRepo.findByNoKP(noKP);
+	}
+	
+	
+	
+	
 }

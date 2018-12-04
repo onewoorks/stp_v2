@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${jawatan == 'Pegawai'}">
+<c:forEach items="${role}" var="test">
+<c:if test="${test == 'Pegawai'}">
 	<aside class="main-sidebar">
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -24,7 +25,7 @@
 		</section>
 	</aside>
 </c:if>
-<c:if test="${jawatan == 'Ketua Pegawai'}">
+<c:if test="${test == 'Ketua Pegawai'}">
 	<aside class="main-sidebar">
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -56,7 +57,7 @@
 		</section>
 	</aside>
 </c:if>
-<c:if test="${jawatan == 'Pentadbir'}">
+<c:if test="${test == 'Pentadbir'}">
 	<aside class="main-sidebar">
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -128,7 +129,7 @@
 		</section>
 	</aside>
 </c:if>
-<c:if test="${jawatan == 'Pengarah'}">
+<c:if test="${test == 'Pengarah'}">
 	<aside class="main-sidebar">
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -160,3 +161,4 @@
 		</section>
 	</aside>
 </c:if>
+</c:forEach>

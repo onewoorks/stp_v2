@@ -20,11 +20,16 @@ import com.stp.auth.model.Penerbangan;
 import com.stp.auth.model.Pengguna;
 import com.stp.auth.model.Permohonan;
 import com.stp.auth.model.PermohonanTemp;
+import com.stp.auth.model.RefJawatan;
+import com.stp.auth.model.RefRole;
 import com.stp.auth.model.User;
+import com.stp.auth.service.DaftarPenggunaService;
 import com.stp.auth.service.DariLokasiService;
 import com.stp.auth.service.PembelianService;
 import com.stp.auth.service.PenerbanganService;
 import com.stp.auth.service.PermohonanService;
+import com.stp.auth.service.RefJawatanService;
+import com.stp.auth.service.RefRoleService;
 import com.stp.auth.service.SecurityService;
 import com.stp.auth.service.SendHTMLEmail;
 import com.stp.auth.service.UserService;
@@ -48,7 +53,16 @@ public class UserController {
 	private DariLokasiService dariLokasiService;
 
 	@Autowired
+	private DaftarPenggunaService daftarPenggunaService;
+
+	@Autowired
 	private UserValidator userValidator;
+
+	@Autowired
+	private RefRoleService refRoleService;
+
+	@Autowired
+	private RefJawatanService refJawatanService;
 
 	ArrayList<Permohonan> permohonan = new ArrayList<Permohonan>();
 
@@ -69,7 +83,7 @@ public class UserController {
 
 		userService.save(userForm);
 
-		securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+		securityService.autologin(userForm.getUsername(), userForm.getNoKP());
 
 		return "redirect:/welcome";
 	}
@@ -94,25 +108,46 @@ public class UserController {
 		User user = userService.findByUsername(username);
 		session.setAttribute("user", user);
 
+		Pengguna pengguna = daftarPenggunaService.findByUsername(username);
+
 		List<Permohonan> userForm = permohonanService.getAll();
 
-		List<Permohonan> permohonanForm = permohonanService.findByNamaPelulus(user.getNamaPengurus());
+		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
-		ArrayList<Pengguna> pengguna = new ArrayList<>();
+		pengguna2 = (ArrayList<Pengguna>) daftarPenggunaService.findByNoKP(user.getNoKP());
 
-		// pengguna = (ArrayList<Pengguna>) userService.;
+		for (Pengguna jb : pengguna2) {
+
+			if (jb.getUsername().equals(user.getUsername())) {
+				Long idRole = jb.getRefJawatan().getRefRole().getRoleId();
+				pengguna.getRefJawatan().getJawatanDesc();
+
+				Long idRole2 = idRole;
+				System.out.println(idRole2);
+				ArrayList<RefRole> listRole = new ArrayList<>();
+
+				listRole = (ArrayList<RefRole>) refRoleService.getAll();
+				for (RefRole jb2 : listRole) {
+					if (jb2.getRoleId().equals(idRole2)) {
+						model.addAttribute("role", jb2.getRoleDesc());
+						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					}
+				}
+			}
+		}
 
 		for (Permohonan jb : userForm) {
-			if(jb.getNamaPelulus().equals(user.getNamaStaff())){
-			model.addAttribute("welcome", userForm);
-			model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(jb));
+			if (jb.getNamaPelulus().equals(user.getNamaStaff())) {
+				model.addAttribute("welcome", userForm);
+				model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(jb));
 			}
 		}
 
 		model.addAttribute("kemaskiniPermohon", new Permohonan());
-		model.addAttribute("jawatan", user.getJawatan());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("username", user.getUsername());
-		System.out.println(username + "=============================" + user.getJawatan());
+		model.addAttribute("namaStaff", user.getNamaStaff());
+		System.out.println(pengguna + "=============================" + pengguna.getRefJawatan().getJawatanDesc());
 
 		return "welcome";
 	}
@@ -123,13 +158,41 @@ public class UserController {
 
 		User user = userService.findByUsername(username);
 		session.setAttribute("user", user);
+
+		Pengguna pengguna = daftarPenggunaService.findByUsername(username);
+
+		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
+
+		pengguna2 = (ArrayList<Pengguna>) daftarPenggunaService.findByNoKP(user.getNoKP());
+
+		for (Pengguna jb : pengguna2) {
+
+			if (jb.getUsername().equals(user.getUsername())) {
+				Long idRole = jb.getRefJawatan().getRefRole().getRoleId();
+				pengguna.getRefJawatan().getJawatanDesc();
+
+				Long idRole2 = idRole;
+				System.out.println(idRole2);
+				ArrayList<RefRole> listRole = new ArrayList<>();
+
+				listRole = (ArrayList<RefRole>) refRoleService.getAll();
+				for (RefRole jb2 : listRole) {
+					if (jb2.getRoleId().equals(idRole2)) {
+						model.addAttribute("role", jb2.getRoleDesc());
+						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					}
+				}
+			}
+		}
+
 		model.addAttribute("welcome", permohonanService.findByStatusPermohonan("Batal"));
 		for (Permohonan userForm : permohonanService.findByStatusPermohonan("Batal")) {
 			model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(userForm));
 		}
 		model.addAttribute("kemaskiniPengesahan", new Permohonan());
-		model.addAttribute("jawatan", user.getJawatan());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("username", user.getUsername());
+		model.addAttribute("namaStaff", user.getNamaStaff());
 		return "pengesahan";
 	}
 
