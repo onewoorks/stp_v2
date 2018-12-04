@@ -1,8 +1,10 @@
 package com.stp.auth.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.stp.auth.model.Pengguna;
+import com.stp.auth.model.RefJawatan;
 
 public interface DaftarPenggunaService {
     void save(Pengguna pengguna);
@@ -12,4 +14,6 @@ public interface DaftarPenggunaService {
 	void remove(Pengguna daftarPenggunaForm);
 	List<Pengguna> findByJawatan(String jawatan);
 	List<Pengguna> findByCawangan(String cawangan);
+	List<Pengguna> findByRefJawatan(RefJawatan ref);
+	List<Pengguna> findByNoKP(String noKP);
 }

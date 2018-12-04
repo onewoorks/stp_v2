@@ -19,7 +19,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Kemaskini Pengguna</h4>
+				<h4 class="modal-title">Padam Pengguna</h4>
 			</div>
 			<form:form method="POST" modelAttribute="padamPenggunaForm"
 				action="${contextPath}/admin/padamPengguna" class="form-horizontal">

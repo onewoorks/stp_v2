@@ -100,7 +100,7 @@
 									</div>
 								</section>
 								<br />
-								<table id="example1" class="table table-bordered table-hover">
+								<table id="pengguna" class="table table-bordered table-hover">
 									<thead>
 										<tr>
 											<th>Bil</th>
@@ -182,7 +182,7 @@
 		<script
 			src="${contextPath}/resources/css/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 		<script>
-			$('#example1').DataTable({
+			$('#pengguna').DataTable({
 				'paging' : true,
 				'lengthChange' : false,
 				'searching' : false,

@@ -1,11 +1,17 @@
 package com.stp.auth.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "user")
@@ -32,6 +38,19 @@ public class Pengguna {
 	private String enrichNo;
 //	private Set<Role> roles;
 	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "refJawatan_Id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private RefJawatan refJawatan;
+	
+	public RefJawatan getRefJawatan() {
+		return refJawatan;
+	}
+
+	public void setRefJawatan(RefJawatan refJawatan) {
+		this.refJawatan = refJawatan;
+	}
+
 	public Long getId() {
 		return id;
 	}

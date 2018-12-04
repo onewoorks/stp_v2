@@ -49,7 +49,8 @@
 										placeholder="Nama Staf"></form:input>
 								</spring:bind>
 							</div>
-							<label for="inputEmail3" class="col-sm-2 control-label">Enrich No</label>
+							<label for="inputEmail3" class="col-sm-2 control-label">Enrich
+								No</label>
 
 							<div class="col-sm-4">
 								<spring:bind path="enrichNo">
@@ -101,13 +102,14 @@
 							<label class="col-sm-2 control-label">Jawatan</label>
 
 							<div class="col-sm-4">
-								<form:select path="Jawatan" class="form-control">
-									<option></option>
-									<option>Pegawai</option>
-									<option>Ketua Pegawai</option>
-									<option>Pentadbir</option>
-									<option>Pengarah</option>
-								</form:select>
+								<spring:bind path="refJawatan">
+									<form:select path="refJawatan" class="form-control">
+										<c:forEach var="test" items="${listJawatan}">
+											<option value="${test.jawatanDesc}"><c:out
+													value="${test.jawatanDesc}" /></option>
+										</c:forEach>
+									</form:select>
+								</spring:bind>
 							</div>
 							<label class="col-sm-2 control-label">Status</label>
 
@@ -144,7 +146,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Nama
+							<label for="inputEmail3" class="col-sm-2 control-label">Nama
 								Pengurus</label>
 
 							<div class="col-sm-4">
@@ -152,7 +154,7 @@
 								<spring:bind path="namaPengurus">
 									<form:select path="namaPengurus" class="form-control">
 
-										<c:forEach var="test" items="${jawatan}">
+										<c:forEach var="test" items="${jawatanUser}">
 
 											<option value="${test.namaStaff}"><c:out
 													value="${test.namaStaff}" /></option>
