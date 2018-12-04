@@ -25,7 +25,6 @@ public class RestServiceApi {
 		ArrayList<PenerbanganPOJO> pData = new ArrayList<PenerbanganPOJO>();
 		
 		for (int i = 0; i < p.size(); i++) {
-			System.out.println(p.get(i).getPermohonan().getId());
 			if(p.get(i).getPermohonan().getId() == id) {
 				
 				PenerbanganPOJO pojo = new PenerbanganPOJO();

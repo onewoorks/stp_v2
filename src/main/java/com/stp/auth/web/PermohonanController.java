@@ -459,6 +459,13 @@ public class PermohonanController {
 		pt.add(pt2);
 
 	}
+	
+	@RequestMapping(value = "/kemasPenerbanganTemp", method = RequestMethod.POST, produces = "application/json")
+	public void kemasPenerbanganTemp(@RequestBody PenerbanganTemp pt2) {
+
+		pt.add(pt2);
+
+	}
 
 	@RequestMapping(value = "/permohonanForm", method = RequestMethod.POST)
 	public String registration(@ModelAttribute("permohonanForm") PermohonanTemp temp, HttpSession session,
@@ -714,12 +721,12 @@ public class PermohonanController {
 					e1.printStackTrace();
 				}
 				Penerbangan penerbangan = new Penerbangan();
-				if (temp.getPenerbanganId() != null) {
-
+				if (pt.get(i).getPenerbanganId() != null) {
+					penerbangan.setPenerbanganId(Long.parseLong(pt.get(i).getPenerbanganId()));
 				}
 
 				penerbangan.setPenerbangan(pt.get(i).getPenerbangan());
-				penerbangan.setTarikhPergi(dtf.format(tarikhPergi));
+				penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
 				penerbangan.setWaktuBerlepas(pt.get(i).getWaktuBerlepas());
 				penerbangan.setWaktuTiba(pt.get(i).getWaktuTiba());
 				penerbangan.setJenisPesawat(pt.get(i).getJenisPesawat());

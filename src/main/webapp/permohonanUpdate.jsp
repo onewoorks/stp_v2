@@ -50,9 +50,13 @@
 	})
 </script>
 <script>
+
+var globalPenerbanganId = 0;
+
 function kemasKini(id,penerbanganId) {
 
 	var pId = penerbanganId;
+	globalPenerbanganId = penerbanganId;
 	
 	$.get("/kemasKiniUpdate?id="+id, function (data){
 		var listPenerbanganDetails = JSON.parse(data);
@@ -67,14 +71,34 @@ function kemasKini(id,penerbanganId) {
 				var waktuBerlepas = document.getElementById('waktuBerlepas2');
 				var penerbanganId = document.getElementById('penerbanganId2');
 
-				penerbanganId.value = listPenerbanganDetails[i].penerbangan;
-				tarikhPergi.value = listPenerbanganDetails[i].tarikhPergi;
-				waktuBerlepas.value = listPenerbanganDetails[i].waktuBerlepas;
-				waktuTiba.value = listPenerbanganDetails[i].waktuTiba;
-				jenisPesawat.value = listPenerbanganDetails[i].jenisPesawat;
-				noPesawat.value = listPenerbanganDetails[i].noPesawat;
-				dariLokasi.value = listPenerbanganDetails[i].dariLokasi;
-				destinasi.value = listPenerbanganDetails[i].destinasi;
+				if(listPenerbanganDetails[i].penerbangan != null){
+					penerbanganId.value = listPenerbanganDetails[i].penerbangan;
+				}
+				if(listPenerbanganDetails[i].tarikhPergi != null){
+					tarikhPergi.value = listPenerbanganDetails[i].tarikhPergi;
+				}
+				if(listPenerbanganDetails[i].waktuBerlepas != null){
+					waktuBerlepas.value = listPenerbanganDetails[i].waktuBerlepas;
+				}
+				if(listPenerbanganDetails[i].waktuTiba != null){
+					waktuTiba.value = listPenerbanganDetails[i].waktuTiba;
+				}
+				if(listPenerbanganDetails[i].jenisPesawat != null){
+					jenisPesawat.value = listPenerbanganDetails[i].jenisPesawat;
+				}
+				if(listPenerbanganDetails[i].noPesawat != null){
+					noPesawat.value = listPenerbanganDetails[i].noPesawat;
+				}
+				if(listPenerbanganDetails[i].dariLokasi != null){
+					dariLokasi.value = listPenerbanganDetails[i].dariLokasi;
+				}
+				if(listPenerbanganDetails[i].destinasi != null){
+					destinasi.value = listPenerbanganDetails[i].destinasi;
+				}
+
+
+				getRowToDelete(listPenerbanganDetails[i]);
+				
 			}			
 		}
 
@@ -86,6 +110,32 @@ function kemasKini(id,penerbanganId) {
 	btnTambah.innerText = "Kemaskini";
 	
 }
+</script>
+<script>
+
+	var whichRowClicked = 0;
+
+	function getRowToDelete(listPenerbanganDetails){
+
+		var detailsCompare = listPenerbanganDetails;
+		var table = document.getElementById('tablePenerbanganId2');
+
+		for(var i = 0; i<table.rows.length; i++){
+			var row = table.rows[i];
+
+			var penerbangan = row.cells[0].innerText;
+			var tarikPenerbangan = row.cells[1].innerText;
+			var waktuBerlepas = row.cells[2].innerText;
+			var waktuTiba = row.cells[3].innerText;
+				
+			if(penerbangan == detailsCompare.penerbangan && tarikPenerbangan == detailsCompare.tarikhPergi && waktuBerlepas == detailsCompare.waktuBerlepas && waktuTiba == detailsCompare.waktuTiba){
+				whichRowClicked = i;
+			}
+			
+			
+		}
+		
+	}
 </script>
 <script>
 	function changeTab3() {
@@ -144,6 +194,7 @@ function kemasKini(id,penerbanganId) {
 
 <script>
 	function tambahDlmTable2() {
+
 		var destinasi2 = document.getElementById('destinasi2');
 		var dariLokasi2 = document.getElementById('dariLokasi2');
 		var noPesawat2 = document.getElementById('noPesawat2');
@@ -153,6 +204,7 @@ function kemasKini(id,penerbanganId) {
 		var waktuBerlepas2 = document.getElementById('waktuBerlepas2');
 		var penerbanganId2 = document.getElementById('penerbanganId2');
 		var table2 = document.getElementById('tablePenerbanganId2');
+
 		$(
 				"<tr><td>" + penerbanganId2.value + "</td><td>"
 						+ tarikhPergi2.value + "</td><td>"
@@ -160,26 +212,65 @@ function kemasKini(id,penerbanganId) {
 						+ "</td><td>" + noPesawat2.value + "</td><td>"
 						+ dariLokasi2.value + "</td><td>" + destinasi2.value
 						+ "</td></tr>").appendTo(table2);
-		var butiranPenerbangan2 = {
-			"penerbangan" : penerbanganId2.value,
-			"tarikhPergi" : tarikhPergi2.value,
-			"waktuBerlepas" : waktuBerlepas2.value,
-			"waktuTiba" : waktuTiba2.value,
-			"noPesawat" : noPesawat2.value,
-			"dariLokasi" : dariLokasi2.value,
-			"destinasi" : destinasi2.value,
-			"jenisPesawat" : jenisPesawat2.value,
-		};
+		
+		if(kemasKiniClicked){
 
-		$.ajax({
-			type : "POST",
-			//the url where you want to sent the userName and password to
-			url : '/penerbanganTemp',
-			contentType : 'application/json',
-			data : JSON.stringify(butiranPenerbangan2),
-			success : function() {
-			}
-		})
+			var butiranPenerbangan2 = {
+					"penerbanganId": globalPenerbanganId,
+					"penerbangan" : penerbanganId2.value,
+					"tarikhPergi" : tarikhPergi2.value,
+					"waktuBerlepas" : waktuBerlepas2.value,
+					"waktuTiba" : waktuTiba2.value,
+					"noPesawat" : noPesawat2.value,
+					"dariLokasi" : dariLokasi2.value,
+					"destinasi" : destinasi2.value,
+					"jenisPesawat" : jenisPesawat2.value,
+				};
+			
+			var btnTambah = document.getElementById('btnTambahDlmTable2');
+			btnTambah.innerText = "Tambah";
+			kemasKiniClicked = false;
+
+			$.ajax({
+				type : "POST",
+				//the url where you want to sent the userName and password to
+				url : '/kemasPenerbanganTemp',
+				contentType : 'application/json',
+				data : JSON.stringify(butiranPenerbangan2),
+				success : function() {
+				}
+			})
+
+			table2.deleteRow(whichRowClicked);
+
+			whichRowClicked = 0;
+			globalPenerbanganId = 0;
+			
+
+			
+		}else{
+			var butiranPenerbangan2 = {
+					"penerbangan" : penerbanganId2.value,
+					"tarikhPergi" : tarikhPergi2.value,
+					"waktuBerlepas" : waktuBerlepas2.value,
+					"waktuTiba" : waktuTiba2.value,
+					"noPesawat" : noPesawat2.value,
+					"dariLokasi" : dariLokasi2.value,
+					"destinasi" : destinasi2.value,
+					"jenisPesawat" : jenisPesawat2.value,
+				};
+			
+			$.ajax({
+				type : "POST",
+				//the url where you want to sent the userName and password to
+				url : '/penerbanganTemp',
+				contentType : 'application/json',
+				data : JSON.stringify(butiranPenerbangan2),
+				success : function() {
+				}
+			})
+		}
+
 		destinasi2.value = "";
 		dariLokasi2.value = "";
 		noPesawat2.value = "";
@@ -188,12 +279,6 @@ function kemasKini(id,penerbanganId) {
 		tarikhPergi2.value = "";
 		waktuBerlepas2.value = "";
 		penerbanganId2.value = "";
-
-		if(kemasKiniClicked){
-			var btnTambah = document.getElementById('btnTambahDlmTable2');
-			btnTambah.innerText = "Tambah";
-			kemasKiniClicked = false;
-		}
 	}
 
 </script>
@@ -675,11 +760,7 @@ function kemasKini(id,penerbanganId) {
 								</div>
 								<div class="tab-pane" id="settings20">
 									<div class="box-body">
-										<c:forEach items="${barangan}" var="barangan">
-											<spring:bind path="baranganId">
-												<form:input type="hidden" class="form-control"
-													path="baranganId" value="${barangan.baranganId}"></form:input>
-											</spring:bind>
+
 											<table id="tableBarangan1"
 												class="table table-bordered table-hover">
 												<thead>
@@ -692,10 +773,12 @@ function kemasKini(id,penerbanganId) {
 
 													</tr>
 												</thead>
+				
 												<tbody>
 													<%
 														
 													%>
+
 													<tr>
 														<td></td>
 														<td><spring:bind path="baranganDibawa">
@@ -715,14 +798,25 @@ function kemasKini(id,penerbanganId) {
 																onclick="baranganTableTambah2()">Tambah</button></td>
 
 													</tr>
+										<c:forEach items="${barangan}" var="barangan">
+											<spring:bind path="baranganId">
+												<form:input type="hidden" class="form-control"
+													path="baranganId" value="${barangan.baranganId}"></form:input>
+											</spring:bind>
+													
+												<tr>
+												<td></td>
+												<td>${barangan.baranganDibawa}</td>
+												<td>${barangan.jumlah}</td>
+												<td>${barangan.anggaranBerat}</td>
+												</tr>
+													
+										</c:forEach>
 													<%
 														
 													%>
 												</tbody>
 											</table>
-											<!-- <div class="box-footer">
-										
-									</div> -->
 											<div class="box-footer">
 												<spring:bind path="total">
 													<form:input type="number" id="total1" class="form-control"
@@ -730,7 +824,7 @@ function kemasKini(id,penerbanganId) {
 														disabled="true"></form:input>
 												</spring:bind>
 											</div>
-										</c:forEach>
+									
 
 										<div class="box-footer">
 											<button type="submit" class="btn btn-danger pull-right">Mohon</button>
