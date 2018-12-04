@@ -295,7 +295,8 @@ public class PermohonanController {
 		session.setAttribute("user", user);
 
 		Permohonan permohonan = permohonanService.findById(id);
-		//
+		session.setAttribute("permohonan", permohonan);
+		
 		// List<Permohonan> permohonan1 = permohonanService.getAll();
 
 		Long id3 = id;
@@ -503,12 +504,12 @@ public class PermohonanController {
 		permohonan.setPassport(temp.getPassport());
 		permohonan.setTujuan(temp.getTujuan());
 		permohonan.setTempatBertugas(temp.getTempatBertugas());
-		permohonan.setTarikhMula(dtf.format(tarikhMula));
-		permohonan.setTarikhTamat(dtf.format(tarikhTamat));
+		permohonan.setTarikhMula(dtf2.format(tarikhMula));
+		permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
 		permohonan.setNoTelefonBimbit(temp.getNoTelefonBimbit());
 		permohonan.setPeruntukan(temp.getPeruntukan());
 		permohonan.setCatatan(temp.getCatatan());
-		permohonan.setTarikhMohon(dtf.format(dateMohon));
+		permohonan.setTarikhMohon(dtf2.format(dateMohon));
 		permohonan.setPembangunan(temp.getPembangunan());
 		permohonan.setNoBilBom(temp.getNoBilBom());
 		permohonan.setEnrichNo(temp.getEnrichNo());
@@ -545,7 +546,7 @@ public class PermohonanController {
 
 				Penerbangan penerbangan = new Penerbangan();
 				penerbangan.setPenerbangan(pt.get(i).getPenerbangan());
-				penerbangan.setTarikhPergi(dtf.format(tarikhPergi));
+				penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
 				penerbangan.setWaktuBerlepas(pt.get(i).getWaktuBerlepas());
 				penerbangan.setWaktuTiba(pt.get(i).getWaktuTiba());
 				penerbangan.setNoPesawat(pt.get(i).getNoPesawat());
@@ -681,12 +682,12 @@ public class PermohonanController {
 		permohonan.setPassport(temp.getPassport());
 		permohonan.setTujuan(temp.getTujuan());
 		permohonan.setTempatBertugas(temp.getTempatBertugas());
-		permohonan.setTarikhMula(dtf.format(tarikhMula));
-		permohonan.setTarikhTamat(dtf.format(tarikhTamat));
+		permohonan.setTarikhMula(dtf2.format(tarikhMula));
+		permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
 		permohonan.setNoTelefonBimbit(temp.getNoTelefonBimbit());
 		permohonan.setPeruntukan(temp.getPeruntukan());
 		permohonan.setCatatan(temp.getCatatan());
-		permohonan.setTarikhMohon(dtf.format(dateMohon));
+		permohonan.setTarikhMohon(dtf2.format(dateMohon));
 		permohonan.setPembangunan(temp.getPembangunan());
 		permohonan.setNoBilBom(temp.getNoBilBom());
 		permohonan.setEnrichNo(temp.getEnrichNo());
@@ -800,12 +801,12 @@ public class PermohonanController {
 		permohonan.setPassport(temp.getPassport());
 		permohonan.setTujuan(temp.getTujuan());
 		permohonan.setTempatBertugas(temp.getTempatBertugas());
-		permohonan.setTarikhMula(dtf.format(tarikhMula));
-		permohonan.setTarikhTamat(dtf.format(tarikhTamat));
+		permohonan.setTarikhMula(dtf2.format(tarikhMula));
+		permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
 		permohonan.setNoTelefonBimbit(temp.getNoTelefonBimbit());
 		permohonan.setPeruntukan(temp.getPeruntukan());
 		permohonan.setCatatan(temp.getCatatan());
-		permohonan.setTarikhMohon(dtf.format(dateMohon));
+		permohonan.setTarikhMohon(dtf2.format(dateMohon));
 		permohonan.setPembangunan(temp.getPembangunan());
 		permohonan.setNoBilBom(temp.getNoBilBom());
 		permohonan.setEnrichNo(temp.getEnrichNo());
@@ -834,7 +835,7 @@ public class PermohonanController {
 				Date tarikhPergi = null;
 
 				try {
-					tarikhPergi = dtf.parse(pt.get(i).getTarikhPergi());
+					tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -842,7 +843,7 @@ public class PermohonanController {
 
 				Penerbangan penerbangan = new Penerbangan();
 				penerbangan.setPenerbangan(pt.get(i).getPenerbangan());
-				penerbangan.setTarikhPergi(dtf.format(tarikhPergi));
+				penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
 				penerbangan.setWaktuBerlepas(pt.get(i).getWaktuBerlepas());
 				penerbangan.setWaktuTiba(pt.get(i).getWaktuTiba());
 				penerbangan.setJenisPesawat(pt.get(i).getJenisPesawat());
@@ -1493,7 +1494,7 @@ public class PermohonanController {
 			e.printStackTrace();
 		}
 
-		penerbanganForm.setTarikhPergi(dtf.format(tarikhPergi));
+		penerbanganForm.setTarikhPergi(dtf2.format(tarikhPergi));
 		System.out.println("haaaaaaaaa" + penerbanganForm);
 		penerbanganService.save(penerbanganForm);
 

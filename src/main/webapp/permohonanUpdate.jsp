@@ -452,7 +452,7 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="tarikhMula">
 														<form:input type="date" class="form-control"
-															path="tarikhMula"></form:input>
+															path="tarikhMula" value="${permohonan.tarikhMula}"></form:input>
 													</spring:bind>
 												</div>
 												<label for="inputPassword3" class="col-sm-2 control-label">Tarikh
@@ -461,7 +461,7 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="tarikhTamat">
 														<form:input type="date" class="form-control"
-															path="tarikhTamat"></form:input>
+															path="tarikhTamat" value="${permohonan.tarikhTamat}"></form:input>
 													</spring:bind>
 												</div>
 											</div>
@@ -496,14 +496,14 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="catatan">
 														<form:input type="text" class="form-control"
-															path="catatan" id="catatan" readonly="true"></form:input>
+															path="catatan" id="catatan" readonly="true" value="${permohonan.catatan}"></form:input>
 													</spring:bind>
 												</div>
 												<label for="inputPassword3" class="col-sm-2 control-label">Peruntukan</label>
 												<div class="col-sm-4">
 													<spring:bind path="peruntukan">
 														<form:select path="peruntukan" class="form-control"
-															id="peruntukanId2" onchange="show2()">
+															id="peruntukanId2" onchange="show2()" value="${permohonan.peruntukan}">
 															<option></option>
 															<option value="Operasi">Operasi</option>
 															<option value="Pembangunan">Pembangunan</option>
@@ -547,7 +547,7 @@ function kemasKini(id,penerbanganId) {
 													<div class="col-sm-4">
 														<spring:bind path="noBilBom">
 															<form:input type="text" class="form-control"
-																path="noBilBom"></form:input>
+																path="noBilBom" value="${permohonan.noBilBom}"></form:input>
 														</spring:bind>
 													</div>
 												</div>
