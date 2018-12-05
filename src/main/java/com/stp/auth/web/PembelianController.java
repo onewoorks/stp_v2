@@ -56,7 +56,7 @@ public class PembelianController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RefRoleService refRoleService;
 
@@ -108,18 +108,23 @@ public class PembelianController {
 		// }
 
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
-
+		List<Penerbangan> listPenerbangan = new ArrayList<>();
 		for (Permohonan userForm : permohonanService.findByStatusPermohonan("Proses")) {
 
-			penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(userForm);
-
+			userForm.getId();
+			
+			Permohonan permohonan = permohonanService.findById(userForm.getId());
+			
+			penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(permohonan);
+			
 			for (Penerbangan jb : penerbangan) {
 				jb.getPenerbanganId();
 				System.out.println("nindiaaaaa : " + jb.getPenerbanganId());
+				listPenerbangan.add(jb);
 
-				model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(userForm));
 			}
 		}
+		model.addAttribute("Penerbangan", listPenerbangan);
 		model.addAttribute("lokasi", dariLokasiService.getAll());
 		model.addAttribute("peruntukan", refPeruntukanService.getAll());
 		model.addAttribute("pesawat", refPesawatService.getAll());

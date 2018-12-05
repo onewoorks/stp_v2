@@ -60,7 +60,7 @@
 											data-toggle="modal" data-target="#modal-tambahPeruntukan"
 											id="permohonanBaru">Tambah</button>
 									</div>
-									<table id="example1" class="table table-bordered table-hover">
+									<table id="tableUnit" class="table table-bordered table-hover">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -225,10 +225,10 @@
 		<script
 			src="${contextPath}/resources/css/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 		<script>
-			$('#example1').DataTable({
+			$('#tableUnit').DataTable({
 				'paging' : true,
 				'lengthChange' : false,
-				'searching' : false,
+				'searching' : true,
 				'ordering' : true,
 				'info' : true,
 				'autoWidth' : false

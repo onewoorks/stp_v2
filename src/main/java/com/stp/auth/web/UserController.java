@@ -110,7 +110,7 @@ public class UserController {
 
 		Pengguna pengguna = daftarPenggunaService.findByUsername(username);
 
-		List<Permohonan> userForm = permohonanService.getAll();
+		List<Permohonan> userForm = permohonanService.findByStatusPermohonan("Baru");
 
 		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
@@ -135,14 +135,23 @@ public class UserController {
 				}
 			}
 		}
-
+		
+		List<Penerbangan> listPenerbangan = new ArrayList<>();
+		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
+		
 		for (Permohonan jb : userForm) {
 			if (jb.getNamaPelulus().equals(user.getNamaStaff())) {
 				model.addAttribute("welcome", userForm);
-				model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(jb));
+				
+				penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(jb);
+				
+				for (Penerbangan jb2 : penerbangan) {
+					listPenerbangan.add(jb2);
+				}
 			}
 		}
-
+		
+		model.addAttribute("Penerbangan", listPenerbangan);
 		model.addAttribute("kemaskiniPermohon", new Permohonan());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("username", user.getUsername());

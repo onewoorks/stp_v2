@@ -21,22 +21,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "refJawatan")
 public class RefJawatan {
 
-	public RefRole getRefRole() {
-		return refRole;
-	}
-
-	public void setRefRole(RefRole refRole) {
-		this.refRole = refRole;
-	}
-
-	public Set<Pengguna> getPengguna() {
-		return pengguna;
-	}
-
-	public void setPengguna(Set<Pengguna> pengguna) {
-		this.pengguna = pengguna;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long jawatanId;
@@ -66,4 +50,21 @@ public class RefJawatan {
 	public void setJawatanDesc(String jawatanDesc) {
 		this.jawatanDesc = jawatanDesc;
 	}
+	
+	public RefRole getRefRole() {
+		return refRole;
+	}
+
+	public void setRefRole(RefRole refRole) {
+		this.refRole = refRole;
+	}
+
+	public Set<Pengguna> getPengguna() {
+		return pengguna;
+	}
+
+	public void setPengguna(Set<Pengguna> pengguna) {
+		this.pengguna = pengguna;
+	}
+
 }

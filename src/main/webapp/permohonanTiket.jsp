@@ -41,154 +41,134 @@
 			<jsp:include page="${contextPath}/template/mainSideBar.jsp" />
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>
+						Maklumat Pengguna
+					</h1>
+					<section class="content">
+						<!-- /.row -->
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="box">
+									<!-- /.box-header -->
+									<div class="box-body">
 
-				<!-- /.row -->
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="box">
-							<div class="box-header">
-								<h3 class="box-title">Maklumat Pengguna</h3>
-							</div>
-							<!-- /.box-header -->
-							<div class="box-body">
+										<form:form method="POST" modelAttribute="permohonanForm"
+											class="form-horizontal">
 
-								<form:form method="POST" modelAttribute="permohonanForm"
-									class="form-horizontal">
+										</form:form>
 
-								</form:form>
-
-								<c:if test="${not empty msg}">
-									<div class="alert alert-${css} alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<strong>${msg}</strong>
+										<c:if test="${not empty msg}">
+											<div class="alert alert-${css} alert-dismissible"
+												role="alert">
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<strong>${msg}</strong>
+											</div>
+										</c:if>
+											<div class="row">
+												<div class="form-group col-sm-2 pull-right">
+													<button type="button" class="btn btn-info form-control"
+														data-toggle="modal" data-target="#modal-permohonan"
+														id="permohonanBaru">Permohonan</button>
+												</div>
+											</div>
+										<br />
+										<c:forEach items="${user.username}" var="user">
+											<div class="table-responsive">
+												<table id="permohonanTiketTable"
+													class="table table-bordered table-hover">
+													<thead>
+														<tr>
+															<th>Tarikh Permohonan</th>
+															<th>Tarikh Penerbangan</th>
+															<th>Tujuan</th>
+															<th>Tempat Bertugas</th>
+															<th>Peruntukan</th>
+															<th>Status</th>
+															<th>Tindakan</th>
+														</tr>
+													</thead>
+													<%
+														int i = 1;
+													%>
+													<c:forEach var="pemohon" items="${welcome}">
+														<tr>
+															<td>${pemohon.tarikhMohon}</td>
+															<td>${pemohon.tarikhMula}</td>
+															<td>${pemohon.tujuan}</td>
+															<td>${pemohon.tempatBertugas}</td>
+															<td>${pemohon.peruntukan}</td>
+															<td>${pemohon.statusPermohonan}</td>
+															<td><spring:url
+																	value="/hapusPermohonan?id=${pemohon.id}"
+																	var="deleteUrl" /> <spring:url
+																	value="/permohonanOpen?id=${pemohon.id}"
+																	var="updateUrl" /> <spring:url
+																	value="/batalPermohonan?id=${pemohon.id}"
+																	var="batalUrl" /> <spring:url
+																	value="/batalPermohonanProses?id=${pemohon.id}"
+																	var="batalProsesUrl" /> <spring:url
+																	value="/permohonanKemaskiniTemp?id=${pemohon.id}"
+																	var="kemaskiniUrl" /> <spring:url
+																	value="/downloadTiket?id=${pemohon.id}"
+																	var="downloadUrl" /> <c:if
+																	test="${pemohon.statusPermohonan == 'Baru'}">
+																	<button id="btnHapus" class="btn btn-warning btn-block"
+																		onclick="location.href='${deleteUrl}'">Hapus</button>
+																	<button id="btnPermohonanSemula"
+																		class="btn btn-primary btn-block"
+																		onclick="location.href='${kemaskiniUrl}'">Kemaskini</button>
+																</c:if> <c:if
+																	test="${pemohon.statusPermohonan == 'Tiket Terbuka'}">
+																	<button id="btnPermohonanSemula"
+																		class="btn btn-primary btn-block"
+																		onclick="location.href='${updateUrl}'">Permohonan
+																		Semula</button>
+																</c:if> <c:if test="${pemohon.statusPermohonan == 'Proses'}">
+																	<button id="btnBatal" class="btn btn-danger btn-block"
+																		onclick="location.href='${batalProsesUrl}'">Batal</button>
+																</c:if> <c:if test="${pemohon.statusPermohonan == 'Selesai'}">
+																	<button id="btnBatal" class="btn btn-danger btn-block"
+																		onclick="location.href='${batalUrl}'">Batal</button>
+																	<form:form method="POST"
+																		modelAttribute="downloadBorangSelesai"
+																		action="${contextPath}/downloadBorang"
+																		class="form-horizontal">
+																		<button type="submit" id="btnDownload"
+																			class="btn btn-primary btn-block">Borang</button>
+																	</form:form>
+																	<form:form method="GET"
+																		modelAttribute="downloadTiketSelesai"
+																		action="${contextPath}/downloadTiket"
+																		class="form-horizontal">
+																		<button type="submit" id="btnDownload"
+																			class="btn btn-info btn-block">Muat Turun</button>
+																	</form:form>
+																</c:if>
+														</tr>
+														<%
+															i++;
+														%>
+													</c:forEach>
+												</table>
+											</div>
+										</c:forEach>
+										<!-- Add permohonan  -->
+										<jsp:include page="${contextPath}/permohonanBaru.jsp" />
+										<jsp:include page="${contextPath}/permohonanHapus.jsp" />
+										<jsp:include page="${contextPath}/permohonanOpenTiket.jsp" />
+										<jsp:include page="${contextPath}/permohonanBatal.jsp" />
+										<jsp:include page="${contextPath}/permohonanUpdate.jsp" />
+										<jsp:include page="${contextPath}/permohonanBatalProses.jsp" />
 									</div>
-								</c:if>
-
-								<section class="content-header">
-									<div class="row">
-										<div class="col-xs-2">
-											<label>Tarikh Permohonan</label>
-										</div>
-										<div class="col-xs-2">
-											<label>Tarikh Penerbangan</label>
-										</div>
-										<div class="col-xs-2">
-											<label>Tarikh Mula Bertugas</label>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-xs-2">
-											<input type="date" class="form-control" id="unit1">
-										</div>
-										<div class="col-xs-2">
-											<input type="date" class="form-control" id="unit2">
-										</div>
-										<div class="col-xs-2">
-											<input type="date" class="form-control" id="unit3">
-										</div>
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-info form-control">Carian</button>
-										</div>
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-info form-control"
-												data-toggle="modal" data-target="#modal-permohonan"
-												id="permohonanBaru">Permohonan</button>
-										</div>
-									</div>
-								</section>
-								<br />
-								<c:forEach items="${user.username}" var="user">
-									<div class="table-responsive">
-										<table id="permohonanTiketTable" class="table table-bordered table-hover">
-											<thead>
-												<tr>
-													<th>Tarikh Permohonan</th>
-													<th>Tarikh Penerbangan</th>
-													<th>Tujuan</th>
-													<th>Tempat Bertugas</th>
-													<th>Peruntukan</th>
-													<th>Status</th>
-													<th>Tindakan</th>
-												</tr>
-											</thead>
-											<%
-												int i = 1;
-											%>
-											<c:forEach var="pemohon" items="${welcome}">
-												<tr>
-													<td>${pemohon.tarikhMohon}</td>
-													<td>${pemohon.tarikhMula}</td>
-													<td>${pemohon.tujuan}</td>
-													<td>${pemohon.tempatBertugas}</td>
-													<td>${pemohon.peruntukan}</td>
-													<td>${pemohon.statusPermohonan}</td>
-													<td><spring:url
-															value="/hapusPermohonan?id=${pemohon.id}" var="deleteUrl" />
-														<spring:url value="/permohonanOpen?id=${pemohon.id}"
-															var="updateUrl" /> <spring:url
-															value="/batalPermohonan?id=${pemohon.id}" var="batalUrl" />
-														<spring:url
-															value="/batalPermohonanProses?id=${pemohon.id}"
-															var="batalProsesUrl" /> <spring:url
-															value="/permohonanKemaskiniTemp?id=${pemohon.id}"
-															var="kemaskiniUrl" /> <spring:url
-															value="/downloadTiket?id=${pemohon.id}" var="downloadUrl" />
-														<c:if test="${pemohon.statusPermohonan == 'Baru'}">
-															<button id="btnHapus" class="btn btn-warning btn-block"
-																onclick="location.href='${deleteUrl}'">Hapus</button>
-															<button id="btnPermohonanSemula"
-																class="btn btn-primary btn-block"
-																onclick="location.href='${kemaskiniUrl}'">Kemaskini</button>
-														</c:if> <c:if
-															test="${pemohon.statusPermohonan == 'Tiket Terbuka'}">
-															<button id="btnPermohonanSemula"
-																class="btn btn-primary btn-block"
-																onclick="location.href='${updateUrl}'">Permohonan
-																Semula</button>
-														</c:if> <c:if test="${pemohon.statusPermohonan == 'Proses'}">
-															<button id="btnBatal" class="btn btn-danger btn-block"
-																onclick="location.href='${batalProsesUrl}'">Batal</button>
-														</c:if> <c:if test="${pemohon.statusPermohonan == 'Selesai'}">
-															<button id="btnBatal" class="btn btn-danger btn-block"
-																onclick="location.href='${batalUrl}'">Batal</button>
-															<form:form method="POST"
-																modelAttribute="downloadBorangSelesai"
-																action="${contextPath}/downloadBorang"
-																class="form-horizontal">
-																<button type="submit" id="btnDownload"
-																	class="btn btn-primary btn-block">Borang</button>
-															</form:form>
-															<form:form method="GET"
-																modelAttribute="downloadTiketSelesai"
-																action="${contextPath}/downloadTiket"
-																class="form-horizontal">
-																<button type="submit" id="btnDownload"
-																	class="btn btn-info btn-block">Muat Turun</button>
-															</form:form>
-														</c:if>
-												</tr>
-												<%
-													i++;
-												%>
-											</c:forEach>
-										</table>
-									</div>
-								</c:forEach>
-								<!-- Add permohonan  -->
-								<jsp:include page="${contextPath}/permohonanBaru.jsp" />
-								<jsp:include page="${contextPath}/permohonanHapus.jsp" />
-								<jsp:include page="${contextPath}/permohonanOpenTiket.jsp" />
-								<jsp:include page="${contextPath}/permohonanBatal.jsp" />
-								<jsp:include page="${contextPath}/permohonanUpdate.jsp" />
-								<jsp:include page="${contextPath}/permohonanBatalProses.jsp" />
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
+					</section>
+				</section>
 			</div>
 			<footer class="main-footer">
 				<div class="pull-right hidden-xs"></div>
@@ -223,8 +203,8 @@
 		<script>
 			$('#permohonanTiketTable').DataTable({
 				'paging' : true,
-				'lengthChange' : false,
-				'searching' : false,
+				'lengthChange' : true,
+				'searching' : true,
 				'ordering' : true,
 				'info' : true,
 				'autoWidth' : false

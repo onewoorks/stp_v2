@@ -43,113 +43,88 @@
 			<div class="content-wrapper">
 
 				<!-- /.row -->
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="box">
-							<div class="box-header">
-								<h3 class="box-title">Maklumat Pengguna</h3>
-							</div>
-							<!-- /.box-header -->
-							<div class="box-body">
+				<section class="content">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="box">
+								<!-- /.box-header -->
+								<div class="box-body">
 
-								<form:form method="POST" modelAttribute="daftarPenggunaForm"
-									class="form-horizontal">
+									<form:form method="POST" modelAttribute="daftarPenggunaForm"
+										class="form-horizontal">
 
-								</form:form>
+									</form:form>
 
-								<c:if test="${not empty msg}">
-									<div class="alert alert-${css} alert-dismissible" role="alert">
-										<button type="button" class="close" data-dismiss="alert"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<strong>${msg}</strong>
-									</div>
-								</c:if>
-
-								<section class="content-header">
-									<div class="row">
-										<div class="col-xs-2">
-											<label>No Staff</label>
-										</div>
-										<div class="col-xs-2">
-											<label>Nama</label>
-										</div>
-
-									</div>
-
-									<div class="row">
-										<div class="col-xs-2">
-											<input type="text" class="form-control" id="unit1">
-										</div>
-										<div class="col-xs-2">
-											<input type="text" class="form-control" id="unit2">
-										</div>
-
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-info form-control">Carian</button>
-										</div>
-
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-info form-control "
-												data-toggle="modal" data-target="#modal-penggunaForm">
-												<b>+</b>
+									<c:if test="${not empty msg}">
+										<div class="alert alert-${css} alert-dismissible" role="alert">
+											<button type="button" class="close" data-dismiss="alert"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
 											</button>
-
+											<strong>${msg}</strong>
 										</div>
-									</div>
-								</section>
-								<br />
-								<table id="pengguna" class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>Bil</th>
-											<th>Nombor Staf</th>
-											<th>Nama Staf</th>
-											<th>Nama Pengguna</th>
-											<th>Status</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<%
-										int i = 1;
-									%>
-									<c:forEach var="user" items="${listPengguna}">
-										<tr>
-											<td><%=i%></td>
-											<td>${user.staffNo}</td>
-											<td>${user.namaStaff}</td>
-											<td>${user.username}</td>
-											<td>${user.status}</td>
-											<td><spring:url
-													value="/admin/lihatPengguna?id=${user.id}" var="userUrl" />
-												<spring:url value="/admin/padamPengguna?id=${user.id}"
-													var="deleteUrl" /> <spring:url
-													value="/admin/kemaskiniPengguna?id=${user.id}"
-													var="updateUrl" />
+									</c:if>
+										<div class="row">
+											<div class="form-group col-xs-2 pull-right">
+												<button type="button" class="btn btn-info form-control "
+													data-toggle="modal" data-target="#modal-penggunaForm">
+													<b>Tambah Pengguna</b>
+												</button>
 
-												<button class="btn btn-info btn-block"
-													onclick="location.href='${userUrl}'">Lihat</button>
-												<button class="btn btn-primary btn-block"
-													onclick="location.href='${updateUrl}'">Kemaskini</button>
-												<button class="btn btn-danger btn-block"
-													onclick="location.href='${deleteUrl}'">Padam</button></td>
-										</tr>
+											</div>
+										</div>
+									<br />
+									<table id="pengguna" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Bil</th>
+												<th>Nombor Staf</th>
+												<th>Nama Staf</th>
+												<th>Nama Pengguna</th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										</thead>
 										<%
-											i++;
+											int i = 1;
 										%>
-									</c:forEach>
-								</table>
-								<!-- Add daftar pengguna  	-->
-								<jsp:include page="${contextPath}/daftarPenggunaForm.jsp" />
-								<jsp:include page="${contextPath}/editPenggunaForm.jsp" />
-								<jsp:include page="${contextPath}/lihatPenggunaForm.jsp" />
-								<jsp:include page="${contextPath}/padamPenggunaForm.jsp" />
+										<c:forEach var="user" items="${listPengguna}">
+											<tr>
+												<td><%=i%></td>
+												<td>${user.staffNo}</td>
+												<td>${user.namaStaff}</td>
+												<td>${user.username}</td>
+												<td>${user.status}</td>
+												<td><spring:url
+														value="/admin/lihatPengguna?id=${user.id}" var="userUrl" />
+													<spring:url value="/admin/padamPengguna?id=${user.id}"
+														var="deleteUrl" /> <spring:url
+														value="/admin/kemaskiniPengguna?id=${user.id}"
+														var="updateUrl" />
 
+													<button class="btn btn-info btn-block"
+														onclick="location.href='${userUrl}'">Lihat</button>
+													<button class="btn btn-primary btn-block"
+														onclick="location.href='${updateUrl}'">Kemaskini</button>
+													<button class="btn btn-danger btn-block"
+														onclick="location.href='${deleteUrl}'">Padam</button></td>
+											</tr>
+											<%
+												i++;
+											%>
+										</c:forEach>
+									</table>
+									<!-- Add daftar pengguna  	-->
+									<jsp:include page="${contextPath}/daftarPenggunaForm.jsp" />
+									<jsp:include page="${contextPath}/editPenggunaForm.jsp" />
+									<jsp:include page="${contextPath}/lihatPenggunaForm.jsp" />
+									<jsp:include page="${contextPath}/padamPenggunaForm.jsp" />
+
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
 			</div>
 			<footer class="main-footer">
 				<div class="pull-right hidden-xs"></div>
@@ -184,8 +159,8 @@
 		<script>
 			$('#pengguna').DataTable({
 				'paging' : true,
-				'lengthChange' : false,
-				'searching' : false,
+				'lengthChange' : true,
+				'searching' : true,
 				'ordering' : true,
 				'info' : true,
 				'autoWidth' : false

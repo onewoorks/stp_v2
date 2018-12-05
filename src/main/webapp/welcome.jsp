@@ -282,8 +282,9 @@
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Fail BOM</label>
-																						 <a href="${contextPath}/downloadBom?id=${pemohon.id}" class="col-sm-2 control-label">Muat Turun Bom</a>
+																							class="col-sm-2 control-label">Fail BOM</label> <a
+																							href="${contextPath}/downloadBom?id=${pemohon.id}"
+																							class="col-sm-2 control-label">Muat Turun Bom</a>
 																					</div>
 																					<div class="form-group">
 																						<div class="table-responsive">
@@ -306,18 +307,25 @@
 																									%>
 																									<c:forEach var="penerbangan"
 																										items="${Penerbangan}">
-																										<tr>
-																											<td>${penerbangan.penerbangan}</td>
-																											<td>${penerbangan.tarikhPergi}</td>
-																											<td>${penerbangan.waktuBerlepas}</td>
-																											<td>${penerbangan.waktuTiba}</td>
-																											<td>${penerbangan.noPesawat}</td>
-																											<td>${penerbangan.dariLokasi}</td>
-																											<td>${penerbangan.destinasi}</td>
-																										</tr>
-																										<%
-																											i++;
-																										%>
+																										<c:set var="penerbanganLongId"
+																											value="${penerbangan.permohonan.id}"></c:set>
+																										<c:set var="permohonanLongId"
+																											value="${pemohon.id}"></c:set>
+																										<c:if
+																											test="${penerbanganLongId == permohonanLongId}">
+																											<tr>
+																												<td>${penerbangan.penerbangan}</td>
+																												<td>${penerbangan.tarikhPergi}</td>
+																												<td>${penerbangan.waktuBerlepas}</td>
+																												<td>${penerbangan.waktuTiba}</td>
+																												<td>${penerbangan.noPesawat}</td>
+																												<td>${penerbangan.dariLokasi}</td>
+																												<td>${penerbangan.destinasi}</td>
+																											</tr>
+																											<%
+																												i++;
+																											%>
+																										</c:if>
 																									</c:forEach>
 																								</tbody>
 																							</table>
@@ -535,18 +543,25 @@
 																									%>
 																									<c:forEach var="penerbangan"
 																										items="${Penerbangan}">
-																										<tr>
-																											<td>${penerbangan.penerbangan}</td>
-																											<td>${penerbangan.tarikhPergi}</td>
-																											<td>${penerbangan.waktuBerlepas}</td>
-																											<td>${penerbangan.waktuTiba}</td>
-																											<td>${penerbangan.noPesawat}</td>
-																											<td>${penerbangan.dariLokasi}</td>
-																											<td>${penerbangan.destinasi}</td>
-																										</tr>
-																										<%
-																											x++;
-																										%>
+																										<c:set var="penerbanganLongId"
+																											value="${penerbangan.permohonan.id}"></c:set>
+																										<c:set var="permohonanLongId"
+																											value="${pemohon.id}"></c:set>
+																										<c:if
+																											test="${penerbanganLongId == permohonanLongId}">
+																											<tr>
+																												<td>${penerbangan.penerbangan}</td>
+																												<td>${penerbangan.tarikhPergi}</td>
+																												<td>${penerbangan.waktuBerlepas}</td>
+																												<td>${penerbangan.waktuTiba}</td>
+																												<td>${penerbangan.noPesawat}</td>
+																												<td>${penerbangan.dariLokasi}</td>
+																												<td>${penerbangan.destinasi}</td>
+																											</tr>
+																											<%
+																												x++;
+																											%>
+																										</c:if>
 																									</c:forEach>
 																								</tbody>
 																							</table>

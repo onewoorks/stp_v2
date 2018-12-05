@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.stp.auth.model.Pengguna;
 import com.stp.auth.model.RefJawatan;
+import com.stp.auth.model.RefLokasi;
 import com.stp.auth.model.RefRole;
 import com.stp.auth.repository.RefJawatanRepository;
 
@@ -27,6 +28,12 @@ public class RefJawatanImpl implements RefJawatanService {
 	public RefJawatan findByRefRole(RefRole jb) {
 		// TODO Auto-generated method stub
 		return refJawatanRepository.findByRefRole(jb);
+	}
+	
+	@Override
+	public void save(RefJawatan refJawatan) {
+		refJawatanRepository.save(refJawatan);
+		
 	}
 	
 	

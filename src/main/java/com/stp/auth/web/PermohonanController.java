@@ -1983,7 +1983,6 @@ public class PermohonanController {
 		}
 
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
-		model.addAttribute("kemaskiniPengesahan", new Permohonan());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("namaStaff", user.getNamaStaff());
 		model.addAttribute("kemaskiniUnit", new RefUnitBahagian());
@@ -2006,6 +2005,68 @@ public class PermohonanController {
 		model.addAttribute("kemaskiniUnit", new RefUnitBahagian());
 
 		return "redirect:/maintenancePageUnit";
+
+	}
+	
+	@RequestMapping(value = { "/maintenancePageJawatan" }, method = RequestMethod.GET)
+	public String updateJawatan(Model model, HttpSession session, RefJawatan refJawatan) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		User user = userService.findByUsername(username);
+		session.setAttribute("user", user);
+
+		Pengguna pengguna = penggunaService.findByUsername(username);
+
+		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
+
+		pengguna2 = (ArrayList<Pengguna>) penggunaService.findByNoKP(user.getNoKP());
+
+		for (Pengguna jb : pengguna2) {
+
+			if (jb.getUsername().equals(user.getUsername())) {
+				Long idRole = jb.getRefJawatan().getRefRole().getRoleId();
+				pengguna.getRefJawatan().getJawatanDesc();
+
+				Long idRole2 = idRole;
+				System.out.println(idRole2);
+				ArrayList<RefRole> listRole = new ArrayList<>();
+
+				listRole = (ArrayList<RefRole>) refRoleService.getAll();
+				for (RefRole jb2 : listRole) {
+					if (jb2.getRoleId().equals(idRole2)) {
+						model.addAttribute("role", jb2.getRoleDesc());
+						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					}
+				}
+			}
+		}
+
+		model.addAttribute("refJawatan", refJawatanService.getAll());
+		System.out.println("sini :::::::" +refJawatanService.getAll());
+		model.addAttribute("roleAll", refRoleService.getAll());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+		model.addAttribute("namaStaff", user.getNamaStaff());
+		model.addAttribute("kemaskiniJawatan", new RefJawatan());
+		model.addAttribute("username", user.getUsername());
+		return "maintenancePageJawatan";
+	}
+
+	@RequestMapping(value = "/updateJawatan", method = RequestMethod.POST)
+	public String updateJawatan(@ModelAttribute("kemaskiniJawatan") RefJawatan refJawatan, Model model,
+			HttpSession session) {
+
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		User user = userService.findByUsername(username);
+		session.setAttribute("user", user);
+
+		refJawatanService.save(refJawatan);
+
+		model.addAttribute("refJawatan", refJawatanService.getAll());
+		model.addAttribute("role", refRoleService.getAll());
+		model.addAttribute("kemaskiniJawatan", new RefJawatan());
+
+		return "redirect:/maintenancePageJawatan";
 
 	}
 	

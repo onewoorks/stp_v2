@@ -8,8 +8,10 @@ import com.stp.auth.model.RefRole;
 
 public interface RefJawatanService {
 
-	List<RefJawatan> getAll();
+	public List<RefJawatan> getAll();
 
-	RefJawatan findByRefRole(RefRole jb);
+	public RefJawatan findByRefRole(RefRole jb);
+
+	public void save(RefJawatan refJawatan);
 	
 }

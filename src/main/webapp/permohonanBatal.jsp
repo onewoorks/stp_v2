@@ -21,6 +21,7 @@
 		'autoWidth' : false
 	})
 </script>
+
 <div class="modal fade" id="modal-batal${pemohon.id}">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -85,8 +86,8 @@
 									value="${pemohon.kelulusan}"></form:input>
 							</spring:bind>
 							<spring:bind path="namaPemohon">
-								<form:input type="hidden" class="form-control" path="namaPemohon"
-									value="${pemohon.namaPemohon}"></form:input>
+								<form:input type="hidden" class="form-control"
+									path="namaPemohon" value="${pemohon.namaPemohon}"></form:input>
 							</spring:bind>
 							<spring:bind path="tarikhMula">
 								<form:input type="hidden" class="form-control" path="tarikhMula"
@@ -126,7 +127,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">Tempat Bertugas</label>
+							<label for="inputPassword3" class="col-sm-2 control-label">Tempat
+								Bertugas</label>
 
 							<div class="col-sm-6">
 								<spring:bind path="tempatBertugas">
@@ -141,44 +143,45 @@
 
 							<div class="col-sm-6">
 								<spring:bind path="tujuan">
-									<form:input type="text" class="form-control"
-										id="tujuan" path="tujuan"
-										value="${pemohon.tujuan}"></form:input>
+									<form:input type="text" class="form-control" id="tujuan"
+										path="tujuan" value="${pemohon.tujuan}"></form:input>
 								</spring:bind>
 							</div>
 						</div>
-						<table id="batalTable" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>Bil</th>
-									<th>Tarikh Pergi</th>
-									<th>Waktu Berlepas</th>
-									<th>Waktu Tiba</th>
-									<th>No Pesawat</th>
-									<th>Dari Lokasi</th>
-									<th>Destinasi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-									int i = 1;
-								%>
-								<c:forEach var="penerbangan" items="${Penerbangan}">
+						<div class="form-group">
+							<table id="batalTable" class="table table-bordered table-hover">
+								<thead>
 									<tr>
-										<td>${penerbangan.penerbangan}</td>
-										<td>${penerbangan.tarikhPergi}</td>
-										<td>${penerbangan.waktuBerlepas}</td>
-										<td>${penerbangan.waktuTiba}</td>
-										<td>${penerbangan.noPesawat}</td>
-										<td>${penerbangan.dariLokasi}</td>
-										<td>${penerbangan.destinasi}</td>
+										<th>Bil</th>
+										<th>Tarikh Pergi</th>
+										<th>Waktu Berlepas</th>
+										<th>Waktu Tiba</th>
+										<th>No Pesawat</th>
+										<th>Dari Lokasi</th>
+										<th>Destinasi</th>
 									</tr>
+								</thead>
+								<tbody>
 									<%
-										i++;
+										int i = 1;
 									%>
-								</c:forEach>
-							</tbody>
-						</table>
+									<c:forEach var="penerbangan" items="${Penerbangan}">
+										<tr>
+											<td>${penerbangan.penerbangan}</td>
+											<td>${penerbangan.tarikhPergi}</td>
+											<td>${penerbangan.waktuBerlepas}</td>
+											<td>${penerbangan.waktuTiba}</td>
+											<td>${penerbangan.noPesawat}</td>
+											<td>${penerbangan.dariLokasi}</td>
+											<td>${penerbangan.destinasi}</td>
+										</tr>
+										<%
+											i++;
+										%>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">Catatan</label>
 
