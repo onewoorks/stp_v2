@@ -94,7 +94,10 @@
 																	<button type="button" class="btn btn-info "
 																		data-toggle="modal"
 																		data-target="#modal-lulus${pemohon.id}">Pembelian</button>
-																</c:if> <c:forEach items="${Penerbangan}" var="penerbangan">
+																</c:if> 
+																<c:forEach items="${Penerbangan}" var="penerbangan">
+																<c:if
+																	test="${pemohon.id == penerbangan.permohonan.id}">
 																	<div class="modal fade"
 																		id="modal-beliTiket${pemohon.id}${penerbangan.penerbanganId}">
 																		<div class="modal-dialog modal-lg">
@@ -131,7 +134,7 @@
 																									<form:select path="caraBeli"
 																										class="form-control"
 																										id="caraBeliId${penerbangan.penerbanganId}"
-																										onchange="showCaraBeli(${penerbangan.penerbanganId}})">
+																										onchange="showCaraBeli(${penerbangan.penerbanganId})">
 																										<option></option>
 																										<option value="KadKredit">Kad Kredit</option>
 																										<option value="Waran">Waran</option>
@@ -204,6 +207,7 @@
 																			</div>
 																		</div>
 																	</div>
+																	</c:if>
 																</c:forEach> <c:forEach items="${Penerbangan}" var="penerbangan">
 																	<div class="modal fade"
 																		id="modal-kemaskini${pemohon.id}${penerbangan.penerbanganId}">
@@ -589,9 +593,11 @@
 													hargaPenguranganHidden.style.display = "none";
 
 													function showCaraBeli(iD) {
-
 														var caraBeliId = document
 																.getElementById('caraBeliId'+iD).value;
+		 											console.log(caraBeliId);
+		 											console.log(iD);
+														
 														if (caraBeliId == 'Waran') {
 															var waranHidden2 = document
 															.getElementById('waranHidden'+iD);
@@ -613,16 +619,6 @@
 														}
 													}
 												</script>
-														<script>
-																				$('#tablePembelian${pemohon.id}').DataTable({
-																					'paging' : true,
-																					'lengthChange' : false,
-																					'searching' : false,
-																					'ordering' : true,
-																					'info' : true,
-																					'autoWidth' : false
-																				})
-																				</script>
 														<script>
 												function myFunction(val) {
 													var hargaWaran = document.getElementById('hargaWaran').value;
