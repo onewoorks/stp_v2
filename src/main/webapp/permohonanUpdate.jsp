@@ -456,7 +456,7 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="tarikhMula">
 														<form:input type="date" class="form-control"
-															path="tarikhMula" value="${permohonan.tarikhMula}"></form:input>
+															path="tarikhMula" value="${tarikhMula}"></form:input>
 													</spring:bind>
 												</div>
 												<label for="inputPassword3" class="col-sm-2 control-label">Tarikh
@@ -465,7 +465,7 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="tarikhTamat">
 														<form:input type="date" class="form-control"
-															path="tarikhTamat" value="${permohonan.tarikhTamat}"></form:input>
+															path="tarikhTamat" value="${tarikhTamat}"></form:input>
 													</spring:bind>
 												</div>
 											</div>
@@ -500,7 +500,7 @@ function kemasKini(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="catatan">
 														<form:input type="text" class="form-control"
-															path="catatan" id="catatan" readonly="true" value="${permohonan.catatan}"></form:input>
+															path="catatan" id="catatan" readonly="true" value="${catatan}"></form:input>
 													</spring:bind>
 												</div>
 												<label for="inputPassword3" class="col-sm-2 control-label">Peruntukan</label>
@@ -508,11 +508,11 @@ function kemasKini(id,penerbanganId) {
 													<spring:bind path="peruntukan">
 														<form:select path="peruntukan" class="form-control"
 															id="peruntukanId2" onchange="show2()">
-															    <c:if test="${permohonan.peruntukan == 'Pembangunan'}">
+															    <c:if test="${peruntukanPermohonan == 'Pembangunan'}">
 															        <option value="Operasi">Operasi</option>
 																	<option value="Pembangunan" selected>Pembangunan</option>
 															    </c:if>
-															    <c:if test="${permohonan.peruntukan == 'Operasi'}">
+															    <c:if test="${peruntukanPermohonan == 'Operasi'}">
 															    	<option value="Operasi" selected>Operasi</option>
 																	<option value="Pembangunan">Pembangunan</option>
 															    </c:if>
@@ -543,11 +543,11 @@ function kemasKini(id,penerbanganId) {
 															<form:select path="pembangunan" class="form-control">
 																<c:forEach var="peruntukan" items="${peruntukan}">
 																
-																 <c:if test="${permohonan.pembangunan == peruntukan.peruntukanDesc}">
+																 <c:if test="${pembangunan == peruntukan.peruntukanDesc}">
 															        <option value="${peruntukan.peruntukanDesc}" selected><c:out
 																			value="${peruntukan.peruntukanDesc}" /></option>
 															    </c:if>
-															    <c:if test="${permohonan.pembangunan != peruntukan.peruntukanDesc}">
+															    <c:if test="${pembangunan != peruntukan.peruntukanDesc}">
 															    	<option value="${peruntukan.peruntukanDesc}"><c:out
 																			value="${peruntukan.peruntukanDesc}" /></option>
 															    </c:if>
@@ -564,7 +564,7 @@ function kemasKini(id,penerbanganId) {
 													<div class="col-sm-4">
 														<spring:bind path="noBilBom">
 															<form:input type="text" class="form-control"
-																path="noBilBom" value="${permohonan.noBilBom}"></form:input>
+																path="noBilBom" value="${noBilBom}"></form:input>
 														</spring:bind>
 													</div>
 												</div>
@@ -750,8 +750,7 @@ function kemasKini(id,penerbanganId) {
 															<td><spring:bind path="destinasi">
 																	${Penerbangan.destinasi}
 																</spring:bind></td>
-															<td><button type="button" value="${Penerbangan}" onclick="kemasKini(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})" id="tambah"
-																	class="btn btn-info pull-right">Kemaskini</button></td>
+															<td><button type="button" value="${Penerbangan}" onclick="kemasKini(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})" id="tambah" class="btn btn-info pull-right">Kemaskini</button></td>
 															<!--  <td><input type="text" class="form-control"
 																		id="bom"></td>
 																	<td><input type="text" class="form-control"

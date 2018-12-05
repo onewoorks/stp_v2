@@ -508,6 +508,12 @@ public class PermohonanController {
 		// model.addAttribute("id", id);
 		// model.addAttribute("namaStaff", permohonan.getNama());
 		// model.addAttribute("noKP", permohonan.getKp());
+		model.addAttribute("noBilBom", permohonan.getNoBilBom());
+		model.addAttribute("pembangunan", permohonan.getPembangunan());
+		model.addAttribute("peruntukanPermohonan", permohonan.getPeruntukan());
+		model.addAttribute("catatan", permohonan.getCatatan());
+		model.addAttribute("tarikhMula", permohonan.getTarikhMula());
+		model.addAttribute("tarikhTamat", permohonan.getTarikhTamat());
 		model.addAttribute("tujuan", permohonan.getTujuan());
 		model.addAttribute("tempat", permohonan.getTempatBertugas());
 		model.addAttribute("unit", user.getUnit());
