@@ -84,10 +84,15 @@ public class AdminController {
 				}
 			}
 		}
+		
+		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			if (jb.getRefJawatan().getRefRole().getRoleId().equals("2")) {
-				model.addAttribute("jawatanUser", userService.findByJawatan(jb.getJawatan()));
+			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				System.out.println("masuk sini" + jawatanUser);
+				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
 
@@ -155,12 +160,18 @@ public class AdminController {
 			}
 		}
 
+		List<Pengguna> jawatanUser = new ArrayList<>();
+
 		for (Pengguna jb : userService.findAll()) {
-			if (jb.getRefJawatan().getRefRole().getRoleId().equals("2")) {
-				model.addAttribute("jawatanUser", userService.findByJawatan(jb.getJawatan()));
+			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				System.out.println("masuk sini" + jawatanUser);
+				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
 		
+		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", userService.findById(id));
 		model.addAttribute("padamPenggunaForm", new Pengguna());
@@ -179,6 +190,7 @@ public class AdminController {
 		Pengguna pengguna = userService.findByUsername(username);
 		session.setAttribute("user", user);
 		
+		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("listPengguna", userService.findAll());
 		model.addAttribute("cawangan", refCawanganService.getAll());
 		model.addAttribute("listJawatan", refJawatanService.getAll());
@@ -210,9 +222,14 @@ public class AdminController {
 			}
 		}
 
+		List<Pengguna> jawatanUser = new ArrayList<>();
+
 		for (Pengguna jb : userService.findAll()) {
-			if (jb.getRefJawatan().getRefRole().getRoleId().equals("2")) {
-				model.addAttribute("jawatanUser", userService.findByJawatan(jb.getJawatan()));
+			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				System.out.println("masuk sini" + jawatanUser);
+				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
 		
@@ -265,12 +282,18 @@ public class AdminController {
 			}
 		}
 
+		List<Pengguna> jawatanUser = new ArrayList<>();
+
 		for (Pengguna jb : userService.findAll()) {
-			if (jb.getRefJawatan().getRefRole().getRoleId().equals("2")) {
-				model.addAttribute("jawatanUser", userService.findByJawatan(jb.getJawatan()));
+			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				System.out.println("masuk sini" + jawatanUser);
+				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
 		
+		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", new Pengguna());
 		model.addAttribute("lihatPenggunaForm", new Pengguna());
