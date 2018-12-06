@@ -87,16 +87,11 @@ div.login-box-header {
 							<button type="submit" class="btn btn-primary btn-block btn-flat">Log
 								Masuk</button>
 						</div>
-						<div class="col-xs-6 pull-right">
-							<a data-toggle="modal" data-target="#modal-reset">I forgot my
-								password</a><br>
-						</div>
+						
 
 					</div>
 				</div>
-				<h4 class="text-center">
-					<a href="${contextPath}/registration">Create an account</a>
-				</h4>
+				
 			</form>
 		</div>
 

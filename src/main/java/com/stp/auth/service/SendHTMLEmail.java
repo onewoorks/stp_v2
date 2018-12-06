@@ -23,15 +23,15 @@ public class SendHTMLEmail {
 
 	public static void main(String[] args) {
 
-		final String username = "systempahtiket@gmail.com";
-		final String password = "stp12345";
+		final String username = " flight@mpc.gov.my";
+		final String password = "passwordmis";
 		// Get system properties
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.host", "domino01.mpc.gov.my");
+		props.put("mail.smtp.port", "25");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -63,15 +63,15 @@ public class SendHTMLEmail {
 
 	public static void sendHtmlEmail(String recieverEmail, String Html) {
 
-		final String username = "systempahtiket@gmail.com";
-		final String password = "stp12345";
+		final String username = " flight@mpc.gov.my";
+		final String password = "passwordmis";
 		// Get system properties
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.host", "domino01.mpc.gov.my");
+		props.put("mail.smtp.port", "25");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {

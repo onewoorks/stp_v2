@@ -46,7 +46,7 @@ public class AdminController {
 
 	ArrayList<Pengguna> user = new ArrayList<>();
 
-	@RequestMapping(value = "/admin/daftarPengguna", method = RequestMethod.GET)
+	@RequestMapping(value = "/daftarPengguna", method = RequestMethod.GET)
 	public String daftarPengguna(Model model, HttpSession session) {
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -107,7 +107,7 @@ public class AdminController {
 		return "daftarPengguna";
 	}
 
-	@RequestMapping(value = "/admin/daftarPengguna", method = RequestMethod.POST)
+	@RequestMapping(value = "/daftarPengguna", method = RequestMethod.POST)
 	public String daftarPengguna(@ModelAttribute("daftarPenggunaForm") Pengguna daftarPenggunaForm,
 			BindingResult bindingResult, Model model) {
 
@@ -118,10 +118,10 @@ public class AdminController {
 		model.addAttribute("padamPenggunaForm", new Pengguna());
 		model.addAttribute("lihatPenggunaForm", new Pengguna());
 
-		return "redirect:/admin/daftarPengguna";
+		return "redirect:daftarPengguna";
 	}
 
-	@RequestMapping(value = "/admin/kemaskiniPengguna", method = RequestMethod.GET)
+	@RequestMapping(value = "/kemaskiniPengguna", method = RequestMethod.GET)
 	public String kemaskiniPengguna(@RequestParam("id") Long id, Model model, HttpSession session) {
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -182,7 +182,7 @@ public class AdminController {
 		return "daftarPengguna";
 	}
 
-	@RequestMapping(value = "/admin/lihatPengguna", method = RequestMethod.GET)
+	@RequestMapping(value = "/lihatPengguna", method = RequestMethod.GET)
 	public String lihatPengguna(@RequestParam("id") Long id, Model model, HttpSession session) {
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -243,7 +243,7 @@ public class AdminController {
 		return "daftarPengguna";
 	}
 
-	@RequestMapping(value = "/admin/padamPengguna", method = RequestMethod.GET)
+	@RequestMapping(value = "/padamPengguna", method = RequestMethod.GET)
 	public String padamPengguna(@RequestParam("id") Long id, Model model, HttpSession session) {
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -304,7 +304,7 @@ public class AdminController {
 		return "daftarPengguna";
 	}
 
-	@RequestMapping(value = "/admin/padamPengguna", method = RequestMethod.POST)
+	@RequestMapping(value = "/padamPengguna", method = RequestMethod.POST)
 	public String padamPengguna(@ModelAttribute("daftarPenggunaForm") Pengguna daftarPenggunaForm,
 			BindingResult bindingResult, Model model) {
 
@@ -315,7 +315,7 @@ public class AdminController {
 		model.addAttribute("padamPenggunaForm", new Pengguna());
 		model.addAttribute("lihatPenggunaForm", new Pengguna());
 
-		return "redirect:/admin/daftarPengguna";
+		return "redirect:/daftarPengguna";
 	}
 
 }

@@ -96,10 +96,10 @@
 												<td>${user.username}</td>
 												<td>${user.status}</td>
 												<td><spring:url
-														value="/admin/lihatPengguna?id=${user.id}" var="userUrl" />
-													<spring:url value="/admin/padamPengguna?id=${user.id}"
+														value="/lihatPengguna?id=${user.id}" var="userUrl" />
+													<spring:url value="/padamPengguna?id=${user.id}"
 														var="deleteUrl" /> <spring:url
-														value="/admin/kemaskiniPengguna?id=${user.id}"
+														value="/kemaskiniPengguna?id=${user.id}"
 														var="updateUrl" />
 
 													<button class="btn btn-info btn-block"

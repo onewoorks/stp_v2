@@ -170,9 +170,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -235,9 +237,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -303,9 +307,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -381,9 +387,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -443,9 +451,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -554,9 +564,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -618,9 +630,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -801,9 +815,11 @@ public class PermohonanController {
 		pengguna = (ArrayList<Pengguna>) penggunaService.findAll();
 
 		for (Pengguna jb : pengguna) {
-			if (jb.getJawatan().equals("Ketua Pegawai")) {
-				if (jb.getNamaStaff().equals(user.getNamaPengurus())) {
-					emel = jb.getEmail();
+			if(jb.getJawatan() != null){
+				if (jb.getJawatan().equals("Ketua Pegawai")) {
+					if (jb.getNamaStaff().equals(user.getNamaPengurus())) {
+						emel = jb.getEmail();
+					}
 				}
 			}
 		}
@@ -827,9 +843,11 @@ public class PermohonanController {
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
-			if (jb2.getJawatan().equals("Pentadbir")) {
-				if (jb2.getCawangan().equals(user.getCawangan())) {
-					emel2 = jb2.getEmail();
+			if(jb2.getJawatan() != null){
+				if (jb2.getJawatan().equals("Pentadbir")) {
+					if (jb2.getCawangan().equals(user.getCawangan())) {
+						emel2 = jb2.getEmail();
+					}
 				}
 			}
 		}
@@ -902,18 +920,20 @@ public class PermohonanController {
 		permohonan.setStatusPermohonan("Baru");
 
 		MultipartFile muatNaikBom = temp.getMuatNaikBom();
-		File convertFile = new File(path + muatNaikBom.getOriginalFilename());
-		try {
-			convertFile.createNewFile();
-			FileOutputStream fout = new FileOutputStream(convertFile);
-			fout.write(muatNaikBom.getBytes());
-			fout.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(muatNaikBom.getOriginalFilename() != null){
+			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
+			try {
+				convertFile.createNewFile();
+				FileOutputStream fout = new FileOutputStream(convertFile);
+				fout.write(muatNaikBom.getBytes());
+				fout.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 		}
-
-		permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 
 		permohonanService.save(permohonan);
 
@@ -923,11 +943,13 @@ public class PermohonanController {
 
 				Date tarikhPergi = null;
 
-				try {
-					tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(pt.get(i).getTarikhPergi() != null){
+					try {
+						tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				Penerbangan penerbangan = new Penerbangan();
 				if (pt.get(i).getPenerbanganId() != null) {
@@ -986,8 +1008,13 @@ public class PermohonanController {
 		Date tarikhTamat = null;
 
 		try {
-			tarikhMula = dtf2.parse(temp.getTarikhMula());
-			tarikhTamat = dtf2.parse(temp.getTarikhTamat());
+			if(temp.getTarikhMula() != null){
+				tarikhMula = dtf2.parse(temp.getTarikhMula());
+			}
+			
+			if(temp.getTarikhTamat() != null){
+				tarikhTamat = dtf2.parse(temp.getTarikhTamat());
+			}
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1009,8 +1036,14 @@ public class PermohonanController {
 		permohonan.setPassport(temp.getPassport());
 		permohonan.setTujuan(temp.getTujuan());
 		permohonan.setTempatBertugas(temp.getTempatBertugas());
-		permohonan.setTarikhMula(dtf2.format(tarikhMula));
-		permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
+		
+		if(tarikhMula != null){
+			permohonan.setTarikhMula(dtf2.format(tarikhMula));
+		}
+		
+		if(tarikhTamat != null){
+			permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
+		}
 		permohonan.setNoTelefonBimbit(temp.getNoTelefonBimbit());
 		permohonan.setPeruntukan(temp.getPeruntukan());
 		permohonan.setCatatan(temp.getCatatan());
@@ -1020,19 +1053,21 @@ public class PermohonanController {
 		permohonan.setEnrichNo(temp.getEnrichNo());
 		permohonan.setStatusPermohonan("Baru");
 
-		MultipartFile muatNaikBom = temp.getMuatNaikBom();
-		File convertFile = new File(path + muatNaikBom.getOriginalFilename());
-		try {
-			convertFile.createNewFile();
-			FileOutputStream fout = new FileOutputStream(convertFile);
-			fout.write(muatNaikBom.getBytes());
-			fout.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(temp.getMuatNaikBom() != null){
+			MultipartFile muatNaikBom = temp.getMuatNaikBom();
+			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
+			try {
+				convertFile.createNewFile();
+				FileOutputStream fout = new FileOutputStream(convertFile);
+				fout.write(muatNaikBom.getBytes());
+				fout.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 		}
-
-		permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 
 		permohonanService.save(permohonan);
 
@@ -1042,16 +1077,21 @@ public class PermohonanController {
 
 				Date tarikhPergi = null;
 
-				try {
-					tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(pt.get(i).getTarikhPergi() != null){
+					try {
+						tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 
 				Penerbangan penerbangan = new Penerbangan();
 				penerbangan.setPenerbangan(pt.get(i).getPenerbangan());
-				penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
+
+				if(tarikhPergi != null){
+					penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
+				}
 				penerbangan.setWaktuBerlepas(pt.get(i).getWaktuBerlepas());
 				penerbangan.setWaktuTiba(pt.get(i).getWaktuTiba());
 				penerbangan.setJenisPesawat(pt.get(i).getJenisPesawat());
@@ -1394,9 +1434,11 @@ public class PermohonanController {
 		pengguna = (ArrayList<Pengguna>) penggunaService.findAll();
 
 		for (Pengguna jb : pengguna) {
-			if (jb.getJawatan().equals("Pengarah")) {
-				if (jb.getCawangan().equals(user.getCawangan())) {
-					emel = jb.getEmail();
+			if(jb.getJawatan() != null){
+				if (jb.getJawatan().equals("Pengarah")) {
+					if (jb.getCawangan().equals(user.getCawangan())) {
+						emel = jb.getEmail();
+					}
 				}
 			}
 		}
@@ -1422,9 +1464,11 @@ public class PermohonanController {
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
-			if (jb2.getJawatan().equals("Pentadbir")) {
-				if (jb2.getCawangan().equals(user.getCawangan())) {
-					emel2 = jb2.getEmail();
+			if(jb2.getJawatan() != null){
+				if (jb2.getJawatan().equals("Pentadbir")) {
+					if (jb2.getCawangan().equals(user.getCawangan())) {
+						emel2 = jb2.getEmail();
+					}
 				}
 			}
 		}
@@ -1608,20 +1652,26 @@ public class PermohonanController {
 
 		Pembelian pembelianForm = new Pembelian();
 
-		MultipartFile muatNaikBom = temp.getMuatNaikTiket();
-		File convertFile = new File(path + muatNaikBom.getOriginalFilename());
-		try {
-			convertFile.createNewFile();
-			FileOutputStream fout = new FileOutputStream(convertFile);
-			fout.write(muatNaikBom.getBytes());
-			fout.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		File convertFile = null;
+		
+		if(temp.getMuatNaikTiket() != null){
+			MultipartFile muatNaikBom = temp.getMuatNaikTiket();
+			convertFile = new File(path + muatNaikBom.getOriginalFilename());
+			try {
+				convertFile.createNewFile();
+				FileOutputStream fout = new FileOutputStream(convertFile);
+				fout.write(muatNaikBom.getBytes());
+				fout.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//
 
-		pembelianForm.setMuatNaikTiket(convertFile.getAbsolutePath());
+		if(convertFile != null){
+			pembelianForm.setMuatNaikTiket(convertFile.getAbsolutePath());
+		}
 		pembelianForm.setId(temp.getId());
 		pembelianForm.setAlasan(temp.getAlasan());
 		pembelianForm.setCaraBeli(temp.getCaraBeli());
@@ -1716,13 +1766,18 @@ public class PermohonanController {
 		DateFormat dtf2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date tarikhPergi = null;
 		try {
-			tarikhPergi = dtf2.parse(penerbanganForm.getTarikhPergi());
+			if(penerbanganForm.getTarikhPergi() != null){
+				tarikhPergi = dtf2.parse(penerbanganForm.getTarikhPergi());
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		penerbanganForm.setTarikhPergi(dtf2.format(tarikhPergi));
+		if(tarikhPergi != null){
+			penerbanganForm.setTarikhPergi(dtf2.format(tarikhPergi));
+		}
+		
 		System.out.println("haaaaaaaaa" + penerbanganForm);
 		penerbanganService.save(penerbanganForm);
 
@@ -1760,9 +1815,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -1818,9 +1875,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -1876,9 +1935,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -1934,9 +1995,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -1993,9 +2056,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}
@@ -2052,9 +2117,11 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}

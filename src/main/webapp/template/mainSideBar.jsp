@@ -85,7 +85,7 @@
 									class="fa fa-dollar"></i>Pembelian</a></li>
 							<!-- <li class="active"><a href="report"><i
 								class="fa fa-file-text-o"></i>Laporan</a></li> -->
-							<li class="active"><a href="admin/daftarPengguna"><i
+							<li class="active"><a href="daftarPengguna"><i
 									class="fa fa-circle-o"></i>Daftar Pengguna</a></li>
 							<!-- <li class="treeview"><a href="#"><i
 								class="fa  fa-check-circle-o"></i>Selenggara</a></li> -->

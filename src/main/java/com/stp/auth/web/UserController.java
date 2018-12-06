@@ -140,13 +140,15 @@ public class UserController {
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
 		
 		for (Permohonan jb : userForm) {
-			if (jb.getNamaPelulus().equals(user.getNamaStaff())) {
-				model.addAttribute("welcome", userForm);
-				
-				penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(jb);
-				
-				for (Penerbangan jb2 : penerbangan) {
-					listPenerbangan.add(jb2);
+			if(jb.getNamaPelulus() != null){
+				if (jb.getNamaPelulus().equals(user.getNamaStaff())) {
+					model.addAttribute("welcome", userForm);
+					
+					penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(jb);
+					
+					for (Penerbangan jb2 : penerbangan) {
+						listPenerbangan.add(jb2);
+					}
 				}
 			}
 		}
@@ -186,9 +188,11 @@ public class UserController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if (jb2.getRoleId().equals(idRole2)) {
-						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+					if(jb2.getRoleId() != null){
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
 					}
 				}
 			}

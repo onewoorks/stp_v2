@@ -12,7 +12,7 @@
 				<h4 class="modal-title">Daftar Pengguna</h4>
 			</div>
 			<form:form method="POST" modelAttribute="daftarPenggunaForm"
-				action="${contextPath}/admin/daftarPengguna" class="form-horizontal">
+				action="${contextPath}/daftarPengguna" class="form-horizontal">
 				<div class="modal-body">
 
 

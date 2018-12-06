@@ -22,7 +22,7 @@
 				<h4 class="modal-title">Padam Pengguna</h4>
 			</div>
 			<form:form method="POST" modelAttribute="padamPenggunaForm"
-				action="${contextPath}/admin/padamPengguna" class="form-horizontal">
+				action="${contextPath}/padamPengguna" class="form-horizontal">
 				<div class="modal-body">
 
 					<spring:bind path="id">
