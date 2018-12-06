@@ -94,119 +94,121 @@
 																	<button type="button" class="btn btn-info "
 																		data-toggle="modal"
 																		data-target="#modal-lulus${pemohon.id}">Pembelian</button>
-																</c:if> 
-																<c:forEach items="${Penerbangan}" var="penerbangan">
-																<c:if
-																	test="${pemohon.id == penerbangan.permohonan.id}">
-																	<div class="modal fade"
-																		id="modal-beliTiket${pemohon.id}${penerbangan.penerbanganId}">
-																		<div class="modal-dialog modal-lg">
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<button type="button" class="close"
-																						data-dismiss="modal" aria-label="Close">
-																						<span aria-hidden="true">&times;</span>
-																					</button>
-																					<h4 class="modal-title">Pembelian</h4>
-																				</div>
-																				<div class="modal-body">
-																					<form:form method="POST"
-																						modelAttribute="updatePembelian"
-																						action="${contextPath}/updatePembelianForm"
-																						class="form-horizontal">
+																</c:if> <c:forEach items="${Penerbangan}" var="penerbangan">
+																	<c:if test="${pemohon.id == penerbangan.permohonan.id}">
+																		<div class="modal fade"
+																			id="modal-beliTiket${pemohon.id}${penerbangan.penerbanganId}">
+																			<div class="modal-dialog modal-lg">
+																				<div class="modal-content">
+																					<div class="modal-header">
+																						<button type="button" class="close"
+																							data-dismiss="modal" aria-label="Close">
+																							<span aria-hidden="true">&times;</span>
+																						</button>
+																						<h4 class="modal-title">Pembelian</h4>
+																					</div>
+																					<div class="modal-body">
+																						<form:form method="POST"
+																							modelAttribute="updatePembelian"
+																							action="${contextPath}/updatePembelianForm"
+																							enctype="multipart/form-data"
+																							class="form-horizontal">
 
-																						<spring:bind path="permohonan">
-																							<form:input type="hidden" class="form-control"
-																								path="permohonan" value="${pemohon.id}"></form:input>
-																						</spring:bind>
+																							<spring:bind path="permohonan">
+																								<form:input type="hidden" class="form-control"
+																									path="permohonan" value="${pemohon.id}"></form:input>
+																							</spring:bind>
 
-																						<spring:bind path="penerbangan">
-																							<form:input type="hidden" class="form-control"
-																								path="penerbangan"
-																								value="${penerbangan.penerbanganId}"></form:input>
-																						</spring:bind>
+																							<spring:bind path="penerbangan">
+																								<form:input type="hidden" class="form-control"
+																									path="penerbangan"
+																									value="${penerbangan.penerbanganId}"></form:input>
+																							</spring:bind>
 
-																						<div class="form-group">
-																							<label for="inputPassword3"
-																								class="col-sm-2 control-label">Cara Beli</label>
-																							<div class="col-sm-6">
-																								<spring:bind path="caraBeli">
-																									<form:select path="caraBeli"
-																										class="form-control"
-																										id="caraBeliId${penerbangan.penerbanganId}"
-																										onchange="showCaraBeli(${penerbangan.penerbanganId})">
-																										<option></option>
-																										<option value="KadKredit">Kad Kredit</option>
-																										<option value="Waran">Waran</option>
-																									</form:select>
-																								</spring:bind>
-																							</div>
-																						</div>
-																						<div class="form-group">
-																							<label for="inputEmail3"
-																								class="col-sm-2 control-label">Harga
-																								Tiket</label>
-																							<div class="col-sm-6">
-																								<spring:bind path="hargaTiket">
-																									<form:input id="hargaTiket" type="text"
-																										class="form-control" path="hargaTiket"
-																										placeholder="Harga Tiket"
-																										onchange="myFunction()"></form:input>
-																								</spring:bind>
-																							</div>
-																						</div>
-																						<div class="form-group">
-																							<div id="waranHidden${penerbangan.penerbanganId}" >
+																							<div class="form-group">
 																								<label for="inputPassword3"
-																									class="col-sm-2 control-label">Waran</label>
+																									class="col-sm-2 control-label">Cara
+																									Beli</label>
 																								<div class="col-sm-6">
-																									<spring:bind path="waran">
-																										<form:input id="hargaWaran" type="text"
-																											class="form-control" path="waran"
-																											placeholder="Harga Waran"
-																											onchange="myFunction()"></form:input>
+																									<spring:bind path="caraBeli">
+																										<form:select path="caraBeli"
+																											class="form-control"
+																											id="caraBeliId${penerbangan.penerbanganId}"
+																											onchange="showCaraBeli(${penerbangan.penerbanganId})">
+																											<option></option>
+																											<option value="KadKredit">Kad Kredit</option>
+																											<option value="Waran">Waran</option>
+																										</form:select>
 																									</spring:bind>
 																								</div>
 																							</div>
-																						</div>
-																						<div class="form-group">
-																							<div id="hargaPenguranganHidden${penerbangan.penerbanganId}">
+																							<div class="form-group">
 																								<label for="inputEmail3"
 																									class="col-sm-2 control-label">Harga
-																									Pengurangan</label>
-
+																									Tiket</label>
 																								<div class="col-sm-6">
-																									<spring:bind path="hargaPengurangan">
-																										<form:input type="text" class="form-control"
-																											id="hargaKurang" path="hargaPengurangan"
-																											placeholder="Harga Pengurangan"
+																									<spring:bind path="hargaTiket">
+																										<form:input id="hargaTiket" type="text"
+																											class="form-control" path="hargaTiket"
+																											placeholder="Harga Tiket"
 																											onchange="myFunction()"></form:input>
 																									</spring:bind>
 																								</div>
 																							</div>
-																						</div>
-																						<div class="form-group">
-																							<label for="exampleInputFile"
-																								class="col-sm-2 control-label">Muatnaik
-																								Tiket</label>
-																							<div class="col-sm-6">
-																								<spring:bind path="muatNaikTiket">
-																									<form:input type="file" class="form-control"
-																										path="muatNaikTiket"></form:input>
-																								</spring:bind>
+																							<div class="form-group">
+																								<div
+																									id="waranHidden${penerbangan.penerbanganId}">
+																									<label for="inputPassword3"
+																										class="col-sm-2 control-label">Waran</label>
+																									<div class="col-sm-6">
+																										<spring:bind path="waran">
+																											<form:input id="hargaWaran" type="text"
+																												class="form-control" path="waran"
+																												placeholder="Harga Waran"
+																												onchange="myFunction()"></form:input>
+																										</spring:bind>
+																									</div>
+																								</div>
 																							</div>
-																						</div>
+																							<div class="form-group">
+																								<div
+																									id="hargaPenguranganHidden${penerbangan.penerbanganId}">
+																									<label for="inputEmail3"
+																										class="col-sm-2 control-label">Harga
+																										Pengurangan</label>
 
-																						<!-- /.box-body -->
-																						<div class="box-footer">
-																							<button type="submit"
-																								class="btn btn-info pull-right">Hantar</button>
-																						</div>
-																					</form:form>
+																									<div class="col-sm-6">
+																										<spring:bind path="hargaPengurangan">
+																											<form:input type="text" class="form-control"
+																												id="hargaKurang" path="hargaPengurangan"
+																												placeholder="Harga Pengurangan"
+																												onchange="myFunction()"></form:input>
+																										</spring:bind>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="form-group">
+																								<label for="exampleInputFile"
+																									class="col-sm-2 control-label">Muatnaik
+																									Tiket</label>
+																								<div class="col-sm-6">
+																									<spring:bind path="muatNaikTiket">
+																										<form:input type="file" class="form-control"
+																											path="muatNaikTiket"></form:input>
+																									</spring:bind>
+																								</div>
+																							</div>
+
+																							<!-- /.box-body -->
+																							<div class="box-footer">
+																								<button type="submit"
+																									class="btn btn-info pull-right">Hantar</button>
+																							</div>
+																						</form:form>
+																					</div>
 																				</div>
 																			</div>
 																		</div>
-																	</div>
 																	</c:if>
 																</c:forEach> <c:forEach items="${Penerbangan}" var="penerbangan">
 																	<div class="modal fade"
@@ -583,8 +585,8 @@
 																										<%
 																											x++;
 																										%>
-																										
-												<script>
+
+																										<script>
 													var waranHidden = document
 															.getElementById('waranHidden${penerbangan.penerbanganId}');
 													waranHidden.style.display = "none";
@@ -619,7 +621,7 @@
 														}
 													}
 												</script>
-														<script>
+																										<script>
 												function myFunction(val) {
 													var hargaWaran = document.getElementById('hargaWaran').value;
 													var hargaTiket = document.getElementById('hargaTiket').value;

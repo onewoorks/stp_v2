@@ -56,6 +56,7 @@ import com.mysql.fabric.xmlrpc.base.Array;
 import com.stp.auth.model.Barangan;
 import com.stp.auth.model.BaranganTemp;
 import com.stp.auth.model.Pembelian;
+import com.stp.auth.model.PembelianTemp;
 import com.stp.auth.model.Penerbangan;
 import com.stp.auth.model.PenerbanganTemp;
 import com.stp.auth.model.Pengguna;
@@ -137,9 +138,8 @@ public class PermohonanController {
 	ArrayList<PenerbanganTemp> pt = new ArrayList<PenerbanganTemp>();
 	ArrayList<BaranganTemp> barangant = new ArrayList<BaranganTemp>();
 	ArrayList<Permohonan> permohonan = new ArrayList<>();
-	
+
 	String kemasKiniPeruntukan = "";
-	
 
 	@RequestMapping(value = "/permohonanTiket", method = RequestMethod.GET)
 	public String permohonan(Model model, HttpSession session, Long id) {
@@ -418,7 +418,8 @@ public class PermohonanController {
 	}
 
 	@RequestMapping(value = "/permohonanKemaskiniTemp", method = RequestMethod.GET)
-	public String permohonanKemaskiniTemp(@RequestParam("id") Long id, Model model, HttpSession session,HttpServletRequest req) {
+	public String permohonanKemaskiniTemp(@RequestParam("id") Long id, Model model, HttpSession session,
+			HttpServletRequest req) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userService.findByUsername(username);
@@ -452,8 +453,7 @@ public class PermohonanController {
 
 		Permohonan permohonan = permohonanService.findById(id);
 		session.setAttribute("permohonan", permohonan);
-		
-		
+
 		Long id3 = id;
 
 		PermohonanTemp temp = new PermohonanTemp();
@@ -668,7 +668,7 @@ public class PermohonanController {
 		pt.add(pt2);
 
 	}
-	
+
 	@RequestMapping(value = "/kemasPenerbanganTemp", method = RequestMethod.POST, produces = "application/json")
 	public void kemasPenerbanganTemp(@RequestBody PenerbanganTemp pt2) {
 
@@ -1178,32 +1178,38 @@ public class PermohonanController {
 			for (Penerbangan jb : penerbangan) {
 				model.addAttribute("downloadTiketSelesai", pembelianService.findByPenerbangan(jb));
 				pembelian = (ArrayList<Pembelian>) pembelianService.findByPenerbangan(jb);
+
+				System.out.println("hoiiiiiiiiiii :::" + pembelian);
+				List<Pembelian> pembelianTiket = new ArrayList<>();
+
 				for (Pembelian pembelianForm : pembelian) {
+					if (pembelianForm.getId() != null) {
 
-					if (pembelianForm.getMuatNaikTiket() != null) {
-						File file = new File(pembelianForm.getMuatNaikTiket()); // kena
-																				// get
-																				// file
-																				// name
-																				// from
-																				// db
+						if (pembelianForm.getMuatNaikTiket() != null) {
+							File file = new File(pembelianForm.getMuatNaikTiket()); // kena
+																					// get
+																					// file
+																					// name
+																					// from
+																					// db
 
-						// guess contenty type
-						String mime = URLConnection.guessContentTypeFromName(file.getPath());
+							// guess contenty type
+							String mime = URLConnection.guessContentTypeFromName(file.getPath());
 
-						response.setContentType(mime);
-						response.setHeader("Content-Disposition", "attachment;filename=" + file.getPath());
+							response.setContentType(mime);
+							response.setHeader("Content-Disposition", "attachment;filename=" + file.getPath());
 
-						BufferedInputStream inStrem = new BufferedInputStream(new FileInputStream(file));
-						BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
+							BufferedInputStream inStrem = new BufferedInputStream(new FileInputStream(file));
+							BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
 
-						byte[] buffer = new byte[1024];
-						int bytesRead = 0;
-						while ((bytesRead = inStrem.read(buffer)) != -1) {
-							outStream.write(buffer, 0, bytesRead);
+							byte[] buffer = new byte[1024];
+							int bytesRead = 0;
+							while ((bytesRead = inStrem.read(buffer)) != -1) {
+								outStream.write(buffer, 0, bytesRead);
+							}
+							outStream.flush();
+							inStrem.close();
 						}
-						outStream.flush();
-						inStrem.close();
 					}
 				}
 			}
@@ -1591,27 +1597,40 @@ public class PermohonanController {
 	}
 
 	@RequestMapping(value = "/updatePembelianForm", method = RequestMethod.POST)
-	public String pembelian(@ModelAttribute("updatePembelian") Pembelian pembelianForm, Model model,
-			HttpSession session) {
+	public String pembelian(@ModelAttribute("updatePembelian") PembelianTemp temp, Model model, HttpSession session) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userService.findByUsername(username);
 		session.setAttribute("user", user);
 		model.addAttribute("welcome", permohonanService.getAll());
 
-		// MultipartFile muatNaikBom = temp.getMuatNaikBom();
-		// File convertFile = new File(path+muatNaikBom.getOriginalFilename());
-		// try {
-		// convertFile.createNewFile();
-		// FileOutputStream fout = new FileOutputStream(convertFile);
-		// fout.write(muatNaikBom.getBytes());
-		// fout.close();
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		System.out.println("bohhhh ::" + temp);
+
+		Pembelian pembelianForm = new Pembelian();
+
+		MultipartFile muatNaikBom = temp.getMuatNaikTiket();
+		File convertFile = new File(path + muatNaikBom.getOriginalFilename());
+		try {
+			convertFile.createNewFile();
+			FileOutputStream fout = new FileOutputStream(convertFile);
+			fout.write(muatNaikBom.getBytes());
+			fout.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//
-		// pembelianForm.setMuatNaikTiket(convertFile.getAbsolutePath());
+
+		pembelianForm.setMuatNaikTiket(convertFile.getAbsolutePath());
+		pembelianForm.setId(temp.getId());
+		pembelianForm.setAlasan(temp.getAlasan());
+		pembelianForm.setCaraBeli(temp.getCaraBeli());
+		pembelianForm.setPenerbangan(temp.getPenerbangan());
+		pembelianForm.setHargaPengurangan(temp.getHargaPengurangan());
+		pembelianForm.setWaran(temp.getWaran());
+		pembelianForm.setHargaTiket(temp.getHargaTiket());
+		pembelianForm.setPermohonan(temp.getPermohonan());
+
 		model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(pembelianForm.getPermohonan()));
 
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
@@ -2007,7 +2026,7 @@ public class PermohonanController {
 		return "redirect:/maintenancePageUnit";
 
 	}
-	
+
 	@RequestMapping(value = { "/maintenancePageJawatan" }, method = RequestMethod.GET)
 	public String updateJawatan(Model model, HttpSession session, RefJawatan refJawatan) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -2042,7 +2061,7 @@ public class PermohonanController {
 		}
 
 		model.addAttribute("refJawatan", refJawatanService.getAll());
-		System.out.println("sini :::::::" +refJawatanService.getAll());
+		System.out.println("sini :::::::" + refJawatanService.getAll());
 		model.addAttribute("roleAll", refRoleService.getAll());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("namaStaff", user.getNamaStaff());
@@ -2069,8 +2088,5 @@ public class PermohonanController {
 		return "redirect:/maintenancePageJawatan";
 
 	}
-	
-
-	
 
 }

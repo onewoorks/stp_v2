@@ -32,6 +32,7 @@ public class PermohonanTemp {
 	private String statusPermohonan;
 	private String catatan;
 	private String enrichNo;
+	private MultipartFile muatNaikTiket;
 	
 	private Long penerbanganId;
 	
@@ -449,6 +450,18 @@ public class PermohonanTemp {
 
 	public void setEnrichNo(String enrichNo) {
 		this.enrichNo = enrichNo;
+	}
+
+
+
+	public MultipartFile getMuatNaikTiket() {
+		return muatNaikTiket;
+	}
+
+
+
+	public void setMuatNaikTiket(MultipartFile muatNaikTiket) {
+		this.muatNaikTiket = muatNaikTiket;
 	}
 
 
