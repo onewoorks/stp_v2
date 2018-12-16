@@ -737,20 +737,24 @@ public class PermohonanController {
 		permohonan.setEnrichNo(temp.getEnrichNo());
 		permohonan.setStatusPermohonan("Baru");
 
-		MultipartFile muatNaikBom = temp.getMuatNaikBom();
-		File convertFile = new File(path + muatNaikBom.getOriginalFilename());
-		try {
-			convertFile.createNewFile();
-			FileOutputStream fout = new FileOutputStream(convertFile);
-			fout.write(muatNaikBom.getBytes());
-			fout.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(!temp.getMuatNaikBom().getOriginalFilename().equalsIgnoreCase("")){
+			MultipartFile muatNaikBom = temp.getMuatNaikBom();
+			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
+			try {
+				convertFile.createNewFile();
+				FileOutputStream fout = new FileOutputStream(convertFile);
+				fout.write(muatNaikBom.getBytes());
+				fout.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
+
 		}
-
-		permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
-
+		
 		permohonanService.save(permohonan);
 
 		if (pt.size() != 0) {
@@ -824,23 +828,23 @@ public class PermohonanController {
 			}
 		}
 
-		SendHTMLEmail.sendHtmlEmail(emel,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
-						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
-						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
-						+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+//		SendHTMLEmail.sendHtmlEmail(emel,
+//				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+//						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+//						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+//						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+//						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+//						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+//						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+//						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+//						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+//						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+//						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+//						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
+//						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+//						+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+//						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+//						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
 			if(jb2.getJawatan() != null){
@@ -852,23 +856,23 @@ public class PermohonanController {
 			}
 		}
 
-		SendHTMLEmail.sendHtmlEmail(emel2,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
-						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
-						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
-						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+//		SendHTMLEmail.sendHtmlEmail(emel2,
+//				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+//						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+//						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+//						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+//						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+//						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+//						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+//						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+//						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+//						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+//						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+//						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
+//						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+//						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+//						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+//						+ "</div></footer></body></html>");
 
 		return "redirect:/permohonanTiket";
 	}
