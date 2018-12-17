@@ -69,7 +69,7 @@ div.login-box-header {
 					</h3>
 				</div>
 				<div class="form-group ${error != null ? 'has-error' : ''}">
-					<span>${message}</span>
+					<span style='color:red;  font-weight: bold;'>${message}</span>
 					<div class="form-group has-feedback">
 						<input name="username" type="text" class="form-control"
 							placeholder="Nama Pengguna"> <span
@@ -82,10 +82,21 @@ div.login-box-header {
 					</div>
 					<span>${error}</span> <input type="hidden"
 						name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<div class="row">
+						<div class="col-xs-1">
+					
+							<input type="checkbox" name="remember" > 
+							
+						</div><div class="col-xs-6" style='color:white;  font-weight: bold;'>Remember me</div>
+						<br/>
+						<br/>
+						<br/>
 					<div class="row">
-						<div class="col-xs-4">
-							<button type="submit" class="btn btn-primary btn-block btn-flat">Log
-								Masuk</button>
+								<div class="col-xs-1">
+								</div>
+					
+						<div class="col-xs-5">
+							<button type="submit" class="btn btn-primary btn-block btn-flat" >Log Masuk</button>
 						</div>
 						
 
