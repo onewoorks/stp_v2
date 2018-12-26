@@ -188,8 +188,8 @@
 
 																						<div class="col-sm-8">
 																							<spring:bind path="refRole">
-																								<form:select path="refRole" class="form-control">
-																									<c:forEach var="role" items="${roleAll}" style="width: 100%">
+																								<form:select path="refRole" class="form-control" style="width: 100%">
+																									<c:forEach var="role" items="${roleAll}" >
 																										<option value="${role.roleId}"><c:out
 																												value="${role.roleDesc}" /></option>
 																									</c:forEach>
