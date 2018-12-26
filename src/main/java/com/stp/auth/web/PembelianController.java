@@ -96,7 +96,18 @@ public class PembelianController {
 
 		// User user = userService.findByUsername(username);
 		// session.setAttribute("user", user);
-		model.addAttribute("welcome", permohonanService.findByStatusPermohonan("Proses"));
+		
+		ArrayList<Permohonan> permohonan2 = new ArrayList<>();
+		
+		permohonan2 = (ArrayList<Permohonan>) permohonanService.getAll();
+		
+		for(Permohonan jb : permohonan2){
+			if(jb.getStatusPermohonan().equalsIgnoreCase("Proses") || jb.getStatusPermohonan().equalsIgnoreCase("Selesai")){
+				model.addAttribute("welcome", permohonan2);
+			}
+		}
+		
+//		model.addAttribute("welcome", permohonanService.getAll());
 
 		// ArrayList<Pengguna> pengguna = new ArrayList<>();
 		//
@@ -109,7 +120,7 @@ public class PembelianController {
 
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
 		List<Penerbangan> listPenerbangan = new ArrayList<>();
-		for (Permohonan userForm : permohonanService.findByStatusPermohonan("Proses")) {
+		for (Permohonan userForm : permohonanService.getAll()) {
 
 			userForm.getId();
 			

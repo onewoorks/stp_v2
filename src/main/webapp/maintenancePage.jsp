@@ -58,9 +58,10 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambah"
-											id="permohonanBaru">Tambah</button>
+											id="permohonanBaru" title="Tambah Cawangan"><i class="fa fa-plus"></i></button>
 									</div>
-									<table id="tableCawangan" class="table table-bordered table-hover">
+									<table id="tableCawangan"
+										class="table table-bordered table-hover">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -78,13 +79,13 @@
 													<td><%=x%></td>
 													<td>${cawangan.cawanganDesc}</td>
 													<td>
-														<button type="button" class="btn btn-info btn-block "
+														<button type="button" class="btn btn-info"
 															data-toggle="modal"
-															data-target="#modal-pengesahan${cawangan.cawanganiId}">Kemaskini</button>
+															data-target="#modal-pengesahan${cawangan.cawanganiId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${cawangan.cawanganiId}">
-															<div class="modal-dialog modal-lg">
+															<div class="modal-dialog modal-lg" role="document">
 																<div class="modal-content">
 																	<div class="modal-header">
 																		<button type="button" class="close"
@@ -93,7 +94,7 @@
 																		</button>
 																		<h4 class="modal-title">Cawangan</h4>
 																	</div>
-																	<div class="modal-body">
+																	<div class="modal-body form-horizontal">
 																		<form:form method="POST"
 																			modelAttribute="kemaskiniCawangan"
 																			action="${contextPath}/updateCawangan"
@@ -108,12 +109,13 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Cawangan :</label>
+																							class="col-sm-3 control-label">Cawangan :</label>
 																						<div class="col-sm-8">
 																							<spring:bind path="cawanganDesc">
 																								<form:input type="text" class="form-control"
 																									id="cawanganDesc" path="cawanganDesc"
-																									value="${cawangan.cawanganDesc}"></form:input>
+																									value="${cawangan.cawanganDesc}"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -150,16 +152,15 @@
 																			class="form-horizontal">
 																			<div class="box-body">
 																				<div class="form-group">
-																					<div class="col-sm-12">
-																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Cawangan :</label>
+																					<label for="inputEmail3"
+																						class="col-sm-3 control-label">Cawangan :</label>
 
-																						<div class="col-sm-8">
-																							<spring:bind path="cawanganDesc">
-																								<form:input type="text" class="form-control"
-																									id="cawanganDesc" path="cawanganDesc"></form:input>
-																							</spring:bind>
-																						</div>
+																					<div class="col-sm-8">
+																						<spring:bind path="cawanganDesc">
+																							<form:input type="text" class="form-control"
+																								id="cawanganDesc" path="cawanganDesc"
+																								style="width: 100%"></form:input>
+																						</spring:bind>
 																					</div>
 																				</div>
 

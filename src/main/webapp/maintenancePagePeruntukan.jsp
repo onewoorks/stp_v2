@@ -58,7 +58,7 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahPeruntukan"
-											id="permohonanBaru">Tambah</button>
+											id="permohonanBaru" title="Tambah Peruntukan"><i class="fa fa-plus"></i></button>
 									</div>
 									<table id="tablePeruntukan" class="table table-bordered table-hover">
 										<thead>
@@ -80,7 +80,7 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-pengesahan${peruntukan.peruntukanId}">Kemaskini</button>
+															data-target="#modal-pengesahan${peruntukan.peruntukanId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${peruntukan.peruntukanId}">
@@ -91,7 +91,7 @@
 																			data-dismiss="modal" aria-label="Close">
 																			<span aria-hidden="true">&times;</span>
 																		</button>
-																		<h4 class="modal-title">Lokasi</h4>
+																		<h4 class="modal-title">Peruntukan</h4>
 																	</div>
 																	<div class="modal-body">
 																		<form:form method="POST"
@@ -108,13 +108,13 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-6 control-label">Peruntukan
+																							class="col-sm-3 control-label">Peruntukan
 																							:</label>
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="peruntukanDesc">
 																								<form:input type="text" class="form-control"
 																									id="peruntukanDesc" path="peruntukanDesc"
-																									value="${peruntukan.peruntukanDesc}"></form:input>
+																									value="${peruntukan.peruntukanDesc}" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -142,7 +142,7 @@
 																			data-dismiss="modal" aria-label="Close">
 																			<span aria-hidden="true">&times;</span>
 																		</button>
-																		<h4 class="modal-title">Lokasi</h4>
+																		<h4 class="modal-title">Peruntukan</h4>
 																	</div>
 																	<div class="modal-body">
 																		<form:form method="POST"
@@ -153,13 +153,13 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-6 control-label">Peruntukan
+																							class="col-sm-3 control-label">Peruntukan
 																							:</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="peruntukanDesc">
 																								<form:input type="text" class="form-control"
-																									id="peruntukanDesc" path="peruntukanDesc"></form:input>
+																									id="peruntukanDesc" path="peruntukanDesc" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

@@ -64,15 +64,16 @@
 											<strong>${msg}</strong>
 										</div>
 									</c:if>
-										<div class="row">
-											<div class="form-group col-xs-2 pull-right">
-												<button type="button" class="btn btn-info form-control "
-													data-toggle="modal" data-target="#modal-penggunaForm">
-													<b>Tambah Pengguna</b>
-												</button>
+									<div class="row">
+										<div class="form-group col-xs-2 pull-right">
+											<button type="button" class="btn btn-info form-control "
+												data-toggle="modal" data-target="#modal-penggunaForm"
+												title="Tambah Pengguna">
+												<i class="fa fa-plus"></i>
+											</button>
 
-											</div>
 										</div>
+									</div>
 									<br />
 									<table id="pengguna" class="table table-bordered table-hover">
 										<thead>
@@ -95,19 +96,23 @@
 												<td>${user.namaStaff}</td>
 												<td>${user.username}</td>
 												<td>${user.status}</td>
-												<td><spring:url
-														value="/lihatPengguna?id=${user.id}" var="userUrl" />
-													<spring:url value="/padamPengguna?id=${user.id}"
-														var="deleteUrl" /> <spring:url
-														value="/kemaskiniPengguna?id=${user.id}"
-														var="updateUrl" />
+												<td><spring:url value="/lihatPengguna?id=${user.id}"
+														var="userUrl" /> <spring:url
+														value="/padamPengguna?id=${user.id}" var="deleteUrl" /> <spring:url
+														value="/kemaskiniPengguna?id=${user.id}" var="updateUrl" />
 
-													<button class="btn btn-info btn-block"
-														onclick="location.href='${userUrl}'">Lihat</button>
-													<button class="btn btn-primary btn-block"
-														onclick="location.href='${updateUrl}'">Kemaskini</button>
-													<button class="btn btn-danger btn-block"
-														onclick="location.href='${deleteUrl}'">Padam</button></td>
+													<button class="btn btn-info"
+														onclick="location.href='${userUrl}'" title="Kemaskini">
+														<i class="fa fa-edit"></i>
+													</button>
+													<button class="btn btn-primary"
+														onclick="location.href='${updateUrl}'" title="Lihat">
+														<i class="fa fa-eye"></i>
+													</button>
+													<button class="btn btn-danger"
+														onclick="location.href='${deleteUrl}'" title="Padam">
+														<i class="fa fa-trash"></i>
+													</button></td>
 											</tr>
 											<%
 												i++;

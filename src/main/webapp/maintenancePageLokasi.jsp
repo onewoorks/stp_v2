@@ -58,7 +58,7 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambah"
-											id="permohonanBaru">Tambah</button>
+											id="permohonanBaru" title="Tambah Lokasi"><i class="fa fa-plus"></i></button>
 									</div>
 									<table id="tableLokasi" class="table table-bordered table-hover">
 										<thead>
@@ -80,7 +80,7 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-pengesahan${lokasi.lokasiId}">Kemaskini</button>
+															data-target="#modal-pengesahan${lokasi.lokasiId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${lokasi.lokasiId}">
@@ -107,12 +107,12 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Lokasi :</label>
+																							class="col-sm-3 control-label">Lokasi :</label>
 																						<div class="col-sm-8">
 																							<spring:bind path="lokasiDesc">
 																								<form:input type="text" class="form-control"
 																									id="lokasiDesc" path="lokasiDesc"
-																									value="${lokasi.lokasiDesc}"></form:input>
+																									value="${lokasi.lokasiDesc}" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -151,12 +151,12 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Lokasi :</label>
+																							class="col-sm-3 control-label">Lokasi :</label>
 
 																						<div class="col-sm-8">
 																							<spring:bind path="lokasiDesc">
 																								<form:input type="text" class="form-control"
-																									id="lokasiDesc" path="lokasiDesc"></form:input>
+																									id="lokasiDesc" path="lokasiDesc" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

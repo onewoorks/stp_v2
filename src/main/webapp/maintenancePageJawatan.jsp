@@ -58,7 +58,7 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahJawatan"
-											id="permohonanBaru">Tambah</button>
+											id="permohonanBaru" title="Tambah Jawatan"><i class="fa fa-plus"></i></button>
 									</div>
 									<table id="tableJawatan"
 										class="table table-bordered table-hover">
@@ -81,7 +81,7 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-jawatan${refJawatanAll.jawatanId}">Kemaskini</button>
+															data-target="#modal-jawatan${refJawatanAll.jawatanId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
 
 														<div class="modal fade"
 															id="modal-jawatan${refJawatanAll.jawatanId}">
@@ -110,12 +110,12 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Jawatan :</label>
+																							class="col-sm-3 control-label">Jawatan :</label>
 																						<div class="col-sm-8">
 																							<spring:bind path="jawatanDesc">
 																								<form:input type="text" class="form-control"
 																									id="jawatanDesc" path="jawatanDesc"
-																									value="${refJawatanAll.jawatanDesc}"></form:input>
+																									value="${refJawatanAll.jawatanDesc}" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -123,11 +123,11 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Peranan:</label>
+																							class="col-sm-3 control-label">Peranan:</label>
 
 																						<div class="col-sm-8">
 																							<spring:bind path="refRole">
-																								<form:select path="refRole" class="form-control">
+																								<form:select path="refRole" class="form-control" style="width: 100%">
 																									<c:forEach var="role" items="${roleAll}">
 																										<option value="${role.roleId}"><c:out
 																												value="${role.roleDesc}" /></option>
@@ -171,12 +171,12 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Jawatan :</label>
+																							class="col-sm-3 control-label">Jawatan :</label>
 
 																						<div class="col-sm-8">
 																							<spring:bind path="jawatanDesc">
 																								<form:input type="text" class="form-control"
-																									id="jawatanDesc" path="jawatanDesc"></form:input>
+																									id="jawatanDesc" path="jawatanDesc" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -184,12 +184,12 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-4 control-label">Peranan:</label>
+																							class="col-sm-3 control-label">Peranan:</label>
 
 																						<div class="col-sm-8">
 																							<spring:bind path="refRole">
 																								<form:select path="refRole" class="form-control">
-																									<c:forEach var="role" items="${roleAll}">
+																									<c:forEach var="role" items="${roleAll}" style="width: 100%">
 																										<option value="${role.roleId}"><c:out
 																												value="${role.roleDesc}" /></option>
 																									</c:forEach>

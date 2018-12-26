@@ -82,7 +82,7 @@
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan</a></li>
 							<li class="active"><a href="pembelian"><i
-									class="fa fa-dollar"></i>Pembelian</a></li>
+									class="fa fa-dollar"></i>Tempahan</a></li>
 							<!-- <li class="active"><a href="report"><i
 								class="fa fa-file-text-o"></i>Laporan</a></li> -->
 							<li class="active"><a href="daftarPengguna"><i

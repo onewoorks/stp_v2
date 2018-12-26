@@ -58,7 +58,7 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahPeruntukan"
-											id="permohonanBaru">Tambah</button>
+											id="permohonanBaru" title="Tambah Jawatan"><i class="fa fa-plus"></i></button>
 									</div>
 									<table id="tableUnit" class="table table-bordered table-hover">
 										<thead>
@@ -80,7 +80,7 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-pengesahan${pesawat.unitBahagianiId}">Kemaskini</button>
+															data-target="#modal-pengesahan${pesawat.unitBahagianiId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${pesawat.unitBahagianiId}">
@@ -107,12 +107,12 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-6 control-label">Unit :</label>
-																						<div class="col-sm-6">
+																							class="col-sm-3 control-label">Unit :</label>
+																						<div class="col-sm-8">
 																							<spring:bind path="unitBahagianDesc">
 																								<form:input type="text" class="form-control"
 																									id="unitBahagianDesc" path="unitBahagianDesc"
-																									value="${pesawat.unitBahagianDesc}"></form:input>
+																									value="${pesawat.unitBahagianDesc}" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -151,12 +151,12 @@
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<label for="inputEmail3"
-																							class="col-sm-6 control-label">Unit :</label>
+																							class="col-sm-3 control-label">Unit :</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="unitBahagianDesc">
 																								<form:input type="text" class="form-control"
-																									id="unitBahagianDesc" path="unitBahagianDesc"></form:input>
+																									id="unitBahagianDesc" path="unitBahagianDesc" style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
