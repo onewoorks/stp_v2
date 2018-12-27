@@ -1,7 +1,7 @@
 <div class="wrapper">
 	<header class="main-header">
 		<!-- Logo -->
-		<a href="http://www.mpc.gov.my" target="_blank" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+		<a href="http://www.mpc.gov.my" target="_blank" class="logo" style="height : 100%"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>STP</b></span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><img class="img.responsive"
 				src="${contextPath}/resources/img/mpc-header.png"

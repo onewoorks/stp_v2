@@ -37,10 +37,10 @@ public class AdminController {
 
 	@Autowired
 	private RefUnitBahagianService refUnitBahagianService;
-	
+
 	@Autowired
 	private RefJawatanService refJawatanService;
-	
+
 	@Autowired
 	private RefRoleService refRoleService;
 
@@ -48,18 +48,19 @@ public class AdminController {
 
 	@RequestMapping(value = "/daftarPengguna", method = RequestMethod.GET)
 	public String daftarPengguna(Model model, HttpSession session) {
-		
+
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		Pengguna pengguna = userService.findByUsername(username);
 		session.setAttribute("user", user);
-		
+
 		model.addAttribute("listPengguna", userService.findAll());
 		model.addAttribute("cawangan", refCawanganService.getAll());
 		model.addAttribute("listJawatan", refJawatanService.getAll());
 
-//		ArrayList<Permohonan> permohonan = new ArrayList<>();
-//		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
+		// ArrayList<Permohonan> permohonan = new ArrayList<>();
+		// permohonan = (ArrayList<Permohonan>)
+		// permohonanService.findByNama(user.getNamaStaff());
 
 		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
@@ -79,19 +80,17 @@ public class AdminController {
 				for (RefRole jb2 : listRole) {
 					if (jb2.getRoleId().equals(idRole2)) {
 						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
 					}
 				}
 			}
 		}
-		
+
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			System.out.println("nama pengurus ::::: " + jb.getRefJawatan().getRefRole().getRoleId());
 			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
 				jawatanUser.add(jb);
-				System.out.println("masuk sini" + jawatanUser);
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
@@ -111,7 +110,23 @@ public class AdminController {
 	public String daftarPengguna(@ModelAttribute("daftarPenggunaForm") Pengguna daftarPenggunaForm,
 			BindingResult bindingResult, Model model) {
 
-		daftarPenggunaForm.setPassword(daftarPenggunaForm.getNoKP());
+		String noKP = (String) daftarPenggunaForm.getNoKP();
+		String a = null;
+		String b = null;
+		String c = null;
+		if (noKP.length() > 6) {
+			a = noKP.substring(0, 6);
+//			IDT1.setValue(a);
+			b = noKP.substring(6, 8);
+//			IDT2.setValue(b);
+			c = noKP.substring(8, 12);
+//			IDT3.setValue(c);
+			}
+		
+		System.out.println("no kp" + c);
+
+
+		daftarPenggunaForm.setPassword(c);
 		userService.save(daftarPenggunaForm);
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", new Pengguna());
@@ -128,13 +143,14 @@ public class AdminController {
 
 		Pengguna pengguna = userService.findByUsername(username);
 		session.setAttribute("user", user);
-		
+
 		model.addAttribute("listPengguna", userService.findAll());
-		model.addAttribute("cawangan", refCawanganService.getAll());
+		model.addAttribute("listCawangan", refCawanganService.getAll());
 		model.addAttribute("listJawatan", refJawatanService.getAll());
 
-//		ArrayList<Permohonan> permohonan = new ArrayList<>();
-//		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
+		// ArrayList<Permohonan> permohonan = new ArrayList<>();
+		// permohonan = (ArrayList<Permohonan>)
+		// permohonanService.findByNama(user.getNamaStaff());
 
 		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
@@ -154,7 +170,6 @@ public class AdminController {
 				for (RefRole jb2 : listRole) {
 					if (jb2.getRoleId().equals(idRole2)) {
 						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
 					}
 				}
 			}
@@ -163,14 +178,14 @@ public class AdminController {
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			// System.out.println("nama pengurus :::::
+			// "+jb.getRefJawatan().getRefRole().getRoleId());
 			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
 				jawatanUser.add(jb);
-				System.out.println("masuk sini" + jawatanUser);
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
-		
+
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", userService.findById(id));
@@ -178,6 +193,8 @@ public class AdminController {
 		model.addAttribute("lihatPenggunaForm", new Pengguna());
 		model.addAttribute("namaStaff", pengguna.getNamaStaff());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+
+		System.out.println("jawatan +" + pengguna.getRefJawatan().getJawatanDesc());
 
 		return "daftarPengguna";
 	}
@@ -189,14 +206,15 @@ public class AdminController {
 
 		Pengguna pengguna = userService.findByUsername(username);
 		session.setAttribute("user", user);
-		
+
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("listPengguna", userService.findAll());
 		model.addAttribute("cawangan", refCawanganService.getAll());
 		model.addAttribute("listJawatan", refJawatanService.getAll());
 
-//		ArrayList<Permohonan> permohonan = new ArrayList<>();
-//		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
+		// ArrayList<Permohonan> permohonan = new ArrayList<>();
+		// permohonan = (ArrayList<Permohonan>)
+		// permohonanService.findByNama(user.getNamaStaff());
 
 		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
@@ -209,14 +227,12 @@ public class AdminController {
 				pengguna.getRefJawatan().getJawatanDesc();
 
 				Long idRole2 = idRole;
-				System.out.println(idRole2);
 				ArrayList<RefRole> listRole = new ArrayList<>();
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
 					if (jb2.getRoleId().equals(idRole2)) {
 						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
 					}
 				}
 			}
@@ -225,14 +241,12 @@ public class AdminController {
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
 			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
 				jawatanUser.add(jb);
-				System.out.println("masuk sini" + jawatanUser);
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
-		
+
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", new Pengguna());
 		model.addAttribute("padamPenggunaForm", new Pengguna());
@@ -250,13 +264,14 @@ public class AdminController {
 
 		Pengguna pengguna = userService.findByUsername(username);
 		session.setAttribute("user", user);
-		
+
 		model.addAttribute("listPengguna", userService.findAll());
 		model.addAttribute("cawangan", refCawanganService.getAll());
 		model.addAttribute("listJawatan", refJawatanService.getAll());
 
-//		ArrayList<Permohonan> permohonan = new ArrayList<>();
-//		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
+		// ArrayList<Permohonan> permohonan = new ArrayList<>();
+		// permohonan = (ArrayList<Permohonan>)
+		// permohonanService.findByNama(user.getNamaStaff());
 
 		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
 
@@ -269,14 +284,12 @@ public class AdminController {
 				pengguna.getRefJawatan().getJawatanDesc();
 
 				Long idRole2 = idRole;
-				System.out.println(idRole2);
 				ArrayList<RefRole> listRole = new ArrayList<>();
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
 					if (jb2.getRoleId().equals(idRole2)) {
 						model.addAttribute("role", jb2.getRoleDesc());
-						System.out.println("tengok listrole -----" + jb2.getRoleDesc());
 					}
 				}
 			}
@@ -285,14 +298,13 @@ public class AdminController {
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			System.out.println("nama pengurus ::::: "+jb.getRefJawatan().getRefRole().getRoleId());
+			System.out.println("nama pengurus ::::: " + jb.getRefJawatan().getRefRole().getRoleId());
 			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
 				jawatanUser.add(jb);
-				System.out.println("masuk sini" + jawatanUser);
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
-		
+
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", new Pengguna());

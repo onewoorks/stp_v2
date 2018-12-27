@@ -216,76 +216,79 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
+											<label for="inputEmail3" class="col-sm-2 control-label">Nama
+												*</label>
 
 											<div class="col-sm-4">
 												<spring:bind path="nama">
-													<c:forEach items="${user.namaStaff}" var="user">
-														<form:input type="text" class="form-control" path="nama"
-															placeholder="Seperti Dalam Kad Pengenalan"
-															required="required" value="${namaStaff}"></form:input>
-													</c:forEach>
+													<form:input type="text" class="form-control" path="nama"
+														placeholder="Seperti Dalam Kad Pengenalan"
+														required="required" value="${namaStaff}"></form:input>
 												</spring:bind>
 											</div>
 											<label for="inputEmail3" class="col-sm-2 control-label">Nama
 												Pelulus</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.namaPengurus}" var="user">
-													<spring:bind path="namaPelulus">
-														<form:input type="text" class="form-control"
-															path="namaPelulus"
-															placeholder="Seperti Dalam Kad Pengenalan"
-															value="${namaPengurus}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="namaPelulus">
+													<form:select path="namaPelulus" class="form-control">
+
+														<c:forEach var="jawatanUser" items="${jawatanUser}">
+
+															<c:if test="${namaPelulus == jawatanUser.namaStaff}">
+																<option value="${jawatanUser.namaStaff}" selected><c:out
+																		value="${jawatanUser.namaStaff}" /></option>
+															</c:if>
+															<c:if test="${namaPelulus != jawatanUser.namaStaff}">
+																<option value="${jawatanUser.namaStaff}"><c:out
+																		value="${jawatanUser.namaStaff}" /></option>
+															</c:if>
+
+														</c:forEach>
+
+													</form:select>
+												</spring:bind>
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="inputPassword3" class="col-sm-2 control-label">No.
-												KP</label>
+												KP *</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.noKP}" var="user">
-													<spring:bind path="kp">
-														<form:input type="text" class="form-control" path="kp"
-															required="required" value="${noKP}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="kp">
+													<form:input type="text" class="form-control" path="kp"
+														required="required" value="${noKP}"></form:input>
+												</spring:bind>
 											</div>
-											<label for="inputPassword3" class="col-sm-2 control-label">Unit</label>
+											<label for="inputPassword3" class="col-sm-2 control-label">Unit
+												*</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.unit}" var="user">
-													<spring:bind path="bahagian">
-														<form:input type="text" class="form-control"
-															path="bahagian" required="required" value="${unit}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="bahagian">
+													<form:input type="text" class="form-control"
+														path="bahagian" required="required" value="${unit}"></form:input>
+												</spring:bind>
 											</div>
 										</div>
 
 										<div class="form-group">
-											<label for="inputPassword3" class="col-sm-2 control-label">Emel</label>
+											<label for="inputPassword3" class="col-sm-2 control-label">Emel
+												*</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.email}" var="user">
-													<spring:bind path="emel">
-														<form:input type="email" class="form-control" path="emel"
-															required="required" value="${email}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="emel">
+													<form:input type="email" class="form-control" path="emel"
+														required="required" value="${email}"></form:input>
+												</spring:bind>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">No.
 												Pasport</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.passport}" var="user">
-													<spring:bind path="passport">
-														<form:input type="text" class="form-control"
-															path="passport" value="${passport}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="passport">
+													<form:input type="text" class="form-control"
+														path="passport" value="${passport}"></form:input>
+												</spring:bind>
 											</div>
 										</div>
 
@@ -294,12 +297,11 @@
 
 											<div class="col-sm-4">
 												<spring:bind path="tujuan">
-													<form:input type="text" class="form-control" path="tujuan"
-														required="required"></form:input>
+													<form:input type="text" class="form-control" path="tujuan"></form:input>
 												</spring:bind>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">Tempat
-												Bertugas</label>
+												Bertugas *</label>
 
 											<div class="col-sm-4">
 												<spring:bind path="tempatBertugas">
@@ -311,7 +313,7 @@
 
 										<div class="form-group">
 											<label for="inputPassword3" class="col-sm-2 control-label">Tarikh
-												Mula Bertugas</label>
+												Mula Bertugas *</label>
 
 											<div class="col-sm-4">
 												<spring:bind path="tarikhMula">
@@ -320,7 +322,7 @@
 												</spring:bind>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">Tarikh
-												Tamat Bertugas</label>
+												Tamat Bertugas *</label>
 
 											<div class="col-sm-4">
 												<spring:bind path="tarikhTamat">
@@ -332,7 +334,7 @@
 
 										<div class="form-group">
 											<label for="inputPassword3" class="col-sm-2 control-label">No.
-												Telefon Bimbit</label>
+												Telefon Bimbit *</label>
 
 											<div class="col-sm-4">
 												<c:forEach items="${user.noTelefon}" var="user">
@@ -344,15 +346,13 @@
 												</c:forEach>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">No
-												Enrich</label>
+												Enrich *</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.enrichNo}" var="user">
-													<spring:bind path="enrichNo">
-														<form:input type="text" class="form-control"
-															path="enrichNo" required="required" value="${enrichNo}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="enrichNo">
+													<form:input type="text" class="form-control"
+														path="enrichNo" required="required" value="${enrichNo}"></form:input>
+												</spring:bind>
 											</div>
 
 										</div>
@@ -368,7 +368,8 @@
 													</form:select>
 												</spring:bind>
 											</div>
-											<label for="inputPassword3" class="col-sm-2 control-label">Catatan</label>
+											<label for="inputPassword3" class="col-sm-2 control-label"
+												title="Sila maklumkan pilihan makanan dan tempat duduk sekiranya perlu. Tertakluk kepada kesediaan.">Catatan</label>
 											<div class="col-sm-4">
 												<spring:bind path="muatNaikBom">
 													<form:input type="text" class="form-control" path="catatan"

@@ -69,7 +69,7 @@ div.login-box-header {
 					</h3>
 				</div>
 				<div class="form-group ${error != null ? 'has-error' : ''}">
-					<span style='color:red;  font-weight: bold;'>${message}</span>
+					<span style='color: red; font-weight: bold;'>${message}</span>
 					<div class="form-group has-feedback">
 						<input name="username" type="text" class="form-control"
 							placeholder="Nama Pengguna"> <span
@@ -80,35 +80,31 @@ div.login-box-header {
 							placeholder="Kata Laluan"> <span
 							class="glyphicon glyphicon-lock form-control-feedback"></span>
 					</div>
+					<div class="form-group has-feedback">
+						<button type="submit" class="btn btn-primary btn-block"
+							style='align: center;'>Log Masuk</button>
+					</div>
 					<span>${error}</span> <input type="hidden"
 						name="${_csrf.parameterName}" value="${_csrf.token}" />
-						<div class="row">
-						<div class="col-xs-1">
-					
-							<input type="checkbox" name="remember" > 
-							
-						</div><div class="col-xs-6" style='color:white;  font-weight: bold;'>Remember me</div>
-						<br/>
-						<br/>
-						<br/>
-					<div class="row">
-								<div class="col-xs-1">
-								</div>
-					
-						<div class="col-xs-5">
-							<button type="submit" class="btn btn-primary btn-block btn-flat" >Log Masuk</button>
-						</div>
-						
+					<div class="row" align="center">
+						<div class="col-xs-12" >
 
+							<input type="checkbox" name="remember" style='color: white; font-weight: bold;'><h10 align="center" style="color: white;"> Remember Me
+							</h10>
+						</div>
+						<!-- <div class="col-xs-6"
+							style='color: white; font-weight: bold; align: center;'>Remember
+							me</div> -->
+						
 					</div>
 				</div>
-				
+
 			</form>
 		</div>
 
 
 	</div>
-	
+
 	<!-- jQuery 3 -->
 	<script
 		src="${contextPath}/resources/css/bower_components/jquery/dist/jquery.min.js"></script>

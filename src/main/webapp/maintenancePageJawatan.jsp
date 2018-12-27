@@ -58,7 +58,9 @@
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahJawatan"
-											id="permohonanBaru" title="Tambah Jawatan"><i class="fa fa-plus"></i></button>
+											id="permohonanBaru" title="Tambah Jawatan">
+											<i class="fa fa-plus"></i>
+										</button>
 									</div>
 									<table id="tableJawatan"
 										class="table table-bordered table-hover">
@@ -81,7 +83,10 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-jawatan${refJawatanAll.jawatanId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
+															data-target="#modal-jawatan${refJawatanAll.jawatanId}"
+															title="Kemaskini">
+															<i class="fa fa-file-text-o"></i>
+														</button>
 
 														<div class="modal fade"
 															id="modal-jawatan${refJawatanAll.jawatanId}">
@@ -100,7 +105,7 @@
 																			action="${contextPath}/updateJawatan"
 																			class="form-horizontal">
 																			<div class="box-body">
-																			
+
 																				<div class="form-group">
 																					<div class="col-sm-12">
 																						<spring:bind path="jawatanId">
@@ -115,7 +120,8 @@
 																							<spring:bind path="jawatanDesc">
 																								<form:input type="text" class="form-control"
 																									id="jawatanDesc" path="jawatanDesc"
-																									value="${refJawatanAll.jawatanDesc}" style="width: 100%"></form:input>
+																									value="${refJawatanAll.jawatanDesc}"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -127,10 +133,19 @@
 
 																						<div class="col-sm-8">
 																							<spring:bind path="refRole">
-																								<form:select path="refRole" class="form-control" style="width: 100%">
-																									<c:forEach var="role" items="${roleAll}">
-																										<option value="${role.roleId}"><c:out
-																												value="${role.roleDesc}" /></option>
+																								<form:select path="refRole" class="form-control"
+																									style="width: 100%">
+																									<c:forEach var="roleAll" items="${roleAll}">
+
+																										<c:if test="${refJawatanAll.refRole.roleId == roleAll.roleId}">
+																											<option value="${roleAll.roleId}" selected><c:out
+																													value="${roleAll.roleDesc}" /></option>
+																										</c:if>
+
+																										<c:if test="${refJawatanAll.refRole.roleId != roleAll.roleId}">
+																											<option value="${roleAll.roleId}"><c:out
+																													value="${roleAll.roleDesc}" /></option>
+																										</c:if>
 																									</c:forEach>
 																								</form:select>
 																							</spring:bind>
@@ -176,7 +191,8 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="jawatanDesc">
 																								<form:input type="text" class="form-control"
-																									id="jawatanDesc" path="jawatanDesc" style="width: 100%"></form:input>
+																									id="jawatanDesc" path="jawatanDesc"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -188,8 +204,9 @@
 
 																						<div class="col-sm-8">
 																							<spring:bind path="refRole">
-																								<form:select path="refRole" class="form-control" style="width: 100%">
-																									<c:forEach var="role" items="${roleAll}" >
+																								<form:select path="refRole" class="form-control"
+																									style="width: 100%">
+																									<c:forEach var="role" items="${roleAll}">
 																										<option value="${role.roleId}"><c:out
 																												value="${role.roleDesc}" /></option>
 																									</c:forEach>

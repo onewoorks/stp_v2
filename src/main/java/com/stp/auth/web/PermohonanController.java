@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.management.Notification;
 import javax.servlet.http.HttpServletRequest;
@@ -179,6 +181,17 @@ public class PermohonanController {
 				}
 			}
 		}
+		
+		List<Pengguna> jawatanUser = new ArrayList<>();
+
+		for (Pengguna jb : penggunaService.findAll()) {
+			System.out.println("nama pengurus ::::: " + jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				model.addAttribute("jawatanUser", jawatanUser);
+			}
+		}
+		
 		model.addAttribute("permohonanForm", new PermohonanTemp());
 		model.addAttribute("lokasi", dariLokasiService.getAll());
 		System.out.println("tengok niiiiiiiii" + dariLokasiService.getAll());
@@ -843,7 +856,7 @@ public class PermohonanController {
 						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
 						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
 						+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
@@ -871,7 +884,7 @@ public class PermohonanController {
 						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
 						+ "\\main\\webapp\\resources\\img\\mpc-header.psng'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
 						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:systempahantiket@gmail.com'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
 						+ "</div></footer></body></html>");
 
 		return "redirect:/permohonanTiket";
@@ -1197,7 +1210,7 @@ public class PermohonanController {
 	@RequestMapping(value = "/downloadTiket", method = RequestMethod.GET)
 	@ResponseBody
 	public void downloadTiket(@ModelAttribute("downloadTiketSelesai") Permohonan userForm, Model model,
-			HttpServletResponse response, HttpSession session) throws IOException {
+			HttpServletResponse response, HttpSession session, ZipOutputStream zos) throws IOException {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userService.findByUsername(username);
@@ -1244,14 +1257,16 @@ public class PermohonanController {
 							response.setHeader("Content-Disposition", "attachment;filename=" + file.getPath());
 
 							BufferedInputStream inStrem = new BufferedInputStream(new FileInputStream(file));
-							BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
+							ZipEntry zipEntry = new ZipEntry(pembelianForm.getMuatNaikTiket());
+							zos.putNextEntry(zipEntry);
+//							BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
 
 							byte[] buffer = new byte[1024];
 							int bytesRead = 0;
 							while ((bytesRead = inStrem.read(buffer)) != -1) {
-								outStream.write(buffer, 0, bytesRead);
+								zos.write(buffer, 0, bytesRead);
 							}
-							outStream.flush();
+							zos.flush();
 							inStrem.close();
 						}
 					}
@@ -1464,7 +1479,7 @@ public class PermohonanController {
 						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
 						+ "\\main\\webapp\\resources\\img\\mpc-header.psng' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
 						+ "diterima untuk kelulusan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
-						+ "</p><p>Maklumat Hubungan: <a href='mailto:systempahantiket@gmail.com'>systempahantiket@gmail.com</a>.</p><footer><divid='footer'>"
+						+ "</p><p>Maklumat Hubungan: <a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
@@ -1492,7 +1507,7 @@ public class PermohonanController {
 						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
 						+ "\\main\\webapp\\resources\\img\\mpc-header.psng' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
 						+ "diterima untuk tindakan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
-						+ "</p><p>Maklumat Hubungan: <ahref='mailto:systempahantiket@gmail.com'>systempahantiket@gmail.com</a>.</p><footer><divid='footer'>"
+						+ "</p><p>Maklumat Hubungan: <ahref='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
 						+ "</div></footer></body></html>");
 
 		return "redirect:/permohonanTiket";

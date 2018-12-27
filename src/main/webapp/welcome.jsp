@@ -43,7 +43,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
-				<section class="content-header">
+				<!-- <section class="content-header">
 					<div class="row">
 						<div class="col-xs-2">
 							<label>Tarikh Permohonan</label>
@@ -70,7 +70,7 @@
 							<button type="button" class="btn btn-info form-control">Carian</button>
 						</div>
 					</div>
-				</section>
+				</section> -->
 
 				<!-- Main content -->
 				<section class="content">
@@ -84,7 +84,8 @@
 								<!-- /.box-header -->
 								<div class="box-body">
 									<div class="table-responsive">
-										<table id="example1" class="table table-bordered table-hover">
+										<table id="kelulusanKPegawai"
+											class="table table-bordered table-hover">
 											<thead>
 												<tr>
 													<th>Tarikh Permohonan</th>
@@ -207,85 +208,94 @@
 																						</spring:bind>
 
 																						<label for="inputEmail3"
-																							class="col-sm-2 control-label">Nama
+																							class="col-sm-3 control-label">Nama
 																							Pemohon</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="nama">
 																								<form:input type="text" class="form-control"
-																									id="nama" path="nama" value="${pemohon.nama}"></form:input>
+																									id="nama" path="nama" value="${pemohon.nama}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Tarikh
+																							class="col-sm-3 control-label">Tarikh
 																							Permohonan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tarikhMohon">
 																								<form:input type="text" class="form-control"
 																									id="tarikhMohon" path="tarikhMohon"
-																									value="${pemohon.tarikhMohon}"></form:input>
+																									value="${pemohon.tarikhMohon}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Unit</label>
+																							class="col-sm-3 control-label">Unit</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="bahagian">
 																								<form:input type="text" class="form-control"
 																									id="bahagian" path="bahagian"
-																									value="${pemohon.bahagian}"></form:input>
+																									value="${pemohon.bahagian}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Tempat
+																							class="col-sm-3 control-label">Tempat
 																							Bertugas</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tempatBertugas">
 																								<form:input type="text" class="form-control"
 																									id="tempatBertugas" path="tempatBertugas"
-																									value="${pemohon.tempatBertugas}"></form:input>
+																									value="${pemohon.tempatBertugas}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Tujuan</label>
+																							class="col-sm-3 control-label">Tujuan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tujuan">
 																								<form:input type="text" class="form-control"
 																									id="tujuan" path="tujuan"
-																									value="${pemohon.tujuan}"></form:input>
+																									value="${pemohon.tujuan}" style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Peruntukan</label>
+																							class="col-sm-3 control-label">Peruntukan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="peruntukan">
 																								<form:input type="text" class="form-control"
 																									id="peruntukan" path="peruntukan"
-																									value="${pemohon.peruntukan}"></form:input>
+																									value="${pemohon.peruntukan}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
-																					<div class="form-group">
-																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Fail BOM</label> <a
-																							href="${contextPath}/downloadBom?id=${pemohon.id}"
-																							class="col-sm-2 control-label">Muat Turun Bom</a>
-																					</div>
+																					<c:if test="${pemohon.peruntukan == 'Pembangunan'}">
+																						<div class="form-group">
+																							<label for="inputPassword3"
+																								class="col-sm-3 control-label">Fail BOM</label>
+																							<a
+																								href="${contextPath}/downloadBom?id=${pemohon.id}"
+																								class="col-sm-2 control-label">Muat Turun
+																								Bom</a>
+																						</div>
+																					</c:if>
 																					<div class="form-group">
 																						<div class="table-responsive">
 																							<table class="table table-bordered table-hover"
@@ -332,25 +342,14 @@
 																						</div>
 																					</div>
 
-																					<c:if test="${pemohon.peruntukan == 'Operasi'}">
-																						<div class="form-group" id="bomId">
-																							<label for="inputEmail3"
-																								class="col-sm-2 control-label">Bom</label>
-
-																							<div class="col-sm-6">
-																								<input type="text" class="form-control"
-																									id="nama" placeholder="Contoh.docx">
-																							</div>
-																						</div>
-																					</c:if>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Catatan</label>
+																							class="col-sm-3 control-label">Catatan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="alasan">
 																								<form:input type="text" class="form-control"
-																									id="alasan" path="alasan"></form:input>
+																									id="alasan" path="alasan" style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -451,77 +450,91 @@
 
 
 																						<label for="inputEmail3"
-																							class="col-sm-2 control-label">Nama
+																							class="col-sm-3 control-label">Nama
 																							Pemohon</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="nama">
 																								<form:input type="text" class="form-control"
 																									id="namaTolak" path="nama"
-																									value="${pemohon.nama}"></form:input>
+																									value="${pemohon.nama}" style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
-																						<label class="col-sm-2 control-label">Tarikh
+																						<label class="col-sm-3 control-label">Tarikh
 																							Permohonan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tarikhMohon">
 																								<form:input type="text" class="form-control"
 																									id="kp" path="tarikhMohon"
-																									value="${pemohon.tarikhMohon}"></form:input>
+																									value="${pemohon.tarikhMohon}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
-																						<label class="col-sm-2 control-label">Unit</label>
+																						<label class="col-sm-3 control-label">Unit</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="bahagian">
 																								<form:input type="text" class="form-control"
 																									id="unit" path="bahagian"
-																									value="${pemohon.bahagian}"></form:input>
+																									value="${pemohon.bahagian}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Tempat
+																							class="col-sm-3 control-label">Tempat
 																							Bertugas</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tempatBertugas">
 																								<form:input type="text" class="form-control"
 																									id="tempatBertugas" path="tempatBertugas"
-																									value="${pemohon.tempatBertugas}"></form:input>
+																									value="${pemohon.tempatBertugas}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Tujuan</label>
+																							class="col-sm-3 control-label">Tujuan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="tujuan">
 																								<form:input type="text" class="form-control"
 																									id="tujuan" path="tujuan"
-																									value="${pemohon.tujuan}"></form:input>
+																									value="${pemohon.tujuan}" style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
 																					<div class="form-group">
 																						<label for="inputPassword3"
-																							class="col-sm-2 control-label">Peruntukan</label>
+																							class="col-sm-3 control-label">Peruntukan</label>
 
-																						<div class="col-sm-6">
+																						<div class="col-sm-8">
 																							<spring:bind path="peruntukan">
 																								<form:input type="text" class="form-control"
 																									id="peruntukan" path="peruntukan"
-																									value="${pemohon.peruntukan}"></form:input>
+																									value="${pemohon.peruntukan}"
+																									style="width : 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
+																					<c:if test="${pemohon.peruntukan == 'Pembangunan'}">
+																						<div class="form-group">
+																							<label for="inputPassword3"
+																								class="col-sm-3 control-label">Fail BOM</label>
+																							<a
+																								href="${contextPath}/downloadBom?id=${pemohon.id}"
+																								class="col-sm-2 control-label">Muat Turun
+																								Bom</a>
+																						</div>
+																					</c:if>
 																					<div class="form-group">
 																						<div class="table-responsive">
 																							<table class="table table-bordered table-hover"
@@ -567,35 +580,26 @@
 																							</table>
 																						</div>
 																					</div>
-																				</div>
-																				<c:if test="${pemohon.peruntukan == 'Operasi'}">
-																					<div class="form-group" id="bomId">
-																						<label for="inputEmail3"
-																							class="col-sm-2 control-label">Bom</label>
 
-																						<div class="col-sm-6">
-																							<input type="text" class="form-control" id="nama"
-																								placeholder="Contoh.docx">
+																					<div class="form-group">
+																						<label class="col-sm-3 control-label">Catatan</label>
+
+																						<div class="col-sm-8">
+																							<spring:bind path="alasan">
+																								<form:input type="text" class="form-control"
+																									id="unit" path="alasan" style="width : 100%"></form:input>
+																							</spring:bind>
 																						</div>
 																					</div>
-																				</c:if>
-																				<div class="form-group">
-																					<label class="col-sm-2 control-label">Catatan</label>
-
-																					<div class="col-sm-6">
-																						<spring:bind path="alasan">
-																							<form:input type="text" class="form-control"
-																								id="unit" path="alasan"></form:input>
-																						</spring:bind>
-																					</div>
 																				</div>
+																				<!-- /.box-body -->
+																				<div class="box-footer">
+																					<button type="submit"
+																						class="btn btn-info pull-right">Tolak</button>
+																				</div>
+																				<!-- /.box-footer -->
+																			</form:form>
 																		</div>
-																		<!-- /.box-body -->
-																		<div class="box-footer">
-																			<button type="submit" class="btn btn-info pull-right">Tolak</button>
-																		</div>
-																		<!-- /.box-footer -->
-																		</form:form>
 																	</div>
 																</div>
 																<!-- /.modal-content -->
@@ -656,6 +660,16 @@
 				'autoWidth' : false
 			})
 			$('#tableTolak${pemohon.id}').DataTable({
+				'paging' : true,
+				'lengthChange' : false,
+				'searching' : false,
+				'ordering' : true,
+				'info' : true,
+				'autoWidth' : false
+			})
+		</script>
+		<script>
+			$('#kelulusanKPegawai').DataTable({
 				'paging' : true,
 				'lengthChange' : false,
 				'searching' : false,

@@ -82,7 +82,7 @@ public class SendHTMLEmail {
 		try {
 
 			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("systempahtiket@gmail.com", "Admin"));
+			msg.setFrom(new InternetAddress("flight@mpc.gov.my", "Admin"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recieverEmail, "user"));
 
 			msg.setSubject("Testing Subject", "UTF-8");

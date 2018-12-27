@@ -75,50 +75,53 @@
 										</div>
 									</div>
 									<br />
-									<table id="pengguna" class="table table-bordered table-hover">
-										<thead>
-											<tr>
-												<th>Bil</th>
-												<th>Nombor Staf</th>
-												<th>Nama Staf</th>
-												<th>Nama Pengguna</th>
-												<th>Status</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<%
-											int i = 1;
-										%>
-										<c:forEach var="user" items="${listPengguna}">
-											<tr>
-												<td><%=i%></td>
-												<td>${user.staffNo}</td>
-												<td>${user.namaStaff}</td>
-												<td>${user.username}</td>
-												<td>${user.status}</td>
-												<td><spring:url value="/lihatPengguna?id=${user.id}"
-														var="userUrl" /> <spring:url
-														value="/padamPengguna?id=${user.id}" var="deleteUrl" /> <spring:url
-														value="/kemaskiniPengguna?id=${user.id}" var="updateUrl" />
-
-													<button class="btn btn-info"
-														onclick="location.href='${userUrl}'" title="Kemaskini">
-														<i class="fa fa-edit"></i>
-													</button>
-													<button class="btn btn-primary"
-														onclick="location.href='${updateUrl}'" title="Lihat">
-														<i class="fa fa-eye"></i>
-													</button>
-													<button class="btn btn-danger"
-														onclick="location.href='${deleteUrl}'" title="Padam">
-														<i class="fa fa-trash"></i>
-													</button></td>
-											</tr>
+									<div class="table-responsive">
+										<table id="pengguna" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>Bil</th>
+													<th>Nombor Staf</th>
+													<th>Nama Staf</th>
+													<th>Nama Pengguna</th>
+													<th>Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
 											<%
-												i++;
+												int i = 1;
 											%>
-										</c:forEach>
-									</table>
+											<c:forEach var="user" items="${listPengguna}">
+												<tr>
+													<td><%=i%></td>
+													<td>${user.staffNo}</td>
+													<td>${user.namaStaff}</td>
+													<td>${user.username}</td>
+													<td>${user.status}</td>
+													<td><spring:url value="/lihatPengguna?id=${user.id}"
+															var="userUrl" /> <spring:url
+															value="/padamPengguna?id=${user.id}" var="deleteUrl" />
+														<spring:url value="/kemaskiniPengguna?id=${user.id}"
+															var="updateUrl" />
+
+														<button class="btn btn-info"
+															onclick="location.href='${userUrl}'" title="Lihat">
+															<i class="fa fa-eye"></i>
+														</button>
+														<button class="btn btn-primary"
+															onclick="location.href='${updateUrl}'" title="Kemaskini">
+															<i class="fa fa-edit"></i>
+														</button>
+														<button class="btn btn-danger"
+															onclick="location.href='${deleteUrl}'" title="Padam">
+															<i class="fa fa-trash"></i>
+														</button></td>
+												</tr>
+												<%
+													i++;
+												%>
+											</c:forEach>
+										</table>
+									</div>
 									<!-- Add daftar pengguna  	-->
 									<jsp:include page="${contextPath}/daftarPenggunaForm.jsp" />
 									<jsp:include page="${contextPath}/editPenggunaForm.jsp" />
