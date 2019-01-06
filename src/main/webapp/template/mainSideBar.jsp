@@ -6,36 +6,8 @@
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="${contextPath}/resources/css/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image">
-					</div>
-					<div class="pull-left info">
-						<p>${namaStaff}</p>
-						<a><i class="fa fa-circle text-success"></i>${jawatan}</a>
-					</div>
-				</div>
-				<ul class="sidebar-menu" data-widget="tree">
-					<li class="header" style="text-align: center;">SELAMAT DATANG</li>
-					<li class="active"><a href="permohonanTiket"><i
-							class="fa fa-edit"></i>Permohonan</a></li>
-
-				</ul>
-			</section>
-		</aside>
-	</c:if>
-	<c:if test="${test == 'Ketua Pegawai'}">
-		<aside class="main-sidebar">
-			<!-- sidebar: style can be found in sidebar.less -->
-			<section class="sidebar">
-				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="${contextPath}/resources/css/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image">
-					</div>
-					<div class="pull-left info">
+				<div class="user-panel" style="height: 60px;">
+					<div class="pull-left info" style="width: 100%;">
 						<p>${namaStaff}</p>
 						<a><i class="fa fa-circle text-success"></i>${jawatan}</a>
 					</div>
@@ -49,6 +21,35 @@
 						<ul class="treeview-menu">
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan</a></li>
+							<li class="active"><a href="infoPengguna"><i
+									class="fa fa-user"></i>Info Pengguna</a></li>
+						</ul></li>
+
+				</ul>
+			</section>
+		</aside>
+	</c:if>
+	<c:if test="${test == 'Ketua Pegawai'}">
+		<aside class="main-sidebar">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+				<!-- Sidebar user panel -->
+				<div class="user-panel">
+					<div class="pull-left info">
+						<p>${namaStaff}</p>
+						<a><i class="fa fa-circle text-success"></i>${jawatan}</a>
+					</div>
+				</div>
+				<ul class="sidebar-menu" data-widget="tree">
+					<li class="header" style="text-align: center;">SELAMAT DATANG</li>
+					<li class="treeview active"><a href="#"><span>Menu</span>
+							<span class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
+						</span> </a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="permohonanTiket"><i
+									class="fa fa-edit"></i>Permohonan<span
+									class="badge badge-light"> 5</span></a></li>
 							<li class="active"><a href="welcome"><i
 									class="fa fa-check-square-o"></i>Kelulusan</a></li>
 						</ul></li>
@@ -63,10 +64,6 @@
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="${contextPath}/resources/css/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image">
-					</div>
 					<div class="pull-left info">
 						<p>${namaStaff}</p>
 						<a><i class="fa fa-circle text-success"></i>${jawatan}</a>
@@ -82,11 +79,12 @@
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan</a></li>
 							<li class="active"><a href="pembelian"><i
-									class="fa fa-dollar"></i>Tempahan</a></li>
+									class="fa fa-dollar"></i>Tempahan<span
+									class="badge badge-light"> 5</span></a></li>
 							<!-- <li class="active"><a href="report"><i
 								class="fa fa-file-text-o"></i>Laporan</a></li> -->
 							<li class="active"><a href="daftarPengguna"><i
-									class="fa fa-circle-o"></i>Daftar Pengguna</a></li>
+									class="fa fa-user-plus"></i>Daftar Pengguna</a></li>
 							<!-- <li class="treeview"><a href="#"><i
 								class="fa  fa-check-circle-o"></i>Selenggara</a></li> -->
 							<li class="treeview"><a href="#"><i
@@ -138,11 +136,7 @@
 			<section class="sidebar">
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="${contextPath}/resources/css/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image">
-					</div>
-					<div class="pull-left info">
+					<div class="pull-left info" style="width: 100%">
 						<p>${namaStaff}</p>
 						<a><i class="fa fa-circle text-success"></i>${jawatan}</a>
 					</div>

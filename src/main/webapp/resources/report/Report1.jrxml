@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="530bca23-007e-41f9-9488-7cbe5e7a61cc">
+	<property name="ireport.zoom" value="1.0000000000000044"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="279"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="1a10c804-c2ef-452d-a143-3d9f8c2de37d">
+		<queryString language="SQL">
+			<![CDATA[select * from penerbangan where penerbangan_id=8]]>
+		</queryString>
+		<field name="penerbangan" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="waktu_berlepas" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="waktu_tiba" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="no_pesawat" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="dari_lokasi" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="destinasi" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tarikh_pergi" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="New Dataset 2" uuid="7027fdd3-1397-4091-bcd0-3914b9e2f927">
+		<queryString language="SQL">
+			<![CDATA[select * from penerbangan where permohonan_id]]>
+		</queryString>
+		<field name="penerbangan" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="waktu_berlepas" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="waktu_tiba" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="no_pesawat" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="dari_lokasi" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="destinasi" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="tarikh_pergi" class="java.lang.String"/>
+		<group name="penerbangan">
+			<groupExpression><![CDATA[$F{penerbangan}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="penerbanganID" class="java.lang.String"/>
+	<parameter name="Nama" class="java.lang.String"/>
+	<parameter name="Kp" class="java.lang.String"/>
+	<parameter name="Unit" class="java.lang.String"/>
+	<parameter name="Emel" class="java.lang.String"/>
+	<parameter name="NoPasport" class="java.lang.String"/>
+	<parameter name="Tujuan" class="java.lang.String"/>
+	<parameter name="tempatBertugas" class="java.lang.String"/>
+	<parameter name="TarikhMula" class="java.lang.String"/>
+	<parameter name="TarikhTamat" class="java.lang.String"/>
+	<parameter name="Peruntukan" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from penerbangan where penerbangan_id =$P{penerbanganID}]]>
+	</queryString>
+	<field name="penerbangan_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dari_lokasi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="destinasi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenis_pesawat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_pesawat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="penerbangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tarikh_pergi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="waktu_berlepas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="waktu_tiba" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="permohonan_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="135">
+			<staticText>
+				<reportElement x="166" y="0" width="280" height="20" uuid="ea9102f6-eaa8-45ff-80bf-896fe5403de5"/>
+				<text><![CDATA[PERBADANAN PRODUKTIVITI MALAYSIA (MPC)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="20" width="280" height="20" uuid="cbf077c6-3675-46a8-9cda-83576b7bbd35"/>
+				<text><![CDATA[PERMOHONAN TEMPAHAN PENERBANGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="280" height="20" uuid="ae511d3c-a0ec-46ed-8dd1-8c8a8ed5fda1"/>
+				<text><![CDATA[Peringatan :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="555" height="75" uuid="e6629362-16c3-4fbc-a14d-98545154e0d8"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[1.	Borang ini hendaklah diisi sepenuhnya dalam satu salinan dan dimajukan ke bahagian Pentadbiran Blok Inovasi selewat-lewatnya 3 hari berkerja sebelum tarikh berlepas.
+2.	Borang yang dihantar mestilah lengkap dengan tandatangan pemohon dan telah diluluskan.
+3.	Borang permohonan tempahan penerbangan adalah untuk permohonan seorang pegawai sahaja.
+4.	Nombor kecemasan adalah merujuk kepada pembantu tadbir (tiket).
+5.	Pegawai perlu bertanggungjawab di atas perubahan dan pembatalan tiket.
+6.	Pegawai perlu menghantar salinan boarding pass selepas pulang bertugas kepada Pembantu Tadbir (tiket).
+]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="425" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="0" width="200" height="20" uuid="947bbf05-a22d-448d-94af-c6c6fdac9fc3"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="37" height="20" uuid="315bcf38-2ece-400c-a73b-de76c98a65a5"/>
+				<text><![CDATA[Nama : ]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" style="table" x="71" y="219" width="360" height="116" uuid="9cca1ecf-69d4-423c-b007-e3700548b77d"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 2" uuid="787b475d-b397-4b6a-a62c-758c0bbc040a">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="90" uuid="d3ae2146-c836-4a77-8451-8f1777f49b5c">
+						<jr:column width="90" uuid="40c3fa6e-3a79-44c6-b16c-00ab8c2ba942">
+							<jr:tableHeader height="0" rowSpan="1"/>
+							<jr:columnHeader height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="90" height="30" uuid="6e40da48-0156-4208-bbba-913e5baff5e1"/>
+									<box>
+										<pen lineWidth="0.25"/>
+										<topPen lineWidth="0.25"/>
+										<leftPen lineWidth="0.25"/>
+										<bottomPen lineWidth="0.25"/>
+										<rightPen lineWidth="0.25"/>
+									</box>
+									<textElement textAlignment="Center">
+										<font size="8"/>
+									</textElement>
+									<text><![CDATA[Penerbangan]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="47" rowSpan="1">
+								<elementGroup>
+									<textField>
+										<reportElement x="0" y="0" width="90" height="47" uuid="b485f0f1-88cb-4780-b6a6-4203fa9a9e81"/>
+										<box>
+											<pen lineWidth="0.25"/>
+											<topPen lineWidth="0.25"/>
+											<leftPen lineWidth="0.25"/>
+											<bottomPen lineWidth="0.25"/>
+											<rightPen lineWidth="0.25"/>
+										</box>
+										<textElement textAlignment="Center">
+											<font size="8"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{penerbangan}]]></textFieldExpression>
+									</textField>
+								</elementGroup>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:column width="52" uuid="3f9ea13f-60a0-4f1b-aa32-d2f5e96af8c6">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="52" height="30" uuid="a51de195-0c32-419e-b1dd-ae8919d7e2e9"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Tarikh]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="52" height="20" uuid="a8e64bb9-a2d4-4b47-818f-8582ce5dec9e"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{tarikh_pergi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="51" uuid="e2a36438-6819-4fab-8b85-44f153178591">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="51" height="30" uuid="19f905f8-09f2-42e8-807c-9026dc9d464a"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Waktu Berlepas]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="51" height="20" uuid="92261f32-d346-4929-863d-4606ad5eccd2"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{waktu_berlepas}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="24432ab5-04b7-4617-bbbc-6165f8923ce2">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="c7bbb5dd-0c92-4abc-aa73-7fc764faa883"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Waktu Tiba]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="20" uuid="8352b953-a295-46d4-902f-87a27b74632f"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{waktu_tiba}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="49" uuid="40bbfdc0-a224-45ca-95ab-568104bb06bf">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="49" height="30" uuid="9fa5f5af-5a07-40ec-9cba-03c58e119bed"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[No Pesawat]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="49" height="47" uuid="6b3a1ea1-2458-4775-ab78-fde7461c257f"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{no_pesawat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="bd719c0d-a648-49ff-96f8-9f2c4afee253">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="1d123315-3d0e-4d64-904f-38c6c6a5a98d"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Dari]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="47" uuid="101be71c-c889-4b60-b4fa-05f797c46701"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{dari_lokasi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="9c01800b-90e2-4eac-8a67-062465813fcd">
+						<jr:tableHeader style="table_TH" height="0" rowSpan="1"/>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="f05b54fd-aa32-4bff-9ac0-327363b4a63e"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Ke]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="47" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="47" uuid="2464a43d-6bde-4c57-b6a2-7e8901316078"/>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[ $F{destinasi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="371" y="0" width="48" height="20" uuid="a336f35f-650f-48c0-9f7b-f8e9c5822499"/>
+				<text><![CDATA[No K/P :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="0" width="128" height="20" uuid="4a875859-4ae9-4dea-9462-20be1ebf03ab"/>
+				<textFieldExpression><![CDATA[$P{Kp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="37" height="20" uuid="732bca4d-ea09-4098-b78e-d8c185a1f3bf"/>
+				<text><![CDATA[Unit :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="20" width="64" height="20" uuid="e75d11d3-3fdd-47a8-94e5-38b027fd3433"/>
+				<textFieldExpression><![CDATA[$P{Unit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="101" y="20" width="37" height="20" uuid="983ff0b9-c93e-4d7a-8eb5-3ba0b1c2a1e3"/>
+				<text><![CDATA[Emel :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="20" width="100" height="20" uuid="411f4542-edc3-4986-94df-01d22bd02b48"/>
+				<textFieldExpression><![CDATA[$P{Emel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="20" width="182" height="20" uuid="1d83bdf4-7527-48fc-b68c-b588154dbc50"/>
+				<text><![CDATA[No Passport : (Antarabangsa sahaja) :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="20" width="128" height="20" uuid="b2547085-e78f-4616-b3a9-cc1f1e26219b"/>
+				<textFieldExpression><![CDATA[$P{NoPasport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="137" height="20" uuid="0069a225-48e9-476a-b5b4-80db05dacc40"/>
+				<text><![CDATA[Tujuan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="40" width="410" height="20" uuid="c3e82ca9-7bca-42d8-b9cd-f9a3a0ba413c"/>
+				<textFieldExpression><![CDATA[$P{Tujuan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="60" width="137" height="20" uuid="b9768570-d53d-447f-b066-40ac13e03831"/>
+				<text><![CDATA[Tempat Bertugas :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="60" width="410" height="20" uuid="9eb46f72-eaf2-4399-9cae-498bf0ba4f9a"/>
+				<textFieldExpression><![CDATA[$P{tempatBertugas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="80" width="137" height="20" uuid="1e564b01-635a-46c8-9cd7-e7c7a30d9ccf"/>
+				<text><![CDATA[Tarikh Mula Bertugas :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="80" width="143" height="20" uuid="6ae3d17a-2c64-4ba6-b270-3df09f873dcd"/>
+				<textFieldExpression><![CDATA[$P{TarikhMula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="80" width="137" height="20" uuid="0403d3dc-3937-42ec-b461-d0f4f50228d6"/>
+				<text><![CDATA[Tarikh Tamat Bertugas :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="416" y="80" width="128" height="20" uuid="5382a54f-3649-4ae1-945f-ee68e76a0595"/>
+				<textFieldExpression><![CDATA[$P{TarikhTamat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="100" width="137" height="20" uuid="2b8ca7b4-9d56-48e9-95b5-283c7043c741"/>
+				<text><![CDATA[Peruntukan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="100" width="143" height="20" uuid="4d477ef3-b3e6-40c6-8758-9b8a7a7c079d"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="100" width="137" height="20" uuid="023c44de-5a6b-46ba-ad3b-9fbd1ceef8f5"/>
+				<text><![CDATA[No Telefon Bimbit :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="416" y="100" width="128" height="20" uuid="c1415bea-5be0-47d9-ae8f-b04c0c0764e2"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="120" width="137" height="20" uuid="3705f492-2e60-4987-92bc-aa92e79bc6bd"/>
+				<text><![CDATA[Pembangunan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="119" width="143" height="20" uuid="9215e927-9da9-4c0b-9ac8-fa645daf228e"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="119" width="137" height="20" uuid="9ee29fa5-41e6-41d3-9efa-5327c64f121b"/>
+				<text><![CDATA[Jenis Pesawat :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="416" y="119" width="128" height="20" uuid="87031ad2-9f12-4929-8d16-b81e2962f6a5"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="139" width="137" height="20" uuid="8a82e2ae-4261-4b00-8655-19ba76564657"/>
+				<text><![CDATA[No Bilangan BOM :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="139" width="143" height="20" uuid="4e861e49-fc88-4374-9197-a230013320f9"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="159" width="279" height="20" uuid="15399005-d289-4ed4-af5e-d013d9d27ddd"/>
+				<text><![CDATA[* Sila lampirkan Keratan BOM dan bajet yang telah diluluskan.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="178" width="333" height="20" uuid="8de75b0c-0237-4c45-9dd2-f0804ff5fddd"/>
+				<text><![CDATA[** Sekiranya tiada kelulusan BOM, sila lampirkan kelulusan yang berkaitan.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="198" width="333" height="20" uuid="7cdc1087-0480-4eb4-a2e1-95c09c5abfcf"/>
+				<text><![CDATA[Butiran - butiran Penerbangan :]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="280" height="20" uuid="50aaa720-db07-4c15-8677-c38dfdfb5bf3"/>
+				<text><![CDATA[Pemohon :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="275" height="20" uuid="73e97238-8a86-4a91-aad6-182c12fe0eb4"/>
+				<text><![CDATA[Diluluskan :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="20" width="280" height="20" uuid="29ed8b0e-4615-4cf6-9eb4-8f2eb168c6f2"/>
+				<text><![CDATA[_____________________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="20" width="275" height="20" uuid="4ce8f709-4349-4948-8527-798610ce95b4"/>
+				<text><![CDATA[_____________________________________________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="40" width="242" height="20" uuid="0c429a34-9e9b-4315-92b1-cb613d611aa4"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="37" height="20" uuid="65d5f482-c9b8-4b3c-aea4-821245b35d06"/>
+				<text><![CDATA[Nama : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="40" width="37" height="20" uuid="1a97d7fa-7398-4d70-a348-fac064c633fa"/>
+				<text><![CDATA[Nama : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="314" y="40" width="241" height="20" uuid="ff9d10aa-4dfe-46ef-91a0-a8fcdb554ec2"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="37" height="20" uuid="7288481a-f61f-4766-9c43-8b942ed76e6a"/>
+				<text><![CDATA[Tarikh :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="36" y="60" width="243" height="20" uuid="1b9048d7-9b15-4970-9524-2989b3849ce3"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="60" width="37" height="20" uuid="5a81c8a0-4b20-459d-b85d-9a733aaef095"/>
+				<text><![CDATA[Tarikh :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="314" y="60" width="241" height="20" uuid="4cdd483e-2717-4e40-871a-92a431162f23"/>
+				<textFieldExpression><![CDATA[$P{Nama}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="174" height="20" uuid="ed0d9816-9122-4344-8617-e27e59be1eb8"/>
+				<text><![CDATA[UNTUK KEGUNAAN PENTADBIRAN]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

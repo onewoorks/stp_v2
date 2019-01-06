@@ -64,16 +64,18 @@ div.login-box-header {
 		<div class="login-box-body" style="background: rgba(0, 0, 0, 0.3);">
 			<form method="POST" action="${contextPath}/login" class="form-signin">
 				<div class="box-header with-border">
-					<h3 align="center" style="color: black;">
+					<h3 align="center" style="color: white;">
 						<strong>SISTEM TEMPAHAN TIKET PENERBANGAN</strong>
 					</h3>
 				</div>
 				<div class="form-group ${error != null ? 'has-error' : ''}">
-					<span style='color: red; font-weight: bold;'>${message}</span>
+					<div class="form-group has-feedback" style="align: center;">
+						<span style='color: white; font-weight: bold; align: center;'>${message}</span>
+					</div>
 					<div class="form-group has-feedback">
 						<input name="username" type="text" class="form-control"
 							placeholder="Nama Pengguna"> <span
-							class="glyphicon glyphicon-envelope form-control-feedback"></span>
+							class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">
 						<input name="password" type="password" class="form-control"
@@ -87,15 +89,17 @@ div.login-box-header {
 					<span>${error}</span> <input type="hidden"
 						name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div class="row" align="center">
-						<div class="col-xs-12" >
-
-							<input type="checkbox" name="remember" style='color: white; font-weight: bold;'><h10 align="center" style="color: white;"> Remember Me
-							</h10>
+						<div class="col-xs-12">
+							<div class="checkbox icheck">
+								<input type="checkbox" name="remember"
+									style='color: white; font-weight: bold;'>
+								<h10 align="center" style="color: white;"> Remember Me </h10>
+							</div>
 						</div>
 						<!-- <div class="col-xs-6"
 							style='color: white; font-weight: bold; align: center;'>Remember
 							me</div> -->
-						
+
 					</div>
 				</div>
 

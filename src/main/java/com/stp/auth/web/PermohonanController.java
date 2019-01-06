@@ -172,7 +172,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -181,7 +181,7 @@ public class PermohonanController {
 				}
 			}
 		}
-		
+
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : penggunaService.findAll()) {
@@ -191,7 +191,7 @@ public class PermohonanController {
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
-		
+
 		model.addAttribute("permohonanForm", new PermohonanTemp());
 		model.addAttribute("lokasi", dariLokasiService.getAll());
 		System.out.println("tengok niiiiiiiii" + dariLokasiService.getAll());
@@ -250,7 +250,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -320,7 +320,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -400,7 +400,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -464,7 +464,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -577,7 +577,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -643,7 +643,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -750,8 +750,7 @@ public class PermohonanController {
 		permohonan.setEnrichNo(temp.getEnrichNo());
 		permohonan.setStatusPermohonan("Baru");
 
-		
-		if(!temp.getMuatNaikBom().getOriginalFilename().equalsIgnoreCase("")){
+		if (!temp.getMuatNaikBom().getOriginalFilename().equalsIgnoreCase("")) {
 			MultipartFile muatNaikBom = temp.getMuatNaikBom();
 			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
 			try {
@@ -763,11 +762,11 @@ public class PermohonanController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	
+
 			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 
 		}
-		
+
 		permohonanService.save(permohonan);
 
 		if (pt.size() != 0) {
@@ -832,7 +831,7 @@ public class PermohonanController {
 		pengguna = (ArrayList<Pengguna>) penggunaService.findAll();
 
 		for (Pengguna jb : pengguna) {
-			if(jb.getJawatan() != null){
+			if (jb.getJawatan() != null) {
 				if (jb.getJawatan().equals("Ketua Pegawai")) {
 					if (jb.getNamaStaff().equals(user.getNamaPengurus())) {
 						emel = jb.getEmail();
@@ -860,7 +859,7 @@ public class PermohonanController {
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
-			if(jb2.getJawatan() != null){
+			if (jb2.getJawatan() != null) {
 				if (jb2.getJawatan().equals("Pentadbir")) {
 					if (jb2.getCawangan().equals(user.getCawangan())) {
 						emel2 = jb2.getEmail();
@@ -937,7 +936,7 @@ public class PermohonanController {
 		permohonan.setStatusPermohonan("Baru");
 
 		MultipartFile muatNaikBom = temp.getMuatNaikBom();
-		if(muatNaikBom.getOriginalFilename() != null){
+		if (muatNaikBom.getOriginalFilename() != null) {
 			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
 			try {
 				convertFile.createNewFile();
@@ -948,7 +947,7 @@ public class PermohonanController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	
+
 			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 		}
 
@@ -960,7 +959,7 @@ public class PermohonanController {
 
 				Date tarikhPergi = null;
 
-				if(pt.get(i).getTarikhPergi() != null){
+				if (pt.get(i).getTarikhPergi() != null) {
 					try {
 						tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
 					} catch (ParseException e1) {
@@ -1025,11 +1024,11 @@ public class PermohonanController {
 		Date tarikhTamat = null;
 
 		try {
-			if(temp.getTarikhMula() != null){
+			if (temp.getTarikhMula() != null) {
 				tarikhMula = dtf2.parse(temp.getTarikhMula());
 			}
-			
-			if(temp.getTarikhTamat() != null){
+
+			if (temp.getTarikhTamat() != null) {
 				tarikhTamat = dtf2.parse(temp.getTarikhTamat());
 			}
 		} catch (ParseException e1) {
@@ -1053,12 +1052,12 @@ public class PermohonanController {
 		permohonan.setPassport(temp.getPassport());
 		permohonan.setTujuan(temp.getTujuan());
 		permohonan.setTempatBertugas(temp.getTempatBertugas());
-		
-		if(tarikhMula != null){
+
+		if (tarikhMula != null) {
 			permohonan.setTarikhMula(dtf2.format(tarikhMula));
 		}
-		
-		if(tarikhTamat != null){
+
+		if (tarikhTamat != null) {
 			permohonan.setTarikhTamat(dtf2.format(tarikhTamat));
 		}
 		permohonan.setNoTelefonBimbit(temp.getNoTelefonBimbit());
@@ -1070,7 +1069,7 @@ public class PermohonanController {
 		permohonan.setEnrichNo(temp.getEnrichNo());
 		permohonan.setStatusPermohonan("Baru");
 
-		if(temp.getMuatNaikBom() != null){
+		if (temp.getMuatNaikBom() != null) {
 			MultipartFile muatNaikBom = temp.getMuatNaikBom();
 			File convertFile = new File(path + muatNaikBom.getOriginalFilename());
 			try {
@@ -1082,7 +1081,7 @@ public class PermohonanController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	
+
 			permohonan.setMuatNaikBom(convertFile.getAbsolutePath());
 		}
 
@@ -1094,7 +1093,7 @@ public class PermohonanController {
 
 				Date tarikhPergi = null;
 
-				if(pt.get(i).getTarikhPergi() != null){
+				if (pt.get(i).getTarikhPergi() != null) {
 					try {
 						tarikhPergi = dtf2.parse(pt.get(i).getTarikhPergi());
 					} catch (ParseException e1) {
@@ -1106,7 +1105,7 @@ public class PermohonanController {
 				Penerbangan penerbangan = new Penerbangan();
 				penerbangan.setPenerbangan(pt.get(i).getPenerbangan());
 
-				if(tarikhPergi != null){
+				if (tarikhPergi != null) {
 					penerbangan.setTarikhPergi(dtf2.format(tarikhPergi));
 				}
 				penerbangan.setWaktuBerlepas(pt.get(i).getWaktuBerlepas());
@@ -1259,7 +1258,8 @@ public class PermohonanController {
 							BufferedInputStream inStrem = new BufferedInputStream(new FileInputStream(file));
 							ZipEntry zipEntry = new ZipEntry(pembelianForm.getMuatNaikTiket());
 							zos.putNextEntry(zipEntry);
-//							BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
+							// BufferedOutputStream outStream = new
+							// BufferedOutputStream(response.getOutputStream());
 
 							byte[] buffer = new byte[1024];
 							int bytesRead = 0;
@@ -1453,7 +1453,7 @@ public class PermohonanController {
 		pengguna = (ArrayList<Pengguna>) penggunaService.findAll();
 
 		for (Pengguna jb : pengguna) {
-			if(jb.getJawatan() != null){
+			if (jb.getJawatan() != null) {
 				if (jb.getJawatan().equals("Pengarah")) {
 					if (jb.getCawangan().equals(user.getCawangan())) {
 						emel = jb.getEmail();
@@ -1483,7 +1483,7 @@ public class PermohonanController {
 						+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
-			if(jb2.getJawatan() != null){
+			if (jb2.getJawatan() != null) {
 				if (jb2.getJawatan().equals("Pentadbir")) {
 					if (jb2.getCawangan().equals(user.getCawangan())) {
 						emel2 = jb2.getEmail();
@@ -1672,8 +1672,8 @@ public class PermohonanController {
 		Pembelian pembelianForm = new Pembelian();
 
 		File convertFile = null;
-		
-		if(temp.getMuatNaikTiket() != null){
+
+		if (temp.getMuatNaikTiket() != null) {
 			MultipartFile muatNaikBom = temp.getMuatNaikTiket();
 			convertFile = new File(path + muatNaikBom.getOriginalFilename());
 			try {
@@ -1688,7 +1688,7 @@ public class PermohonanController {
 		}
 		//
 
-		if(convertFile != null){
+		if (convertFile != null) {
 			pembelianForm.setMuatNaikTiket(convertFile.getAbsolutePath());
 		}
 		pembelianForm.setId(temp.getId());
@@ -1785,7 +1785,7 @@ public class PermohonanController {
 		DateFormat dtf2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date tarikhPergi = null;
 		try {
-			if(penerbanganForm.getTarikhPergi() != null){
+			if (penerbanganForm.getTarikhPergi() != null) {
 				tarikhPergi = dtf2.parse(penerbanganForm.getTarikhPergi());
 			}
 		} catch (ParseException e) {
@@ -1793,10 +1793,10 @@ public class PermohonanController {
 			e.printStackTrace();
 		}
 
-		if(tarikhPergi != null){
+		if (tarikhPergi != null) {
 			penerbanganForm.setTarikhPergi(dtf2.format(tarikhPergi));
 		}
-		
+
 		System.out.println("haaaaaaaaa" + penerbanganForm);
 		penerbanganService.save(penerbanganForm);
 
@@ -1834,7 +1834,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -1894,7 +1894,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -1954,7 +1954,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -2014,7 +2014,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -2075,7 +2075,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -2136,7 +2136,7 @@ public class PermohonanController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -2173,6 +2173,100 @@ public class PermohonanController {
 
 		return "redirect:/maintenancePageJawatan";
 
+	}
+
+	@RequestMapping(value = { "/infoPengguna" }, method = RequestMethod.GET)
+	public String infoPengguna(Model model, HttpSession session, RefJawatan refJawatan) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		User user = userService.findByUsername(username);
+		session.setAttribute("user", user);
+
+		Pengguna pengguna = penggunaService.findByUsername(username);
+
+		ArrayList<Pengguna> pengguna2 = new ArrayList<>();
+
+		pengguna2 = (ArrayList<Pengguna>) penggunaService.findByNoKP(user.getNoKP());
+
+		for (Pengguna jb : pengguna2) {
+
+			if (jb.getUsername().equals(user.getUsername())) {
+				Long idRole = jb.getRefJawatan().getRefRole().getRoleId();
+				pengguna.getRefJawatan().getJawatanDesc();
+
+				Long idRole2 = idRole;
+				System.out.println(idRole2);
+				ArrayList<RefRole> listRole = new ArrayList<>();
+
+				listRole = (ArrayList<RefRole>) refRoleService.getAll();
+				for (RefRole jb2 : listRole) {
+					if (jb2.getRoleId() != null) {
+						if (jb2.getRoleId().equals(idRole2)) {
+							model.addAttribute("role", jb2.getRoleDesc());
+							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
+						}
+					}
+				}
+			}
+		}
+
+		List<Pengguna> jawatanUser = new ArrayList<>();
+
+		for (Pengguna jb : penggunaService.findAll()) {
+			System.out.println("nama pengurus ::::: " + jb.getRefJawatan().getRefRole().getRoleId());
+			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
+				jawatanUser.add(jb);
+				model.addAttribute("jawatanUser", jawatanUser);
+			}
+		}
+
+		model.addAttribute("listPengguna", penggunaService.findAll());
+		model.addAttribute("cawangan", refCawanganService.getAll());
+		model.addAttribute("listJawatan", refJawatanService.getAll());
+		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
+		model.addAttribute("refJawatan", refJawatanService.getAll());
+		System.out.println("sini :::::::" + refJawatanService.getAll());
+		model.addAttribute("roleAll", refRoleService.getAll());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+		model.addAttribute("namaStaff", user.getNamaStaff());
+		model.addAttribute("namaPengguna", user.getUsername());
+		model.addAttribute("noStaff", user.getStaffNo());
+		model.addAttribute("enrichNo", user.getEnrichNo());
+		model.addAttribute("noKp", user.getNoKP());
+		model.addAttribute("passport", user.getPassport());
+		model.addAttribute("namaStaff", user.getNamaStaff());
+		model.addAttribute("emelAdd", user.getEmail());
+		model.addAttribute("noPhone", user.getNoTelefon());
+		model.addAttribute("kemaskiniJawatan", new RefJawatan());
+		model.addAttribute("username", user.getUsername());
+		model.addAttribute("infoPenggunaForm", new Pengguna());
+		return "infoPengguna";
+	}
+
+	@RequestMapping(value = "/infoPengguna", method = RequestMethod.POST)
+	public String infoPengguna(@ModelAttribute("infoPenggunaForm") Pengguna daftarPenggunaForm,
+			BindingResult bindingResult, Model model) {
+
+		String noKP = (String) daftarPenggunaForm.getNoKP();
+		String a = null;
+		String b = null;
+		String c = null;
+		if (noKP.length() > 6) {
+			a = noKP.substring(0, 6);
+			// IDT1.setValue(a);
+			b = noKP.substring(6, 8);
+			// IDT2.setValue(b);
+			c = noKP.substring(8, 12);
+			// IDT3.setValue(c);
+		}
+
+		System.out.println("no kp" + c);
+
+		daftarPenggunaForm.setPassword(c);
+		penggunaService.save(daftarPenggunaForm);
+		model.addAttribute("infoPenggunaForm", new Pengguna());
+
+		return "redirect:infoPengguna";
 	}
 
 }

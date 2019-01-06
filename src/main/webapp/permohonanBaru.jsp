@@ -193,29 +193,6 @@
 										action="${contextPath}/permohonanForm"
 										enctype="multipart/form-data" class="form-horizontal">
 										<div class="form-group">
-											<label for="inputEmail3" class="col-sm-2 control-label">Wakil
-												Pemohon</label>
-
-											<div class="col-sm-4">
-												<spring:bind path="wakilPermohon">
-													<form:checkbox path="wakilPermohon" id="wakil"></form:checkbox>
-												</spring:bind>
-											</div>
-
-											<div id="hidden">
-												<label for="inputEmail3" class="col-sm-2 control-label">Nama
-													Wakil</label>
-
-												<div class="col-sm-4">
-													<spring:bind path="namaPemohon">
-														<form:input type="text" class="form-control"
-															path="namaPemohon"
-															placeholder="Seperti Dalam Kad Pengenalan"></form:input>
-													</spring:bind>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
 											<label for="inputEmail3" class="col-sm-2 control-label">Nama
 												*</label>
 
@@ -235,14 +212,10 @@
 
 														<c:forEach var="jawatanUser" items="${jawatanUser}">
 
-															<c:if test="${namaPelulus == jawatanUser.namaStaff}">
-																<option value="${jawatanUser.namaStaff}" selected><c:out
-																		value="${jawatanUser.namaStaff}" /></option>
-															</c:if>
-															<c:if test="${namaPelulus != jawatanUser.namaStaff}">
-																<option value="${jawatanUser.namaStaff}"><c:out
-																		value="${jawatanUser.namaStaff}" /></option>
-															</c:if>
+															<option value="${jawatanUser.namaStaff}" selected><c:out
+																	value="${jawatanUser.namaStaff}" /></option>
+
+
 
 														</c:forEach>
 
@@ -337,13 +310,11 @@
 												Telefon Bimbit *</label>
 
 											<div class="col-sm-4">
-												<c:forEach items="${user.noTelefon}" var="user">
-													<spring:bind path="noTelefonBimbit">
-														<form:input type="text" class="form-control"
-															path="noTelefonBimbit" required="required"
-															value="${noTelefon}"></form:input>
-													</spring:bind>
-												</c:forEach>
+												<spring:bind path="noTelefonBimbit">
+													<form:input type="text" class="form-control"
+														path="noTelefonBimbit" required="required"
+														value="${noTelefon}"></form:input>
+												</spring:bind>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">No
 												Enrich *</label>
@@ -373,7 +344,8 @@
 											<div class="col-sm-4">
 												<spring:bind path="muatNaikBom">
 													<form:input type="text" class="form-control" path="catatan"
-														id="catatan" rel="textTooltip" data-toogle="tooltip"></form:input>
+														id="catatan" rel="textTooltip" data-toogle="tooltip"
+														title="Sila maklumkan pilihan makanan dan tempat duduk sekiranya perlu. Tertakluk kepada kesediaan."></form:input>
 												</spring:bind>
 											</div>
 
@@ -470,13 +442,13 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="inputPassword3" class="col-sm-4 control-label">Waktu
+									<div class="form-group" style="text-align: -webkit-right;">
+										<label for="inputPassword3" class="col-sm-3 control-label">Waktu
 											Berlepas</label>
 
-										<div class="col-sm-6">
+										<div class="col-sm-8">
 											<spring:bind path="waktuBerlepas">
-												<form:input id="waktuBerlepas" type="time"
+												<form:input id="waktuBerlepas" type="datetime-local"
 													class="form-control" path="waktuBerlepas"></form:input>
 											</spring:bind>
 										</div>

@@ -345,29 +345,6 @@ function kemasKini(id,penerbanganId) {
 													id="kemaskini" value="${pemohon.id}"></form:input>
 											</spring:bind>
 											<div class="form-group">
-												<label for="inputEmail3" class="col-sm-2 control-label">Wakil
-													Pemohon</label>
-
-												<div class="col-sm-4">
-													<spring:bind path="wakilPermohon">
-														<form:checkbox path="wakilPermohon" id="wakil2"></form:checkbox>
-													</spring:bind>
-												</div>
-
-												<div id="hidden2">
-													<label for="inputEmail3" class="col-sm-2 control-label">Nama
-														Wakil</label>
-
-													<div class="col-sm-4">
-														<spring:bind path="namaPemohon">
-															<form:input type="text" class="form-control"
-																path="namaPemohon"
-																placeholder="Seperti Dalam Kad Pengenalan"></form:input>
-														</spring:bind>
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
 												<label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
 
 												<div class="col-sm-4">
