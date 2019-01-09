@@ -28,8 +28,6 @@ public class Permohonan {
 	private Long id;
 	private Long kp;
 
-	private Boolean wakilPermohon;
-
 //	private Pengguna pengguna;
 	private String noBilBom;
 	private String muatNaikBom;
@@ -40,7 +38,6 @@ public class Permohonan {
 	private String emel;
 	private String noTelefonBimbit;
 	private String pembangunan;
-	private String kelulusan;
 	private String passport;
 	private String tujuan;
 	private String tempatBertugas;
@@ -216,14 +213,6 @@ public class Permohonan {
 		this.tarikhMohon = tarikhMohon;
 	}
 
-	public Boolean getWakilPermohon() {
-		return wakilPermohon;
-	}
-
-	public void setWakilPermohon(Boolean wakilPermohon) {
-		this.wakilPermohon = wakilPermohon;
-	}
-
 	public String getTarikhMula() {
 		return tarikhMula;
 	}
@@ -334,14 +323,6 @@ public class Permohonan {
 
 	public void setNoBilBom(String noBilBom) {
 		this.noBilBom = noBilBom;
-	}
-
-	public String getKelulusan() {
-		return kelulusan;
-	}
-
-	public void setKelulusan(String kelulusan) {
-		this.kelulusan = kelulusan;
 	}
 
 	public String getTempatBertugas() {

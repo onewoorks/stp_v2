@@ -14,22 +14,19 @@
 				</div>
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header" style="text-align: center;">SELAMAT DATANG</li>
-					<li class="treeview active"><a href="#"><span>Menu</span>
-							<span class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
-						</span> </a>
-						<ul class="treeview-menu">
-							<li class="active"><a href="permohonanTiket"><i
-									class="fa fa-edit"></i>Permohonan</a></li>
-							<li class="active"><a href="infoPengguna"><i
-									class="fa fa-user"></i>Info Pengguna</a></li>
-						</ul></li>
+
+
+					<li class="active"><a href="permohonanTiket"><i
+							class="fa fa-edit"></i>Permohonan</a></li>
+					<li class="active"><a href="infoPengguna"><i
+							class="fa fa-user"></i>Info Pengguna</a></li>
+
 
 				</ul>
 			</section>
 		</aside>
 	</c:if>
-	<c:if test="${test == 'Ketua Pegawai'}">
+	<c:if test="${test == 'Pelulus'}">
 		<aside class="main-sidebar">
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">

@@ -81,10 +81,6 @@
 									<form:input type="hidden" class="form-control" path="passport"
 										value="${pemohon.passport}"></form:input>
 								</spring:bind>
-								<spring:bind path="tujuan">
-									<form:input type="hidden" class="form-control" path="tujuan"
-										value="${pemohon.tujuan}"></form:input>
-								</spring:bind>
 								<spring:bind path="noTelefonBimbit">
 									<form:input type="hidden" class="form-control"
 										path="noTelefonBimbit" value="${pemohon.noTelefonBimbit}"></form:input>
@@ -105,12 +101,8 @@
 									<form:input type="hidden" class="form-control" path="noBilBom"
 										value="${pemohon.noBilBom}"></form:input>
 								</spring:bind>
-								<spring:bind path="kelulusan">
-									<form:input type="hidden" class="form-control" path="kelulusan"
-										value="${pemohon.kelulusan}"></form:input>
-								</spring:bind>
 								<spring:bind path="namaPemohon">
-									<form:input type="hidden" class="form-control" path="kelulusan"
+									<form:input type="hidden" class="form-control" path="namaPemohon"
 										value="${pemohon.namaPemohon}"></form:input>
 								</spring:bind>
 								<spring:bind path="tarikhMula">
@@ -118,10 +110,10 @@
 										path="tarikhMula" value="${pemohon.tarikhMula}"></form:input>
 								</spring:bind>
 
-								<label for="inputEmail3" class="col-sm-2 control-label">Nama
+								<label for="inputEmail3" class="col-sm-3 control-label">Nama
 									Pemohon</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="nama">
 										<form:input type="text" class="form-control" id="nama"
 											path="nama" value="${pemohon.nama}" readonly="true"></form:input>
@@ -129,10 +121,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Tarikh
+								<label for="inputPassword3" class="col-sm-3 control-label">Tarikh
 									Permohonan</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="tarikhMohon">
 										<form:input type="text" class="form-control" id="tarikhMohon"
 											path="tarikhMohon" value="${pemohon.tarikhMohon}" readonly="true"></form:input>
@@ -141,9 +133,9 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Unit</label>
+								<label for="inputPassword3" class="col-sm-3 control-label">Unit</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="bahagian">
 										<form:input type="text" class="form-control" id="bahagian"
 											path="bahagian" value="${pemohon.bahagian}" readonly="true"></form:input>
@@ -151,10 +143,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Tempat
+								<label for="inputPassword3" class="col-sm-3 control-label">Tempat
 									Bertugas</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="tempatBertugas">
 										<form:input type="text" class="form-control"
 											id="tempatBertugas" path="tempatBertugas"
@@ -163,9 +155,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Tujuan</label>
+								<label for="inputPassword3" class="col-sm-3 control-label">Tujuan</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="tujuan">
 										<form:input type="text" class="form-control" id="tujuan"
 											path="tujuan" value="${pemohon.tujuan}" readonly="true"></form:input>
@@ -207,9 +199,9 @@
 								</table>
 							</div>
 							<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">Catatan</label>
+								<label for="inputPassword3" class="col-sm-3 control-label">Catatan</label>
 
-								<div class="col-sm-6">
+								<div class="col-sm-8">
 									<spring:bind path="alasan">
 										<form:input type="text" class="form-control" id="alasan"
 											path="alasan"></form:input>

@@ -166,10 +166,6 @@
 																							<form:input type="hidden" class="form-control"
 																								path="passport" value="${pemohon.passport}"></form:input>
 																						</spring:bind>
-																						<spring:bind path="tujuan">
-																							<form:input type="hidden" class="form-control"
-																								path="tujuan" value="${pemohon.tujuan}"></form:input>
-																						</spring:bind>
 																						<spring:bind path="noTelefonBimbit">
 																							<form:input type="hidden" class="form-control"
 																								path="noTelefonBimbit"
@@ -405,10 +401,6 @@
 																						<spring:bind path="passport">
 																							<form:input type="hidden" class="form-control"
 																								path="passport" value="${pemohon.passport}"></form:input>
-																						</spring:bind>
-																						<spring:bind path="tujuan">
-																							<form:input type="hidden" class="form-control"
-																								path="tujuan" value="${pemohon.tujuan}"></form:input>
 																						</spring:bind>
 																						<spring:bind path="noTelefonBimbit">
 																							<form:input type="hidden" class="form-control"

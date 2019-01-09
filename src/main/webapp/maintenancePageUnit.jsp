@@ -50,15 +50,28 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="box">
-								<div class="box-header">
-									<h3 class="box-title">Maklumat Unit</h3>
-								</div>
 								<!-- /.box-header -->
+								<div class="box-header with-border">
+									<h3 class="box-title">Maklumat Unit</h3>
+
+									<div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool"
+											data-widget="collapse" data-toggle="tooltip" title="Collapse">
+											<i class="fa fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-box-tool"
+											data-widget="remove" data-toggle="tooltip" title="Remove">
+											<i class="fa fa-times"></i>
+										</button>
+									</div>
+								</div>
 								<div class="box-body">
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahPeruntukan"
-											id="permohonanBaru" title="Tambah Jawatan"><i class="fa fa-plus"></i></button>
+											id="permohonanBaru" title="Tambah Jawatan">
+											<i class="fa fa-plus"></i>
+										</button>
 									</div>
 									<table id="tableUnit" class="table table-bordered table-hover">
 										<thead>
@@ -80,7 +93,10 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-pengesahan${pesawat.unitBahagianiId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
+															data-target="#modal-pengesahan${pesawat.unitBahagianiId}"
+															title="Kemaskini">
+															<i class="fa fa-file-text-o"></i>
+														</button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${pesawat.unitBahagianiId}">
@@ -103,7 +119,8 @@
 																					<div class="col-sm-12">
 																						<spring:bind path="unitBahagianiId">
 																							<form:input type="hidden" class="form-control"
-																								path="unitBahagianiId" value="${pesawat.unitBahagianiId}"></form:input>
+																								path="unitBahagianiId"
+																								value="${pesawat.unitBahagianiId}"></form:input>
 																						</spring:bind>
 
 																						<label for="inputEmail3"
@@ -112,7 +129,8 @@
 																							<spring:bind path="unitBahagianDesc">
 																								<form:input type="text" class="form-control"
 																									id="unitBahagianDesc" path="unitBahagianDesc"
-																									value="${pesawat.unitBahagianDesc}" style="width: 100%"></form:input>
+																									value="${pesawat.unitBahagianDesc}"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -156,7 +174,8 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="unitBahagianDesc">
 																								<form:input type="text" class="form-control"
-																									id="unitBahagianDesc" path="unitBahagianDesc" style="width: 100%"></form:input>
+																									id="unitBahagianDesc" path="unitBahagianDesc"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

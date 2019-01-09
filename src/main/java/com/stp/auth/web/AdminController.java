@@ -116,15 +116,14 @@ public class AdminController {
 		String c = null;
 		if (noKP.length() > 6) {
 			a = noKP.substring(0, 6);
-//			IDT1.setValue(a);
+			// IDT1.setValue(a);
 			b = noKP.substring(6, 8);
-//			IDT2.setValue(b);
+			// IDT2.setValue(b);
 			c = noKP.substring(8, 12);
-//			IDT3.setValue(c);
-			}
-		
-		System.out.println("no kp" + c);
+			// IDT3.setValue(c);
+		}
 
+		System.out.println("no kp" + c);
 
 		daftarPenggunaForm.setPassword(c);
 		userService.save(daftarPenggunaForm);
@@ -184,6 +183,10 @@ public class AdminController {
 				jawatanUser.add(jb);
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
+
+			model.addAttribute("userJawatan", jb.getRefJawatan().getJawatanDesc());
+
+			System.out.println("jwatan : " + jb.getRefJawatan().getJawatanDesc());
 		}
 
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());

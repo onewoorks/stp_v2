@@ -50,17 +50,31 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="box">
-								<div class="box-header">
-									<h3 class="box-title">Maklumat Peruntukan</h3>
-								</div>
 								<!-- /.box-header -->
+								<div class="box-header with-border">
+									<h3 class="box-title">Maklumat Peruntukan</h3>
+
+									<div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool"
+											data-widget="collapse" data-toggle="tooltip" title="Collapse">
+											<i class="fa fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-box-tool"
+											data-widget="remove" data-toggle="tooltip" title="Remove">
+											<i class="fa fa-times"></i>
+										</button>
+									</div>
+								</div>
 								<div class="box-body">
 									<div class="form-group col-sm-2 pull-right">
 										<button type="button" class="btn btn-info form-control"
 											data-toggle="modal" data-target="#modal-tambahPeruntukan"
-											id="permohonanBaru" title="Tambah Peruntukan"><i class="fa fa-plus"></i></button>
+											id="permohonanBaru" title="Tambah Peruntukan">
+											<i class="fa fa-plus"></i>
+										</button>
 									</div>
-									<table id="tablePeruntukan" class="table table-bordered table-hover">
+									<table id="tablePeruntukan"
+										class="table table-bordered table-hover">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -80,7 +94,10 @@
 													<td>
 														<button type="button" class="btn btn-info btn-block "
 															data-toggle="modal"
-															data-target="#modal-pengesahan${peruntukan.peruntukanId}" title="Kemaskini"><i class="fa fa-file-text-o"></i></button>
+															data-target="#modal-pengesahan${peruntukan.peruntukanId}"
+															title="Kemaskini">
+															<i class="fa fa-file-text-o"></i>
+														</button>
 
 														<div class="modal fade"
 															id="modal-pengesahan${peruntukan.peruntukanId}">
@@ -114,7 +131,8 @@
 																							<spring:bind path="peruntukanDesc">
 																								<form:input type="text" class="form-control"
 																									id="peruntukanDesc" path="peruntukanDesc"
-																									value="${peruntukan.peruntukanDesc}" style="width: 100%"></form:input>
+																									value="${peruntukan.peruntukanDesc}"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -159,7 +177,8 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="peruntukanDesc">
 																								<form:input type="text" class="form-control"
-																									id="peruntukanDesc" path="peruntukanDesc" style="width: 100%"></form:input>
+																									id="peruntukanDesc" path="peruntukanDesc"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

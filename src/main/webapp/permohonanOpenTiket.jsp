@@ -361,20 +361,6 @@
 											</div>
 
 											<div class="form-group">
-												<!-- <label for="inputPassword3"
-																class="col-sm-2 control-label">Kelulusan</label>
-															<div class="col-sm-4">
-																<spring:bind path="kelulusan">
-																	<form:select path="kelulusan" class="form-control"
-																		required="required">
-																		<option></option>
-																		<option value="mas">MAS</option>
-																		<option value="airasia">AIRASIA</option>
-																		<option value="malindo">MALINDO</option>
-																		<option value="firefly">FIREFLY</option>
-																	</form:select>
-																</spring:bind>
-															</div> -->
 												<div id="pembangunanHidden3">
 													<label for="inputPassword3" class="col-sm-2 control-label">Pembangunan</label>
 													<div class="col-sm-4">

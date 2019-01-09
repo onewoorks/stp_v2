@@ -102,7 +102,7 @@ public class PembelianController {
 		permohonan2 = (ArrayList<Permohonan>) permohonanService.getAll();
 		
 		for(Permohonan jb : permohonan2){
-			if(jb.getStatusPermohonan().equalsIgnoreCase("Proses") || jb.getStatusPermohonan().equalsIgnoreCase("Selesai")){
+			if(jb.getStatusPermohonan().equalsIgnoreCase("Lulus") || jb.getStatusPermohonan().equalsIgnoreCase("Selesai")){
 				model.addAttribute("welcome", permohonan2);
 			}
 		}

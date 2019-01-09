@@ -19,7 +19,6 @@ public class PermohonanTemp {
 	private String emel;
 	private String noTelefonBimbit;
 	private String pembangunan;
-	private String kelulusan;
 	private String passport;
 	private String tujuan;
 	private String tempatBertugas;
@@ -406,14 +405,6 @@ public class PermohonanTemp {
 
 	public void setNoBilBom(String noBilBom) {
 		this.noBilBom = noBilBom;
-	}
-
-	public String getKelulusan() {
-		return kelulusan;
-	}
-
-	public void setKelulusan(String kelulusan) {
-		this.kelulusan = kelulusan;
 	}
 
 	public String getTempatBertugas() {

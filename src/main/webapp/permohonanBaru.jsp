@@ -210,13 +210,16 @@
 												<spring:bind path="namaPelulus">
 													<form:select path="namaPelulus" class="form-control">
 
-														<c:forEach var="jawatanUser" items="${jawatanUser}">
+														<c:forEach var="test" items="${jawatanUser}">
 
-															<option value="${jawatanUser.namaStaff}" selected><c:out
-																	value="${jawatanUser.namaStaff}" /></option>
-
-
-
+															<c:if test="${namaPengurus == test.namaStaff}">
+																<option value="${test.namaStaff}" selected><c:out
+																		value="${test.namaStaff}" /></option>
+															</c:if>
+															<c:if test="${namaPengurus != test.namaStaff}">
+																<option value="${test.namaStaff}"><c:out
+																		value="${test.namaStaff}" /></option>
+															</c:if>
 														</c:forEach>
 
 													</form:select>
@@ -317,12 +320,12 @@
 												</spring:bind>
 											</div>
 											<label for="inputPassword3" class="col-sm-2 control-label">No
-												Enrich *</label>
+												Enrich</label>
 
 											<div class="col-sm-4">
 												<spring:bind path="enrichNo">
 													<form:input type="text" class="form-control"
-														path="enrichNo" required="required" value="${enrichNo}"></form:input>
+														path="enrichNo" value="${enrichNo}"></form:input>
 												</spring:bind>
 											</div>
 
@@ -352,20 +355,6 @@
 										</div>
 
 										<div class="form-group">
-											<!-- <label for="inputPassword3"
-																class="col-sm-2 control-label">Kelulusan</label>
-															<div class="col-sm-4">
-																<spring:bind path="kelulusan">
-																	<form:select path="kelulusan" class="form-control"
-																		required="required">
-																		<option></option>
-																		<option value="mas">MAS</option>
-																		<option value="airasia">AIRASIA</option>
-																		<option value="malindo">MALINDO</option>
-																		<option value="firefly">FIREFLY</option>
-																	</form:select>
-																</spring:bind>
-															</div> -->
 											<div id="pembangunanHidden">
 												<label for="inputPassword3" class="col-sm-2 control-label">Pembangunan</label>
 												<div class="col-sm-4">
@@ -417,7 +406,7 @@
 							<div class="tab-pane" id="timeline">
 								<!-- /.box-header -->
 								<div class="box-body">
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Penerbangan</label>
 										<div class="col-sm-6">
 											<spring:bind path="penerbangan">
@@ -431,7 +420,7 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Tarikh
 											Penerbangan</label>
 
@@ -443,17 +432,17 @@
 										</div>
 									</div>
 									<div class="form-group" style="text-align: -webkit-right;">
-										<label for="inputPassword3" class="col-sm-3 control-label">Waktu
+										<label for="inputPassword3" class="col-sm-4 control-label">Waktu
 											Berlepas</label>
 
-										<div class="col-sm-8">
+										<div class="col-sm-6">
 											<spring:bind path="waktuBerlepas">
 												<form:input id="waktuBerlepas" type="datetime-local"
 													class="form-control" path="waktuBerlepas"></form:input>
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Waktu
 											Tiba</label>
 
@@ -464,7 +453,7 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Jenis
 											Pesawat</label>
 										<div class="col-sm-6">
@@ -479,7 +468,7 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">No.
 											Pesawat</label>
 
@@ -490,7 +479,7 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Dari
 											Lokasi</label>
 										<div class="col-sm-6">
@@ -505,7 +494,7 @@
 											</spring:bind>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="text-align: -webkit-right;">
 										<label for="inputPassword3" class="col-sm-4 control-label">Destinasi</label>
 										<div class="col-sm-6">
 											<spring:bind path="destinasi">

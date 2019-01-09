@@ -107,7 +107,7 @@
 							<div class="col-sm-4">
 								<spring:bind path="noTelefon">
 									<form:input type="text" class="form-control" path="noTelefon"
-										placeholder="No telefon Bimbit"></form:input>
+										placeholder="No telefon Bimbit" value="${userJawatan}"></form:input>
 								</spring:bind>
 							</div>
 						</div>
@@ -119,14 +119,12 @@
 									<form:select path="refJawatan" class="form-control">
 										<c:forEach var="testJawatan" items="${listJawatan}">
 
-											<c:set var="jawatan1" value="${refJawatan}"></c:set>
-											<c:set var="jawatan2" value="${testJawatan.jawatanId}"></c:set>
-											<c:if test="${jawatan1 == jawatan2}">
-												<option value="${testJawatan.jawatanId}" selected><c:out
+											<c:if test="${userJawatan == testJawatan.jawatanDesc}">
+												<option value="${testJawatan.jawatanDesc}" selected><c:out
 														value="${testJawatan.jawatanDesc}" /></option>
 											</c:if>
-											<c:if test="${jawatan1 != jawatan2}">
-												<option value="${testJawatan.jawatanId}"><c:out
+											<c:if test="${userJawatan != testJawatan.jawatanDesc}">
+												<option value="${testJawatan.jawatanDesc}"><c:out
 														value="${testJawatan.jawatanDesc}" /></option>
 											</c:if>
 										</c:forEach>

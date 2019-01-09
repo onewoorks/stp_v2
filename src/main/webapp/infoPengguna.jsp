@@ -48,8 +48,26 @@
 						<div class="col-xs-12">
 							<div class="box">
 								<!-- /.box-header -->
+								<div class="box-header with-border">
+									<h3 class="box-title">Maklumat Pengguna</h3>
+
+									<div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool"
+											data-widget="collapse" data-toggle="tooltip" title="Collapse">
+											<i class="fa fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-box-tool"
+											data-widget="remove" data-toggle="tooltip" title="Remove">
+											<i class="fa fa-times"></i>
+										</button>
+									</div>
+								</div>
 								<form:form method="POST" modelAttribute="infoPenggunaForm"
 									action="${contextPath}/infoPengguna" class="form-horizontal">
+									<spring:bind path="id">
+										<form:input type="hidden" class="form-control" path="id"
+											value="${pengguna.id}"></form:input>
+									</spring:bind>
 									<div class="box-body">
 										<div class="form-group">
 											<label for="inputEmail3" class="col-sm-2 control-label">Nombor
@@ -104,7 +122,7 @@
 											<div class="col-sm-4">
 												<spring:bind path="noKP">
 													<form:input type="text" class="form-control" path="noKP"
-														placeholder="Nombor Kad Pengenalan" value="${enrichNo}"></form:input>
+														placeholder="Nombor Kad Pengenalan" value="${noKp}"></form:input>
 												</spring:bind>
 											</div>
 											<label class="col-sm-2 control-label">Passport</label>
@@ -146,13 +164,11 @@
 													<form:select path="refJawatan" class="form-control">
 														<c:forEach var="testJawatan" items="${listJawatan}">
 
-															<c:set var="jawatan1" value="${refJawatan}"></c:set>
-															<c:set var="jawatan2" value="${testJawatan}"></c:set>
-															<c:if test="${jawatan1 == jawatan2}">
+															<c:if test="${userJawatan == testJawatan.jawatanId}">
 																<option value="${testJawatan.jawatanId}" selected><c:out
 																		value="${testJawatan.jawatanDesc}" /></option>
 															</c:if>
-															<c:if test="${jawatan1 != jawatan2}">
+															<c:if test="${userJawatan != testJawatan.jawatanId}">
 																<option value="${testJawatan.jawatanId}"><c:out
 																		value="${testJawatan.jawatanDesc}" /></option>
 															</c:if>
@@ -165,8 +181,14 @@
 											<div class="col-sm-4">
 												<form:select path="status" class="form-control">
 													<option></option>
-													<option>Aktif</option>
-													<option>Tidak Aktif</option>
+													<c:if test="${userStatus == 'Aktif'}">
+														<option value="Aktif" selected>Aktif</option>
+														<option value="Tidak Aktif">Tidak Aktif</option>
+													</c:if>
+													<c:if test="${userStatus == 'Tidak Aktif'}">
+														<option value="Aktif">Aktif</option>
+														<option value="Tidak Aktif" selected>Tidak Aktif</option>
+													</c:if>
 												</form:select>
 											</div>
 										</div>
@@ -177,11 +199,11 @@
 													<form:select path="cawangan" class="form-control">
 														<c:forEach var="listCawangan" items="${listCawangan}">
 
-															<c:if test="${cawangan == listCawangan.cawanganDesc}">
+															<c:if test="${userCawangan == listCawangan.cawanganDesc}">
 																<option value="${listCawangan.cawanganDesc}" selected><c:out
 																		value="${listCawangan.cawanganDesc}" /></option>
 															</c:if>
-															<c:if test="${cawangan != listCawangan.cawanganDesc}">
+															<c:if test="${userCawangan != listCawangan.cawanganDesc}">
 																<option value="${listCawangan.cawanganDesc}"><c:out
 																		value="${listCawangan.cawanganDesc}" /></option>
 															</c:if>
@@ -194,9 +216,16 @@
 												<spring:bind path="unit">
 													<form:select path="unit" class="form-control">
 														<c:forEach var="unitBahagian" items="${unitBahagian}">
-															<option value="${unitBahagian.unitBahagianDesc}"><c:out
-																	value="${unitBahagian.unitBahagianDesc}" /></option>
 
+															<c:if test="${userUnit == unitBahagian.unitBahagianDesc}">
+																<option value="${unitBahagian.unitBahagianDesc}"
+																	selected><c:out
+																		value="${unitBahagian.unitBahagianDesc}" /></option>
+															</c:if>
+															<c:if test="${userUnit != unitBahagian.unitBahagianDesc}">
+																<option value="${unitBahagian.unitBahagianDesc}"><c:out
+																		value="${unitBahagian.unitBahagianDesc}" /></option>
+															</c:if>
 														</c:forEach>
 													</form:select>
 												</spring:bind>
@@ -210,14 +239,17 @@
 
 												<spring:bind path="namaPengurus">
 													<form:select path="namaPengurus" class="form-control">
-
 														<c:forEach var="test" items="${jawatanUser}">
 
-															<option value="${test.namaStaff}"><c:out
-																	value="${test.namaStaff}" /></option>
-
+															<c:if test="${userPengurus == test.namaStaff}">
+																<option value="${test.namaStaff}" selected><c:out
+																		value="${test.namaStaff}" /></option>
+															</c:if>
+															<c:if test="${userPengurus != test.namaStaff}">
+																<option value="${test.namaStaff}"><c:out
+																		value="${test.namaStaff}" /></option>
+															</c:if>
 														</c:forEach>
-
 													</form:select>
 												</spring:bind>
 
