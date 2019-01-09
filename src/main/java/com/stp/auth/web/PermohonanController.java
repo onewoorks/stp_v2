@@ -2,46 +2,29 @@ package com.stp.auth.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.management.Notification;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,12 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 import com.stp.auth.model.Barangan;
 import com.stp.auth.model.BaranganTemp;
 import com.stp.auth.model.Pembelian;
@@ -86,7 +65,6 @@ import com.stp.auth.service.RefPeruntukanService;
 import com.stp.auth.service.RefPesawatService;
 import com.stp.auth.service.RefRoleService;
 import com.stp.auth.service.RefUnitBahagianService;
-import com.stp.auth.service.SendHTMLEmail;
 import com.stp.auth.service.UserService;
 
 @Controller
@@ -331,6 +309,22 @@ public class PermohonanController {
 		}
 
 		Permohonan permohonan = permohonanService.findById(id);
+
+		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
+		penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(permohonan);
+
+		Penerbangan contoh = null;
+		List<Penerbangan> list = new ArrayList<>();
+		for (Penerbangan jb : penerbangan) {
+			if (jb.getPenerbanganId() != null) {
+
+				contoh = jb;
+				list.add(jb);
+			}
+		}
+
+		model.addAttribute("penerbangan", list);
+		
 		//
 		// List<Permohonan> permohonan1 = permohonanService.getAll();
 

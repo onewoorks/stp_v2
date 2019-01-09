@@ -12,6 +12,9 @@
 	});
 </script>
 <script>
+
+	var kemasKiniClicked = false;
+
 	$(function() {
 
 		// Get the form fields and hidden div
@@ -50,7 +53,94 @@
 		});
 	})
 </script>
+<script>
 
+var globalPenerbanganId = 0;
+
+function kemasKini3(id,penerbanganId) {
+	var pId = penerbanganId;
+	globalPenerbanganId = penerbanganId;
+	
+	$.get("/kemasKiniUpdate?id="+id, function (data){
+		var listPenerbanganDetails = JSON.parse(data);
+		console.log(listPenerbanganDetails);
+		for(var i = 0;i<listPenerbanganDetails.length;i++){
+			if(listPenerbanganDetails[i].penerbanganId == pId){
+				var destinasi = document.getElementById('destinasi3');
+				var dariLokasi = document.getElementById('dariLokasi3');
+				var noPesawat = document.getElementById('noPesawat3');
+				var jenisPesawat = document.getElementById('jenisPesawat3');
+				var waktuTiba = document.getElementById('waktuTiba3');
+				var tarikhPergi = document.getElementById('tarikhPergi3');
+				var waktuBerlepas = document.getElementById('waktuBerlepas3');
+				var penerbanganId = document.getElementById('penerbanganId3');
+
+				if(listPenerbanganDetails[i].penerbangan != null){
+					penerbanganId.value = listPenerbanganDetails[i].penerbangan;
+				}
+				if(listPenerbanganDetails[i].tarikhPergi != null){
+					tarikhPergi.value = listPenerbanganDetails[i].tarikhPergi;
+				}
+				if(listPenerbanganDetails[i].waktuBerlepas != null){
+					waktuBerlepas.value = listPenerbanganDetails[i].waktuBerlepas;
+				}
+				if(listPenerbanganDetails[i].waktuTiba != null){
+					waktuTiba.value = listPenerbanganDetails[i].waktuTiba;
+				}
+				if(listPenerbanganDetails[i].jenisPesawat != null){
+					jenisPesawat.value = listPenerbanganDetails[i].jenisPesawat;
+				}
+				if(listPenerbanganDetails[i].noPesawat != null){
+					noPesawat.value = listPenerbanganDetails[i].noPesawat;
+				}
+				if(listPenerbanganDetails[i].dariLokasi != null){
+					dariLokasi.value = listPenerbanganDetails[i].dariLokasi;
+				}
+				if(listPenerbanganDetails[i].destinasi != null){
+					destinasi.value = listPenerbanganDetails[i].destinasi;
+				}
+
+
+				getRowToDelete3(listPenerbanganDetails[i]);
+				
+			}			
+		}
+
+	});
+
+	kemasKiniClicked = true;
+
+	var btnTambah = document.getElementById('btnTambahDlmTable3');
+	btnTambah.innerText = "Kemaskini";
+	
+}
+</script>
+<script>
+
+	var whichRowClicked = 0;
+
+	function getRowToDelete3(listPenerbanganDetails){
+
+		var detailsCompare = listPenerbanganDetails;
+		var table = document.getElementById('tablePenerbanganId3');
+
+		for(var i = 0; i<table.rows.length; i++){
+			var row = table.rows[i];
+
+			var penerbangan = row.cells[0].innerText;
+			var tarikPenerbangan = row.cells[1].innerText;
+			var waktuBerlepas = row.cells[2].innerText;
+			var waktuTiba = row.cells[3].innerText;
+
+			if(penerbangan == detailsCompare.penerbangan && tarikPenerbangan == detailsCompare.tarikhPergi && waktuBerlepas == detailsCompare.waktuBerlepas && waktuTiba == detailsCompare.waktuTiba){
+				whichRowClicked = i;
+			}
+			
+			
+		}
+		
+	}
+</script>
 <script>
 	function changeTab5() {
 		$('[href="#timeline3"]').tab('show');
@@ -69,13 +159,13 @@
 		var jumlah2 = document.getElementById('jumlah2').value;
 		var anggaranBerat2 = document.getElementById('anggaranBerat2').value;
 		var total2 = document.getElementById('total2');
-		var table2 = document.getElementById('tableBarangan2');
+		var table3 = document.getElementById('tableBarangan2');
 		totalAnggaran2 = totalAnggaran2 + parseInt(anggaranBerat2, 10);
 
 		$(
 				"<tr><td>" + baranganCount2 + "</td><td>" + baranganDibawa2
 						+ "</td><td>" + jumlah2 + "</td><td>" + anggaranBerat2
-						+ "</td></tr>").appendTo(table2);
+						+ "</td></tr>").appendTo(table3);
 		baranganCount2++;
 		total2.value = totalAnggaran2;
 
@@ -116,6 +206,7 @@
 		var waktuBerlepas3 = document.getElementById('waktuBerlepas3');
 		var penerbanganId3 = document.getElementById('penerbanganId3');
 		var table3 = document.getElementById('tablePenerbanganId3');
+		
 		$(
 				"<tr><td>" + penerbanganId3.value + "</td><td>"
 						+ tarikhPergi3.value + "</td><td>"
@@ -123,26 +214,66 @@
 						+ "</td><td>" + noPesawat3.value + "</td><td>"
 						+ dariLokasi3.value + "</td><td>" + destinasi3.value
 						+ "</td></tr>").appendTo(table3);
-		var butiranPenerbangan3 = {
-			"penerbangan" : penerbanganId3.value,
-			"tarikhPergi" : tarikhPergi3.value,
-			"waktuBerlepas" : waktuBerlepas3.value,
-			"waktuTiba" : waktuTiba3.value,
-			"noPesawat" : noPesawat3.value,
-			"dariLokasi" : dariLokasi3.value,
-			"destinasi" : destinasi3.value,
-			"jenisPesawat" : jenisPesawat3.value,
-		};
+		
+		if(kemasKiniClicked){
 
-		$.ajax({
-			type : "POST",
-			//the url where you want to sent the userName and password to
-			url : '/penerbanganTemp',
-			contentType : 'application/json',
-			data : JSON.stringify(butiranPenerbangan3),
-			success : function() {
-			}
-		})
+			var butiranPenerbangan3 = {
+					"penerbanganId": globalPenerbanganId,
+					"penerbangan" : penerbanganId3.value,
+					"tarikhPergi" : tarikhPergi3.value,
+					"waktuBerlepas" : waktuBerlepas3.value,
+					"waktuTiba" : waktuTiba3.value,
+					"noPesawat" : noPesawat3.value,
+					"dariLokasi" : dariLokasi3.value,
+					"destinasi" : destinasi3.value,
+					"jenisPesawat" : jenisPesawat3.value,
+				};
+			
+			var btnTambah = document.getElementById('btnTambahDlmTable3');
+			btnTambah.innerText = "Tambah";
+			kemasKiniClicked = false;
+
+			$.ajax({
+				type : "POST",
+				//the url where you want to sent the userName and password to
+				url : '/kemasPenerbanganTemp',
+				contentType : 'application/json',
+				data : JSON.stringify(butiranPenerbangan3),
+				success : function() {
+				}
+			})
+
+			table3.deleteRow(whichRowClicked);
+
+			whichRowClicked = 0;
+			globalPenerbanganId = 0;
+			
+
+			
+		}else{
+			var butiranPenerbangan3 = {
+					"penerbangan" : penerbanganId3.value,
+					"tarikhPergi" : tarikhPergi3.value,
+					"waktuBerlepas" : waktuBerlepas3.value,
+					"waktuTiba" : waktuTiba3.value,
+					"noPesawat" : noPesawat3.value,
+					"dariLokasi" : dariLokasi3.value,
+					"destinasi" : destinasi3.value,
+					"jenisPesawat" : jenisPesawat3.value,
+				};
+			
+			$.ajax({
+				type : "POST",
+				//the url where you want to sent the userName and password to
+				url : '/penerbanganTemp',
+				contentType : 'application/json',
+				data : JSON.stringify(butiranPenerbangan3),
+				success : function() {
+				}
+			})
+		}
+
+		
 		destinasi3.value = "";
 		dariLokasi3.value = "";
 		noPesawat3.value = "";
@@ -533,45 +664,35 @@
 														<th>No Pesawat</th>
 														<th>Dari Lokasi</th>
 														<th>Destinasi</th>
+														<th>Tindakan</th>
 													</tr>
 												</thead>
 												<tbody>
 													<%
 														int x = 1;
 													%>
-													<c:forEach var="Penerbangan" items="${listPenerbangan}">
+														<c:forEach var="Penerbangan" items="${penerbangan}">
 														<tr>
-															<td><%=x%></td>
 															<td><spring:bind path="penerbangan">
-																	<form:input type="text" class="form-control"
-																		path="penerbangan"></form:input>
+																	${Penerbangan.penerbangan}
 																</spring:bind></td>
 															<td><spring:bind path="tarikhPergi">
-																	<form:input type="text" class="form-control"
-																		path="tarikhPergi"></form:input>
+																	${Penerbangan.tarikhPergi }
 																</spring:bind></td>
 															<td><spring:bind path="waktuBerlepas">
-																	<form:input type="text" class="form-control"
-																		path="waktuBerlepas"></form:input>
+																	${Penerbangan.waktuBerlepas }
 																</spring:bind></td>
 															<td><spring:bind path="waktuTiba">
-																	<form:input type="text" class="form-control"
-																		path="waktuTiba"></form:input>
+																	${Penerbangan.waktuTiba}
 																</spring:bind></td>
-															<td><spring:bind path="noPesawat">
-																	<form:input type="text" class="form-control"
-																		path="noPesawat"></form:input>
+															<td><spring:bind path="noPesawat">${Penerbangan.noPesawat}
 																</spring:bind></td>
-															<td><spring:bind path="dariLokasi">
-																	<form:input type="text" class="form-control"
-																		path="dariLokasi"></form:input>
+															<td><spring:bind path="dariLokasi">${Penerbangan.dariLokasi }
 																</spring:bind></td>
 															<td><spring:bind path="destinasi">
-																	<form:input type="text" class="form-control"
-																		path="destinasi"></form:input>
+																	${Penerbangan.destinasi}
 																</spring:bind></td>
-															<td><button type="button" id="tambah"
-																	class="btn btn-info pull-right">Tambah</button></td>
+															<td><button type="button" value="${Penerbangan}" onclick="kemasKini3(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})" id="tambah" class="btn btn-info pull-right">Kemaskini</button></td>
 															<!--  <td><input type="text" class="form-control"
 																		id="bom"></td>
 																	<td><input type="text" class="form-control"
