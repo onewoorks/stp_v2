@@ -211,9 +211,31 @@
 						</div>
 						<!-- /.box-body -->
 						<div class="box-footer">
-							<button type="submit" class="btn btn-info pull-right">Batal</button>
+							<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#BatalModal">Batal</button>
 						</div>
 						<!-- /.box-footer -->
+						
+						<div class="modal fade" id="BatalModal" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Padam Maklumat Pengguna</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">Sila segera hubungi Pn. Farah Diyana di ext: 385 untuk urusan pembatalan seterusnya</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Tidak</button>
+										<button type="submit"class="btn btn-danger  pull-right">Batal</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 					</form:form>
 				</div>
 			</div>
