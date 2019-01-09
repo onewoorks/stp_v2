@@ -9,6 +9,7 @@
 
 			$('#modal-batalProses').modal('show');
 		}
+		
 	});
 </script>
 <script>
@@ -45,7 +46,7 @@
 </div>
 <div class="col-md-6 col-xs-6">
 	<div class="modal fade" id="modal-batalProses${pemohon.id}"
-		tabindex="-1" role="dialog" aria-hidden="true">
+		tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -216,7 +217,7 @@
 						<!-- /.box-footer -->
 						
 						<div class="modal fade" id="BatalModal" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
