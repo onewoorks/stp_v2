@@ -2,11 +2,15 @@ package com.stp.auth.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +20,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -1200,7 +1205,7 @@ public class PermohonanController {
 	@RequestMapping(value = "/downloadTiket", method = RequestMethod.GET)
 	@ResponseBody
 	public void downloadTiket(@ModelAttribute("downloadTiketSelesai") Permohonan userForm, Model model,
-			HttpServletResponse response, HttpSession session, ZipOutputStream zos) throws IOException {
+			HttpServletResponse response, HttpSession session) throws IOException {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userService.findByUsername(username);
@@ -1217,6 +1222,11 @@ public class PermohonanController {
 		ArrayList<Pembelian> pembelian = new ArrayList<>();
 
 		ArrayList<Permohonan> permohonan = new ArrayList<>();
+		
+		byte[] zip = null;
+		File directory = new File(path); 
+		
+		ArrayList<String> files = new ArrayList<String>();
 
 		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
 		for (Permohonan prJb : permohonan) {
@@ -1233,38 +1243,71 @@ public class PermohonanController {
 					if (pembelianForm.getId() != null) {
 
 						if (pembelianForm.getMuatNaikTiket() != null) {
-							File file = new File(pembelianForm.getMuatNaikTiket()); // kena
-																					// get
-																					// file
-																					// name
-																					// from
-																					// db
-
-							// guess contenty type
-							String mime = URLConnection.guessContentTypeFromName(file.getPath());
-
-							response.setContentType(mime);
-							response.setHeader("Content-Disposition", "attachment;filename=" + file.getPath());
-
-							BufferedInputStream inStrem = new BufferedInputStream(new FileInputStream(file));
-							ZipEntry zipEntry = new ZipEntry(pembelianForm.getMuatNaikTiket());
-							zos.putNextEntry(zipEntry);
-							// BufferedOutputStream outStream = new
-							// BufferedOutputStream(response.getOutputStream());
-
-							byte[] buffer = new byte[1024];
-							int bytesRead = 0;
-							while ((bytesRead = inStrem.read(buffer)) != -1) {
-								zos.write(buffer, 0, bytesRead);
-							}
-							zos.flush();
-							inStrem.close();
+							String[] fileName = splitPath(pembelianForm.getMuatNaikTiket());
+							files.add(fileName[fileName.length - 1]);
+							
 						}
 					}
 				}
+			
+				zip = zipFiles(directory, files);
+				
+				ServletOutputStream sos = response.getOutputStream();
+				response.setContentType("application/zip");
+				response.setHeader("Content-Disposition", "attachment; filename=ticket.zip");
+
+				sos.write(zip);
+	            sos.flush();
+				
 			}
 		}
 	}
+	
+	public static String[] splitPath (String path) {
+	    String backslash = ((char)92) + "";
+	    if (path.contains(backslash)) {
+	        ArrayList<String> parts = new ArrayList<>();
+	        int start = 0;
+	        int end = 0;
+	        for ( int c : path.toCharArray() ) {
+	            if (c == 92) {
+	                parts.add(path.substring(start, end));
+	                start = end + 1;
+	            }
+	            end++;
+	        }
+	        parts.add(path.substring(start));
+	        return parts.toArray( new String[parts.size()] );
+	    }
+	    return path.split("/");
+	}
+	
+    private byte[] zipFiles(File directory, ArrayList<String> files) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ZipOutputStream zos = new ZipOutputStream(baos);
+        byte bytes[] = new byte[2048];
+
+        for (String fileName : files) {
+            FileInputStream fis = new FileInputStream(directory+"\\"+fileName);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+
+            zos.putNextEntry(new ZipEntry(fileName));
+
+            int bytesRead;
+            while ((bytesRead = bis.read(bytes)) != -1) {
+                zos.write(bytes, 0, bytesRead);
+            }
+            zos.closeEntry();
+            bis.close();
+            fis.close();
+        }
+        zos.flush();
+        baos.flush();
+        zos.close();
+        baos.close();
+
+        return baos.toByteArray();
+    }
 
 	@RequestMapping(value = "/downloadBom", method = RequestMethod.GET)
 	@ResponseBody

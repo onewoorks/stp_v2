@@ -189,10 +189,6 @@
 																							<form:input type="hidden" class="form-control"
 																								path="noBilBom" value="${pemohon.noBilBom}"></form:input>
 																						</spring:bind>
-																						<spring:bind path="kelulusan">
-																							<form:input type="hidden" class="form-control"
-																								path="kelulusan" value="${pemohon.kelulusan}"></form:input>
-																						</spring:bind>
 																						<spring:bind path="namaPemohon">
 																							<form:input type="hidden" class="form-control"
 																								path="namaPemohon"
@@ -424,10 +420,6 @@
 																						<spring:bind path="noBilBom">
 																							<form:input type="hidden" class="form-control"
 																								path="noBilBom" value="${pemohon.noBilBom}"></form:input>
-																						</spring:bind>
-																						<spring:bind path="kelulusan">
-																							<form:input type="hidden" class="form-control"
-																								path="kelulusan" value="${pemohon.kelulusan}"></form:input>
 																						</spring:bind>
 																						<spring:bind path="namaPemohon">
 																							<form:input type="hidden" class="form-control"

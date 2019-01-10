@@ -158,10 +158,6 @@
 																							<form:input type="hidden" class="form-control"
 																								path="noBilBom" value="${pemohon.noBilBom}"></form:input>
 																						</spring:bind>
-																						<spring:bind path="kelulusan">
-																							<form:input type="hidden" class="form-control"
-																								path="kelulusan" value="${pemohon.kelulusan}"></form:input>
-																						</spring:bind>
 																						<spring:bind path="namaPemohon">
 																							<form:input type="hidden" class="form-control"
 																								path="namaPemohon"
@@ -179,7 +175,7 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="nama">
 																								<form:input type="text" class="form-control"
-																									id="nama" path="nama" value="${pemohon.nama}" style="width: 100%"></form:input>
+																									id="nama" path="nama" value="${pemohon.nama}" style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -192,7 +188,7 @@
 																							<spring:bind path="tarikhMohon">
 																								<form:input type="text" class="form-control"
 																									id="tarikhMohon" path="tarikhMohon"
-																									value="${pemohon.tarikhMohon}" style="width: 100%"></form:input>
+																									value="${pemohon.tarikhMohon}" style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -206,7 +202,7 @@
 																							<spring:bind path="bahagian">
 																								<form:input type="text" class="form-control"
 																									id="bahagian" path="bahagian"
-																									value="${pemohon.bahagian}" style="width: 100%"></form:input>
+																									value="${pemohon.bahagian}" style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -218,7 +214,7 @@
 																							<spring:bind path="tempatBertugas">
 																								<form:input type="text" class="form-control"
 																									id="tempatBertugas" path="tempatBertugas"
-																									value="${pemohon.tempatBertugas}" style="width: 100%"></form:input>
+																									value="${pemohon.tempatBertugas}" style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

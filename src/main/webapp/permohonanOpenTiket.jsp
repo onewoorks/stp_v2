@@ -594,7 +594,7 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="jenisPesawat">
 													<form:select id="jenisPesawat3" path="jenisPesawat"
-														class="form-control">
+														class="form-control" readonly="true"> 
 														<c:forEach var="pesawat" items="${pesawat}">
 															<option value="${pesawat.pesawatDesc}"><c:out
 																	value="${pesawat.pesawatDesc}" /></option>
@@ -610,7 +610,7 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="noPesawat">
 													<form:input id="noPesawat3" type="text"
-														class="form-control" path="noPesawat"></form:input>
+														class="form-control" path="noPesawat" readonly="true"></form:input>
 												</spring:bind>
 											</div>
 										</div>
@@ -620,7 +620,7 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="dariLokasi">
 													<form:select path="dariLokasi" id="dariLokasi3"
-														class="form-control">
+														class="form-control" readonly="true">
 														<c:forEach var="test" items="${lokasi}">
 															<option value="${test.lokasiDesc}"><c:out
 																	value="${test.lokasiDesc}" /></option>
@@ -634,7 +634,7 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="destinasi">
 													<form:select path="destinasi" id="destinasi3"
-														class="form-control">
+														class="form-control" readonly="true">
 														<c:forEach var="test" items="${lokasi}">
 															<option value="${test.lokasiDesc}"><c:out
 																	value="${test.lokasiDesc}" /></option>

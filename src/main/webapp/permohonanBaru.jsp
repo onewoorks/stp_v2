@@ -437,7 +437,7 @@
 
 										<div class="col-sm-6">
 											<spring:bind path="waktuBerlepas">
-												<form:input id="waktuBerlepas" type="datetime-local"
+												<form:input id="waktuBerlepas" type="time"
 													class="form-control" path="waktuBerlepas"></form:input>
 											</spring:bind>
 										</div>
