@@ -462,8 +462,7 @@ function kemasKini3(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="enrichNo">
 														<form:input type="text" class="form-control"
-															path="enrichNo" required="required"
-															value="${user.enrichNo}"></form:input>
+															path="enrichNo" value="${user.enrichNo}" readonly="true"></form:input>
 													</spring:bind>
 												</div>
 
@@ -475,17 +474,22 @@ function kemasKini3(id,penerbanganId) {
 												<div class="col-sm-4">
 													<spring:bind path="catatan">
 														<form:input type="text" class="form-control"
-															path="catatan" id="catatan" readonly="true"></form:input>
+															path="catatan" id="catatan" readonly="true" value="${catatan}"></form:input>
 													</spring:bind>
 												</div>
 												<label for="inputPassword3" class="col-sm-2 control-label">Peruntukan</label>
 												<div class="col-sm-4">
 													<spring:bind path="peruntukan">
 														<form:select path="peruntukan" class="form-control"
-															id="peruntukanId3" onchange="show3()">
-															<option></option>
-															<option value="Operasi">Operasi</option>
-															<option value="Pembangunan">Pembangunan</option>
+															id="peruntukanId2" onchange="show2()" readonly="true">
+															<c:if test="${peruntukanPermohonan == 'Pembangunan'}">
+																<option value="Operasi">Operasi</option>
+																<option value="Pembangunan" selected>Pembangunan</option>
+															</c:if>
+															<c:if test="${peruntukanPermohonan == 'Operasi'}">
+																<option value="Operasi" selected>Operasi</option>
+																<option value="Pembangunan">Pembangunan</option>
+															</c:if>
 														</form:select>
 													</spring:bind>
 												</div>
@@ -496,10 +500,21 @@ function kemasKini3(id,penerbanganId) {
 													<label for="inputPassword3" class="col-sm-2 control-label">Pembangunan</label>
 													<div class="col-sm-4">
 														<spring:bind path="pembangunan">
-															<form:select path="pembangunan" class="form-control">
+															<form:select path="pembangunan" class="form-control"
+																readonly="true">
 																<c:forEach var="peruntukan" items="${peruntukan}">
-																	<option value="${peruntukan.peruntukanDesc}"><c:out
-																			value="${peruntukan.peruntukanDesc}" /></option>
+
+																	<c:if
+																		test="${pembangunan == peruntukan.peruntukanDesc}">
+																		<option value="${peruntukan.peruntukanDesc}" selected><c:out
+																				value="${peruntukan.peruntukanDesc}" /></option>
+																	</c:if>
+																	<c:if
+																		test="${pembangunan != peruntukan.peruntukanDesc}">
+																		<option value="${peruntukan.peruntukanDesc}"><c:out
+																				value="${peruntukan.peruntukanDesc}" /></option>
+																	</c:if>
+
 																</c:forEach>
 															</form:select>
 														</spring:bind>
@@ -512,7 +527,7 @@ function kemasKini3(id,penerbanganId) {
 													<div class="col-sm-4">
 														<spring:bind path="noBilBom">
 															<form:input type="text" class="form-control"
-																path="noBilBom"></form:input>
+																path="noBilBom" value="${noBilBom}" readonly="true"></form:input>
 														</spring:bind>
 													</div>
 												</div>
@@ -546,7 +561,8 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="penerbangan">
 													<form:select path="penerbangan" class="form-control"
-														id="penerbanganId3" onchange="showPenerbangan3()">
+														id="penerbanganId3" onchange="showPenerbangan3()"
+														readonly="true">
 														<option></option>
 														<option value="Pergi">Pergi</option>
 														<option value="Balik">Balik</option>
@@ -594,7 +610,7 @@ function kemasKini3(id,penerbanganId) {
 											<div class="col-sm-6">
 												<spring:bind path="jenisPesawat">
 													<form:select id="jenisPesawat3" path="jenisPesawat"
-														class="form-control" readonly="true"> 
+														class="form-control" readonly="true">
 														<c:forEach var="pesawat" items="${pesawat}">
 															<option value="${pesawat.pesawatDesc}"><c:out
 																	value="${pesawat.pesawatDesc}" /></option>
@@ -671,7 +687,7 @@ function kemasKini3(id,penerbanganId) {
 													<%
 														int x = 1;
 													%>
-														<c:forEach var="Penerbangan" items="${penerbangan}">
+													<c:forEach var="Penerbangan" items="${penerbangan}">
 														<tr>
 															<td><spring:bind path="penerbangan">
 																	${Penerbangan.penerbangan}
@@ -692,7 +708,9 @@ function kemasKini3(id,penerbanganId) {
 															<td><spring:bind path="destinasi">
 																	${Penerbangan.destinasi}
 																</spring:bind></td>
-															<td><button type="button" value="${Penerbangan}" onclick="kemasKini3(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})" id="tambah" class="btn btn-info pull-right">Kemaskini</button></td>
+															<td><button type="button" value="${Penerbangan}"
+																	onclick="kemasKini3(${Penerbangan.permohonan.id},${Penerbangan.penerbanganId})"
+																	id="tambah" class="btn btn-info pull-right">Kemaskini</button></td>
 															<!--  <td><input type="text" class="form-control"
 																		id="bom"></td>
 																	<td><input type="text" class="form-control"

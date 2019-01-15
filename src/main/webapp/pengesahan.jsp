@@ -175,7 +175,8 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="nama">
 																								<form:input type="text" class="form-control"
-																									id="nama" path="nama" value="${pemohon.nama}" style="width: 100%" readonly="true"></form:input>
+																									id="nama" path="nama" value="${pemohon.nama}"
+																									style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -188,7 +189,8 @@
 																							<spring:bind path="tarikhMohon">
 																								<form:input type="text" class="form-control"
 																									id="tarikhMohon" path="tarikhMohon"
-																									value="${pemohon.tarikhMohon}" style="width: 100%" readonly="true"></form:input>
+																									value="${pemohon.tarikhMohon}"
+																									style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -202,7 +204,8 @@
 																							<spring:bind path="bahagian">
 																								<form:input type="text" class="form-control"
 																									id="bahagian" path="bahagian"
-																									value="${pemohon.bahagian}" style="width: 100%" readonly="true"></form:input>
+																									value="${pemohon.bahagian}" style="width: 100%"
+																									readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -214,7 +217,8 @@
 																							<spring:bind path="tempatBertugas">
 																								<form:input type="text" class="form-control"
 																									id="tempatBertugas" path="tempatBertugas"
-																									value="${pemohon.tempatBertugas}" style="width: 100%" readonly="true"></form:input>
+																									value="${pemohon.tempatBertugas}"
+																									style="width: 100%" readonly="true"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>
@@ -236,18 +240,25 @@
 																							%>
 																							<c:forEach var="penerbangan"
 																								items="${Penerbangan}">
-																								<tr>
-																									<td>${penerbangan.penerbangan}</td>
-																									<td>${penerbangan.tarikhPergi}</td>
-																									<td>${penerbangan.waktuBerlepas}</td>
-																									<td>${penerbangan.waktuTiba}</td>
-																									<td>${penerbangan.noPesawat}</td>
-																									<td>${penerbangan.dariLokasi}</td>
-																									<td>${penerbangan.destinasi}</td>
-																								</tr>
-																								<%
-																									i++;
-																								%>
+																								<c:set var="penerbanganLongId"
+																									value="${penerbangan.permohonan.id}"></c:set>
+																								<c:set var="permohonanLongId"
+																									value="${pemohon.id}"></c:set>
+																								<c:if
+																									test="${penerbanganLongId == permohonanLongId}">
+																									<tr>
+																										<td>${penerbangan.penerbangan}</td>
+																										<td>${penerbangan.tarikhPergi}</td>
+																										<td>${penerbangan.waktuBerlepas}</td>
+																										<td>${penerbangan.waktuTiba}</td>
+																										<td>${penerbangan.noPesawat}</td>
+																										<td>${penerbangan.dariLokasi}</td>
+																										<td>${penerbangan.destinasi}</td>
+																									</tr>
+																									<%
+																										i++;
+																									%>
+																								</c:if>
 																							</c:forEach>
 																						</tbody>
 																					</table>
@@ -258,7 +269,8 @@
 																						<div class="col-sm-8">
 																							<spring:bind path="alasan">
 																								<form:input type="text" class="form-control"
-																									id="pengesahan" path="alasan" style="width: 100%"></form:input>
+																									id="pengesahan" path="alasan"
+																									style="width: 100%"></form:input>
 																							</spring:bind>
 																						</div>
 																					</div>

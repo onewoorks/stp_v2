@@ -107,7 +107,7 @@
 							<div class="col-sm-4">
 								<spring:bind path="noTelefon">
 									<form:input type="text" class="form-control" path="noTelefon"
-										placeholder="No telefon Bimbit" value="${userJawatan}"></form:input>
+										placeholder="No telefon Bimbit" value="${notelefon}"></form:input>
 								</spring:bind>
 							</div>
 						</div>
@@ -119,12 +119,12 @@
 									<form:select path="refJawatan" class="form-control">
 										<c:forEach var="testJawatan" items="${listJawatan}">
 
-											<c:if test="${userJawatan == testJawatan.jawatanDesc}">
-												<option value="${testJawatan.jawatanDesc}" selected><c:out
+											<c:if test="${jawatan == testJawatan.jawatanDesc}">
+												<option value="${testJawatan.jawatanId}" selected><c:out
 														value="${testJawatan.jawatanDesc}" /></option>
 											</c:if>
-											<c:if test="${userJawatan != testJawatan.jawatanDesc}">
-												<option value="${testJawatan.jawatanDesc}"><c:out
+											<c:if test="${jawatan != testJawatan.jawatanDesc}">
+												<option value="${testJawatan.jawatanId}"><c:out
 														value="${testJawatan.jawatanDesc}" /></option>
 											</c:if>
 										</c:forEach>
@@ -136,8 +136,14 @@
 							<div class="col-sm-4">
 								<form:select path="status" class="form-control">
 									<option></option>
-									<option>Aktif</option>
-									<option>Tidak Aktif</option>
+									<c:if test="${penggunaStatus == 'Aktif'}">
+										<option value="Aktif" selected>Aktif</option>
+										<option value="Tidak Aktif">Tidak Aktif</option>
+									</c:if>
+									<c:if test="${penggunaStatus == 'Tidak Aktif'}">
+										<option value="Aktif">Aktif</option>
+										<option value="Tidak Aktif" selected>Tidak Aktif</option>
+									</c:if>
 								</form:select>
 							</div>
 						</div>
@@ -148,11 +154,11 @@
 									<form:select path="cawangan" class="form-control">
 										<c:forEach var="listCawangan" items="${listCawangan}">
 
-											<c:if test="${cawangan == listCawangan.cawanganDesc}">
+											<c:if test="${penggunaCawangan == listCawangan.cawanganDesc}">
 												<option value="${listCawangan.cawanganDesc}" selected><c:out
 														value="${listCawangan.cawanganDesc}" /></option>
 											</c:if>
-											<c:if test="${cawangan != listCawangan.cawanganDesc}">
+											<c:if test="${penggunaCawangan != listCawangan.cawanganDesc}">
 												<option value="${listCawangan.cawanganDesc}"><c:out
 														value="${listCawangan.cawanganDesc}" /></option>
 											</c:if>
@@ -165,9 +171,15 @@
 								<spring:bind path="unit">
 									<form:select path="unit" class="form-control">
 										<c:forEach var="unitBahagian" items="${unitBahagian}">
-											<option value="${unitBahagian.unitBahagianDesc}"><c:out
-													value="${unitBahagian.unitBahagianDesc}" /></option>
 
+											<c:if test="${penggunaUnit == unitBahagian.unitBahagianDesc}">
+												<option value="${unitBahagian.unitBahagianDesc}" selected><c:out
+														value="${unitBahagian.unitBahagianDesc}" /></option>
+											</c:if>
+											<c:if test="${penggunaUnit != unitBahagian.unitBahagianDesc}">
+												<option value="${unitBahagian.unitBahagianDesc}"><c:out
+														value="${unitBahagian.unitBahagianDesc}" /></option>
+											</c:if>
 										</c:forEach>
 									</form:select>
 								</spring:bind>
@@ -184,9 +196,14 @@
 
 										<c:forEach var="test" items="${jawatanUser}">
 
-											<option value="${test.namaStaff}"><c:out
-													value="${test.namaStaff}" /></option>
-
+											<c:if test="${penggunaPengurus == test.namaStaff}">
+												<option value="${test.namaStaff}" selected><c:out
+														value="${test.namaStaff}" /></option>
+											</c:if>
+											<c:if test="${penggunaPengurus != test.namaStaff}">
+												<option value="${test.namaStaff}"><c:out
+														value="${test.namaStaff}" /></option>
+											</c:if>
 										</c:forEach>
 
 									</form:select>

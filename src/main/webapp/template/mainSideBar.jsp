@@ -47,6 +47,8 @@
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan<span
 									class="badge badge-light"> 5</span></a></li>
+							<li class="active"><a href="infoPengguna"><i
+									class="fa fa-user"></i>Info Pengguna</a></li>
 							<li class="active"><a href="welcome"><i
 									class="fa fa-check-square-o"></i>Kelulusan</a></li>
 						</ul></li>
@@ -75,6 +77,8 @@
 						<ul class="treeview-menu">
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan</a></li>
+							<li class="active"><a href="infoPengguna"><i
+									class="fa fa-user"></i>Info Pengguna</a></li>
 							<li class="active"><a href="pembelian"><i
 									class="fa fa-dollar"></i>Tempahan<span
 									class="badge badge-light"> 5</span></a></li>
@@ -147,6 +151,8 @@
 						<ul class="treeview-menu">
 							<li class="active"><a href="permohonanTiket"><i
 									class="fa fa-edit"></i>Permohonan</a></li>
+							<li class="active"><a href="infoPengguna"><i
+									class="fa fa-user"></i>Info Pengguna</a></li>
 							<li class="active"><a href="pengesahan"><i
 									class="fa  fa-check-circle-o"></i>Pengesahan</a></li>
 						</ul></li>

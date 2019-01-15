@@ -330,7 +330,7 @@ public class PermohonanController {
 		}
 
 		model.addAttribute("penerbangan", list);
-		
+
 		//
 		// List<Permohonan> permohonan1 = permohonanService.getAll();
 
@@ -367,6 +367,14 @@ public class PermohonanController {
 		model.addAttribute("namaPengurus", user.getNamaPengurus());
 		model.addAttribute("passport", user.getPassport());
 		model.addAttribute("enrichNo", user.getEnrichNo());
+		model.addAttribute("noBilBom", permohonan.getNoBilBom());
+		model.addAttribute("pembangunan", permohonan.getPembangunan());
+		model.addAttribute("peruntukanPermohonan", permohonan.getPeruntukan());
+		model.addAttribute("catatan", permohonan.getCatatan());
+		model.addAttribute("tarikhMula", permohonan.getTarikhMula());
+		model.addAttribute("tarikhTamat", permohonan.getTarikhTamat());
+		model.addAttribute("tujuan", permohonan.getTujuan());
+		model.addAttribute("tempat", permohonan.getTempatBertugas());
 
 		return "permohonanTiket";
 
@@ -729,7 +737,7 @@ public class PermohonanController {
 		// String tarikhMula = temp.getTarikhMula();
 
 		Permohonan permohonan = new Permohonan();
-		
+
 		permohonan.setNama(temp.getNama());
 		permohonan.setNamaPelulus(temp.getNamaPelulus());
 		permohonan.setKp(temp.getKp());
@@ -913,7 +921,7 @@ public class PermohonanController {
 		if (temp.getId() != null) {
 			permohonan.setId(temp.getId());
 		}
-		
+
 		permohonan.setNama(temp.getNama());
 		permohonan.setNamaPelulus(temp.getNamaPelulus());
 		permohonan.setKp(temp.getKp());
@@ -1223,10 +1231,10 @@ public class PermohonanController {
 		ArrayList<Pembelian> pembelian = new ArrayList<>();
 
 		ArrayList<Permohonan> permohonan = new ArrayList<>();
-		
+
 		byte[] zip = null;
-		File directory = new File(path); 
-		
+		File directory = new File(path);
+
 		ArrayList<String> files = new ArrayList<String>();
 
 		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
@@ -1246,69 +1254,69 @@ public class PermohonanController {
 						if (pembelianForm.getMuatNaikTiket() != null) {
 							String[] fileName = splitPath(pembelianForm.getMuatNaikTiket());
 							files.add(fileName[fileName.length - 1]);
-							
+
 						}
 					}
 				}
-			
+
 				zip = zipFiles(directory, files);
-				
+
 				ServletOutputStream sos = response.getOutputStream();
 				response.setContentType("application/zip");
 				response.setHeader("Content-Disposition", "attachment; filename=ticket.zip");
 
 				sos.write(zip);
-	            sos.flush();
-				
+				sos.flush();
+
 			}
 		}
 	}
-	
-	public static String[] splitPath (String path) {
-	    String backslash = ((char)92) + "";
-	    if (path.contains(backslash)) {
-	        ArrayList<String> parts = new ArrayList<>();
-	        int start = 0;
-	        int end = 0;
-	        for ( int c : path.toCharArray() ) {
-	            if (c == 92) {
-	                parts.add(path.substring(start, end));
-	                start = end + 1;
-	            }
-	            end++;
-	        }
-	        parts.add(path.substring(start));
-	        return parts.toArray( new String[parts.size()] );
-	    }
-	    return path.split("/");
+
+	public static String[] splitPath(String path) {
+		String backslash = ((char) 92) + "";
+		if (path.contains(backslash)) {
+			ArrayList<String> parts = new ArrayList<>();
+			int start = 0;
+			int end = 0;
+			for (int c : path.toCharArray()) {
+				if (c == 92) {
+					parts.add(path.substring(start, end));
+					start = end + 1;
+				}
+				end++;
+			}
+			parts.add(path.substring(start));
+			return parts.toArray(new String[parts.size()]);
+		}
+		return path.split("/");
 	}
-	
-    private byte[] zipFiles(File directory, ArrayList<String> files) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ZipOutputStream zos = new ZipOutputStream(baos);
-        byte bytes[] = new byte[2048];
 
-        for (String fileName : files) {
-            FileInputStream fis = new FileInputStream(directory+"\\"+fileName);
-            BufferedInputStream bis = new BufferedInputStream(fis);
+	private byte[] zipFiles(File directory, ArrayList<String> files) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ZipOutputStream zos = new ZipOutputStream(baos);
+		byte bytes[] = new byte[2048];
 
-            zos.putNextEntry(new ZipEntry(fileName));
+		for (String fileName : files) {
+			FileInputStream fis = new FileInputStream(directory + "\\" + fileName);
+			BufferedInputStream bis = new BufferedInputStream(fis);
 
-            int bytesRead;
-            while ((bytesRead = bis.read(bytes)) != -1) {
-                zos.write(bytes, 0, bytesRead);
-            }
-            zos.closeEntry();
-            bis.close();
-            fis.close();
-        }
-        zos.flush();
-        baos.flush();
-        zos.close();
-        baos.close();
+			zos.putNextEntry(new ZipEntry(fileName));
 
-        return baos.toByteArray();
-    }
+			int bytesRead;
+			while ((bytesRead = bis.read(bytes)) != -1) {
+				zos.write(bytes, 0, bytesRead);
+			}
+			zos.closeEntry();
+			bis.close();
+			fis.close();
+		}
+		zos.flush();
+		baos.flush();
+		zos.close();
+		baos.close();
+
+		return baos.toByteArray();
+	}
 
 	@RequestMapping(value = "/downloadBom", method = RequestMethod.GET)
 	@ResponseBody
@@ -1690,7 +1698,7 @@ public class PermohonanController {
 		model.addAttribute("jawatan", user.getJawatan());
 		model.addAttribute("username", user.getUsername());
 
-		return "pengesahan";
+		return "redirect:/pengesahan";
 
 	}
 
@@ -2264,6 +2272,7 @@ public class PermohonanController {
 		model.addAttribute("roleAll", refRoleService.getAll());
 		model.addAttribute("pengguna", pengguna);
 		model.addAttribute("userJawatan", pengguna.getRefJawatan().getJawatanId());
+		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("userPengurus", pengguna.getNamaPengurus());
 		model.addAttribute("userUnit", pengguna.getUnit());
 		model.addAttribute("userCawangan", pengguna.getCawangan());

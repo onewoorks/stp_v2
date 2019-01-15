@@ -135,24 +135,24 @@ public class UserController {
 				}
 			}
 		}
-		
+
 		List<Penerbangan> listPenerbangan = new ArrayList<>();
 		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
-		
+
 		for (Permohonan jb : userForm) {
-			if(jb.getNamaPelulus() != null){
+			if (jb.getNamaPelulus() != null) {
 				if (jb.getNamaPelulus().equals(user.getNamaStaff())) {
 					model.addAttribute("welcome", userForm);
-					
+
 					penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(jb);
-					
+
 					for (Penerbangan jb2 : penerbangan) {
 						listPenerbangan.add(jb2);
 					}
 				}
 			}
 		}
-		
+
 		model.addAttribute("Penerbangan", listPenerbangan);
 		model.addAttribute("kemaskiniPermohon", new Permohonan());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
@@ -188,7 +188,7 @@ public class UserController {
 
 				listRole = (ArrayList<RefRole>) refRoleService.getAll();
 				for (RefRole jb2 : listRole) {
-					if(jb2.getRoleId() != null){
+					if (jb2.getRoleId() != null) {
 						if (jb2.getRoleId().equals(idRole2)) {
 							model.addAttribute("role", jb2.getRoleDesc());
 							System.out.println("tengok listrole -----" + jb2.getRoleDesc());
@@ -198,10 +198,30 @@ public class UserController {
 			}
 		}
 
-		model.addAttribute("welcome", permohonanService.findByStatusPermohonan("Batal"));
-		for (Permohonan userForm : permohonanService.findByStatusPermohonan("Batal")) {
-			model.addAttribute("Penerbangan", penerbanganService.findByPermohonan(userForm));
-		}
+		ArrayList<Permohonan> permohonan2 = new ArrayList<>();
+
+		permohonan2 = (ArrayList<Permohonan>) permohonanService.getAll();
+
+		List<Permohonan> listPermohonan = new ArrayList<>();
+		
+		List<Penerbangan> listPenerbangan = new ArrayList<>();
+		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
+		
+		for(Permohonan jb : permohonan2){
+			if(jb.getStatusPermohonan().equals("Batal") || jb.getStatusPermohonan().equals("Tiket Terbuka")){
+				System.out.println("list " + jb);
+				listPermohonan.add(jb);
+				model.addAttribute("welcome", listPermohonan);
+				
+				penerbangan = (ArrayList<Penerbangan>) penerbanganService.findByPermohonan(jb);
+
+				for (Penerbangan jb2 : penerbangan) {
+					listPenerbangan.add(jb2);
+				}
+			}
+		}		
+
+		model.addAttribute("Penerbangan", listPenerbangan);
 		model.addAttribute("kemaskiniPengesahan", new Permohonan());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
 		model.addAttribute("username", user.getUsername());

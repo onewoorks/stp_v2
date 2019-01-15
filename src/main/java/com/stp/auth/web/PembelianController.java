@@ -101,9 +101,13 @@ public class PembelianController {
 		
 		permohonan2 = (ArrayList<Permohonan>) permohonanService.getAll();
 		
+		List<Permohonan> listPermohonan = new ArrayList<>();
+		
 		for(Permohonan jb : permohonan2){
-			if(jb.getStatusPermohonan().equalsIgnoreCase("Lulus") || jb.getStatusPermohonan().equalsIgnoreCase("Selesai")){
-				model.addAttribute("welcome", permohonan2);
+			if(jb.getStatusPermohonan().equals("Selesai") || jb.getStatusPermohonan().equals("Lulus") || jb.getStatusPermohonan().equals("Batal") || jb.getStatusPermohonan().equals("Tiket Terbuka")){
+				System.out.println("list " + jb);
+				listPermohonan.add(jb);
+				model.addAttribute("welcome", listPermohonan);
 			}
 		}
 		

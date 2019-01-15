@@ -88,7 +88,8 @@ public class AdminController {
 		List<Pengguna> jawatanUser = new ArrayList<>();
 
 		for (Pengguna jb : userService.findAll()) {
-			System.out.println("nama pengurus ::::: " + jb.getRefJawatan().getRefRole().getRoleId());
+			// System.out.println("nama pengurus ::::: " +
+			// jb.getRefJawatan().getRefRole().getRoleId());
 			if (jb.getRefJawatan().getRefRole().getRoleId() == 2) {
 				jawatanUser.add(jb);
 				model.addAttribute("jawatanUser", jawatanUser);
@@ -185,19 +186,30 @@ public class AdminController {
 			}
 
 			model.addAttribute("userJawatan", jb.getRefJawatan().getJawatanDesc());
+			model.addAttribute("userNoTelefon", jb.getNoTelefon());
 
-			System.out.println("jwatan : " + jb.getRefJawatan().getJawatanDesc());
 		}
+
+		Pengguna pengguna3 = new Pengguna();
+
+		pengguna3 = userService.findById(id);
+
+		System.out.println("nama staff " + pengguna3.getNamaStaff());
 
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", userService.findById(id));
 		model.addAttribute("padamPenggunaForm", new Pengguna());
 		model.addAttribute("lihatPenggunaForm", new Pengguna());
-		model.addAttribute("namaStaff", pengguna.getNamaStaff());
-		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+		model.addAttribute("namaStaff", pengguna3.getNamaStaff());
+		model.addAttribute("jawatan", pengguna3.getRefJawatan().getJawatanDesc());
+		model.addAttribute("notelefon", pengguna3.getNoTelefon());
+		model.addAttribute("penggunaCawangan", pengguna3.getCawangan());
+		model.addAttribute("penggunaPengurus", pengguna3.getNamaPengurus());
+		model.addAttribute("penggunaUnit", pengguna3.getUnit());
+		model.addAttribute("penggunaStatus", pengguna3.getStatus());
 
-		System.out.println("jawatan +" + pengguna.getRefJawatan().getJawatanDesc());
+		System.out.println("jawatan " + pengguna3.getRefJawatan().getJawatanDesc());
 
 		return "daftarPengguna";
 	}
@@ -250,12 +262,23 @@ public class AdminController {
 			}
 		}
 
+		Pengguna pengguna3 = new Pengguna();
+
+		pengguna3 = userService.findById(id);
+
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
 		model.addAttribute("kemaskiniPenggunaForm", new Pengguna());
 		model.addAttribute("padamPenggunaForm", new Pengguna());
 		model.addAttribute("lihatPenggunaForm", userService.findById(id));
 		model.addAttribute("namaStaff", pengguna.getNamaStaff());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+		model.addAttribute("namaStaff", pengguna3.getNamaStaff());
+		model.addAttribute("jawatan", pengguna3.getRefJawatan().getJawatanDesc());
+		model.addAttribute("notelefon", pengguna3.getNoTelefon());
+		model.addAttribute("penggunaCawangan", pengguna3.getCawangan());
+		model.addAttribute("penggunaPengurus", pengguna3.getNamaPengurus());
+		model.addAttribute("penggunaUnit", pengguna3.getUnit());
+		model.addAttribute("penggunaStatus", pengguna3.getStatus());
 
 		return "daftarPengguna";
 	}
@@ -307,6 +330,10 @@ public class AdminController {
 				model.addAttribute("jawatanUser", jawatanUser);
 			}
 		}
+		
+		Pengguna pengguna3 = new Pengguna();
+
+		pengguna3 = userService.findById(id);
 
 		model.addAttribute("unitBahagian", refUnitBahagianService.getAll());
 		model.addAttribute("daftarPenggunaForm", new Pengguna());
@@ -315,6 +342,13 @@ public class AdminController {
 		model.addAttribute("padamPenggunaForm", userService.findById(id));
 		model.addAttribute("namaStaff", pengguna.getNamaStaff());
 		model.addAttribute("jawatan", pengguna.getRefJawatan().getJawatanDesc());
+		model.addAttribute("namaStaff", pengguna3.getNamaStaff());
+		model.addAttribute("jawatan", pengguna3.getRefJawatan().getJawatanDesc());
+		model.addAttribute("notelefon", pengguna3.getNoTelefon());
+		model.addAttribute("penggunaCawangan", pengguna3.getCawangan());
+		model.addAttribute("penggunaPengurus", pengguna3.getNamaPengurus());
+		model.addAttribute("penggunaUnit", pengguna3.getUnit());
+		model.addAttribute("penggunaStatus", pengguna3.getStatus());
 
 		return "daftarPengguna";
 	}

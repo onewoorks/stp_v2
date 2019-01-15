@@ -105,7 +105,7 @@
 								<spring:bind path="refJawatan">
 									<form:select path="refJawatan" class="form-control">
 										<c:forEach var="test" items="${listJawatan}">
-											<option value="${test.jawatanDesc}"><c:out
+											<option value="${test.jawatanId}"><c:out
 													value="${test.jawatanDesc}" /></option>
 										</c:forEach>
 									</form:select>
