@@ -11,12 +11,15 @@ import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -24,9 +27,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +44,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 
 import com.stp.auth.model.Barangan;
 import com.stp.auth.model.BaranganTemp;
@@ -73,11 +81,26 @@ import com.stp.auth.service.RefUnitBahagianService;
 import com.stp.auth.service.SendHTMLEmail;
 import com.stp.auth.service.UserService;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.HtmlExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
+
 @Controller
 public class PermohonanController {
 
 	@Value("${path.file}")
 	private String path;
+	@Autowired
+	private ApplicationContext appContext;
 
 	@Autowired
 	private PermohonanService permohonanService;
@@ -121,6 +144,8 @@ public class PermohonanController {
 	@Autowired
 	private RefJawatanService refJawatanService;
 
+	@Autowired
+	private ResourceLoader resourceLoader;
 	ArrayList<PenerbanganTemp> pt = new ArrayList<PenerbanganTemp>();
 	ArrayList<BaranganTemp> barangant = new ArrayList<BaranganTemp>();
 	ArrayList<Permohonan> permohonan = new ArrayList<>();
@@ -847,23 +872,22 @@ public class PermohonanController {
 			}
 		}
 
-		SendHTMLEmail.sendHtmlEmail(emel,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
-						+ "<img src='C:\\Program Files\\STP"
-						+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
-						+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+		SendHTMLEmail.sendHtmlEmail(emel, "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+				+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+				+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+				+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+				+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+				+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+				+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+				+ "<img src='C:\\Program Files\\STP"
+				+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+				+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+				+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+				+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
 			if (jb2.getJawatan() != null) {
@@ -875,23 +899,22 @@ public class PermohonanController {
 			}
 		}
 
-		SendHTMLEmail.sendHtmlEmail(emel2,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
-						+ "<img src='C:\\Program Files\\STP"
-						+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
-						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
-						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+		SendHTMLEmail.sendHtmlEmail(emel2, "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+				+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+				+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+				+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+				+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+				+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+				+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+				+ "<img src='C:\\Program Files\\STP"
+				+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+				+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+				+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+				+ "</div></footer></body></html>");
 
 		return "redirect:/permohonanTiket";
 	}
@@ -1348,67 +1371,100 @@ public class PermohonanController {
 
 	}
 
+	
 	@RequestMapping(value = "/downloadBorang", method = RequestMethod.POST)
-	public String downloadBorang(@ModelAttribute("downloadBorangSelesai") Permohonan userForm, Model model,
-			HttpServletResponse response, HttpSession session) throws IOException {
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+	public void export(ModelAndView model, HttpServletResponse response) throws IOException, JRException, SQLException {
 
-		User user = userService.findByUsername(username);
-		session.setAttribute("user", user);
-		// penerbanganService.save(userForm);
-		// permohonanService.save(userForm);
+		String path = resourceLoader.getResource("classpath:/reports/Report1.jrxml").getURI().getPath();
 
-		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
+		JasperReport jasperReport = JasperCompileManager.compileReport(path);
 
-		model.addAttribute("welcome", permohonanService.findByNama(user.getNamaStaff()));
+		// Parameters for report
+	
+		Map<String, Object> item = new HashMap<String, Object>();
+		item.put("penerbanganID", "");
+		item.put("Nama", "");
+		item.put("Kp", "");
+		item.put("Unit", "");
+		item.put("Emel", "");
+		item.put("NoPasport", "");
+		item.put("Tujuan", "");
+		item.put("tempatBertugas", "");
+		item.put("tarikhMula", "");
+		item.put("tarikhTamat", "");
+		item.put("Peruntukan", "");
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(permohonanService.report());
 
-		System.out.println("tengok sini mana tahu :" + userForm);
+		JasperPrint print = JasperFillManager.fillReport(jasperReport, item,dataSource );
 
-		ArrayList<Pembelian> pembelian = new ArrayList<>();
+		response.setContentType("application/x-download");
+		response.setHeader("Content-Disposition", String.format("attachment; filename=\"users.pdf\""));
 
-		ArrayList<Permohonan> permohonan = new ArrayList<>();
-
-		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
-		//
-		// Permohonan permohonan = (Permohonan)
-		// permohonanService.findByNama(user.getNamaStaff());
-
-		// pembelianForm = (ArrayList<Pembelian>)
-		// pembelianService.findByPermohonan(permohonan);
-		// for (Permohonan prJb : permohonan) {
-		// penerbangan = (ArrayList<Penerbangan>)
-		// penerbanganService.findByPermohonan(prJb);
-		//
-		// for (Penerbangan jb : penerbangan) {
-		// model.addAttribute("downloadTiketSelesai",
-		// pembelianService.findByPenerbangan(jb));
-		// pembelian = (ArrayList<Pembelian>)
-		// pembelianService.findByPenerbangan(jb);
-		// for (Pembelian pembelianForm : pembelian) {
-		//
-		// PrintWriter out = response.getWriter();
-		//
-		// if (pembelianForm.getMuatNaikTiket() != null) {
-		// response.setContentType(pembelianForm.getMuatNaikTiket());
-		// File file = new File(pembelianForm.getMuatNaikTiket());
-		// FileInputStream fileIn = new FileInputStream(file + path);
-		//
-		// int i;
-		//
-		// while ((i = fileIn.read()) != -1) {
-		// out.write(i);
-		// }
-		// fileIn.close();
-		// out.close();
-		// } else {
-		// System.out.println("no file to download");
-		// }
-		// // ServletOutputStream out = response.getOutputStream();
-		// }
-		// }
-		// }
-		return "redirect:/permohonanTiket";
+		OutputStream out = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, out);
 	}
+	
+//	@RequestMapping(value = "/downloadBorang", method = RequestMethod.POST)
+//	public String downloadBorang(@ModelAttribute("downloadBorangSelesai") Permohonan userForm, Model model,
+//			HttpServletResponse response, HttpSession session) throws IOException {
+//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//
+//		User user = userService.findByUsername(username);
+//		session.setAttribute("user", user);
+//		// penerbanganService.save(userForm);
+//		// permohonanService.save(userForm);
+//
+//		ArrayList<Penerbangan> penerbangan = new ArrayList<>();
+//
+//		model.addAttribute("welcome", permohonanService.findByNama(user.getNamaStaff()));
+//
+//		System.out.println("tengok sini mana tahu :" + userForm);
+//
+//		ArrayList<Pembelian> pembelian = new ArrayList<>();
+//
+//		ArrayList<Permohonan> permohonan = new ArrayList<>();
+//
+//		permohonan = (ArrayList<Permohonan>) permohonanService.findByNama(user.getNamaStaff());
+//		//
+//		// Permohonan permohonan = (Permohonan)
+//		// permohonanService.findByNama(user.getNamaStaff());
+//
+//		// pembelianForm = (ArrayList<Pembelian>)
+//		// pembelianService.findByPermohonan(permohonan);
+//		// for (Permohonan prJb : permohonan) {
+//		// penerbangan = (ArrayList<Penerbangan>)
+//		// penerbanganService.findByPermohonan(prJb);
+//		//
+//		// for (Penerbangan jb : penerbangan) {
+//		// model.addAttribute("downloadTiketSelesai",
+//		// pembelianService.findByPenerbangan(jb));
+//		// pembelian = (ArrayList<Pembelian>)
+//		// pembelianService.findByPenerbangan(jb);
+//		// for (Pembelian pembelianForm : pembelian) {
+//		//
+//		// PrintWriter out = response.getWriter();
+//		//
+//		// if (pembelianForm.getMuatNaikTiket() != null) {
+//		// response.setContentType(pembelianForm.getMuatNaikTiket());
+//		// File file = new File(pembelianForm.getMuatNaikTiket());
+//		// FileInputStream fileIn = new FileInputStream(file + path);
+//		//
+//		// int i;
+//		//
+//		// while ((i = fileIn.read()) != -1) {
+//		// out.write(i);
+//		// }
+//		// fileIn.close();
+//		// out.close();
+//		// } else {
+//		// System.out.println("no file to download");
+//		// }
+//		// // ServletOutputStream out = response.getOutputStream();
+//		// }
+//		// }
+//		// }
+//		return "redirect:/permohonanTiket";
+//	}
 
 	/*
 	 * @RequestMapping(value = "/hapusPermohonan", method = RequestMethod.GET)
@@ -1507,23 +1563,22 @@ public class PermohonanController {
 
 		System.out.println("emel >" + emel);
 
-		SendHTMLEmail.sendHtmlEmail(emel,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height: 3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top, color-stop(0%, rgba(226,226,226,1)), color-stop(50%, rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1)));background: -webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,10%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(to right,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width: 100%;height:3%;}</style>"
-						+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
-						+ "mpc-header.png' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
-						+ "diterima untuk kelulusan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
-						+ "</p><p>Maklumat Hubungan: <a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+		SendHTMLEmail.sendHtmlEmail(emel, "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+				+ " {width: 100%;height: 3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-webkit-gradient(left top, right top, color-stop(0%, rgba(226,226,226,1)), color-stop(50%, rgba(219,219,219,1)), "
+				+ "color-stop(51%, rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1)));background: -webkit-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-o-linear-gradient(left, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%,rgba(254,254,254,1)"
+				+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,10%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+				+ "rgba(254,254,254,1) 100%);background: linear-gradient(to right,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+				+ "(209,209,209,1) 51%, rgba(254,254,254,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2',"
+				+ " endColorstr='#fefefe', GradientType=1 );width: 100%;height:3%;}</style>"
+				+ "<img src='C:\\Users\\saufirasid\\Desktop\\STP\\STP\\src"
+				+ "mpc-header.png' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
+				+ "diterima untuk kelulusan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
+				+ "</p><p>Maklumat Hubungan: <a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+				+ "</div></footer></body></html>");
 
 		for (Pengguna jb2 : pengguna) {
 			if (jb2.getRefJawatan() != null) {
@@ -1535,23 +1590,22 @@ public class PermohonanController {
 			}
 		}
 
-		SendHTMLEmail.sendHtmlEmail(emel2,
-				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
-						+ " {width: 100%;height: 3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-webkit-gradient(left top, right top, color-stop(0%, rgba(226,226,226,1)), color-stop(50%, rgba(219,219,219,1)), "
-						+ "color-stop(51%, rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1)));background: -webkit-linear-gradient(left,"
-						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
-						+ "-o-linear-gradient(left, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%,rgba(254,254,254,1)"
-						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,10%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
-						+ "rgba(254,254,254,1) 100%);background: linear-gradient(to right,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
-						+ "(209,209,209,1) 51%, rgba(254,254,254,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2',"
-						+ " endColorstr='#fefefe', GradientType=1 );width: 100%;height:3%;}</style>"
-						+ "<img src='C:\\Program Files\\STP"
-						+ "mpc-header.png' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
-						+ "diterima untuk tindakan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
-						+ "</p><p>Maklumat Hubungan: <ahref='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
-						+ "</div></footer></body></html>");
+		SendHTMLEmail.sendHtmlEmail(emel2, "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+				+ " {width: 100%;height: 3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-webkit-gradient(left top, right top, color-stop(0%, rgba(226,226,226,1)), color-stop(50%, rgba(219,219,219,1)), "
+				+ "color-stop(51%, rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1)));background: -webkit-linear-gradient(left,"
+				+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+				+ "-o-linear-gradient(left, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%,rgba(254,254,254,1)"
+				+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,10%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+				+ "rgba(254,254,254,1) 100%);background: linear-gradient(to right,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+				+ "(209,209,209,1) 51%, rgba(254,254,254,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2',"
+				+ " endColorstr='#fefefe', GradientType=1 );width: 100%;height:3%;}</style>"
+				+ "<img src='C:\\Program Files\\STP"
+				+ "mpc-header.png' id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapatpermohonan PEMBATALAN "
+				+ "diterima untuk tindakan. Sila log masuk <a href='http://localhost:8090/login'>di sini</a> untuk melihat maklumat permohonan pembatalan.Sekian, terima kasih."
+				+ "</p><p>Maklumat Hubungan: <ahref='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+				+ "</div></footer></body></html>");
 
 		return "redirect:/permohonanTiket";
 

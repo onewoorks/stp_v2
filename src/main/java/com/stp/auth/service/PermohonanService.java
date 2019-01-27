@@ -1,6 +1,8 @@
 package com.stp.auth.service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.stp.auth.model.Pengguna;
 import com.stp.auth.model.Permohonan;
@@ -15,4 +17,7 @@ public interface PermohonanService {
     List<Permohonan> findByNamaPelulus(String namaPelulus);
    	Permohonan findById(Long id);
    	void remove(Permohonan permohonanForm);
+
+   	List<Map<String, Object>> report();
+   	
 }
