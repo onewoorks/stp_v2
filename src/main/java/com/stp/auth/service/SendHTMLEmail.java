@@ -23,15 +23,15 @@ public class SendHTMLEmail {
 
 	public static void main(String[] args) {
 
-		final String username = "mpc@onewoorks-solutions.com";
-		final String password = "mpc@2019";
+		final String username = "flight@mpc.gov.my";
+		final String password = "passwordmis";
 		// Get system properties
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "onewoorks-solutions.com");
-		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.host", "domino01.mpc.gov.my");
+		props.put("mail.smtp.port", "25");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -42,7 +42,7 @@ public class SendHTMLEmail {
 		try {
 
 			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("mpc@onewoorks-solutions.com", "Admin"));
+			msg.setFrom(new InternetAddress("flight@mpc.gov.my", "Admin"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress("saufirasid@gmail.com", "user"));
 
 			msg.setSubject("Testing Subject", "UTF-8");
@@ -63,15 +63,15 @@ public class SendHTMLEmail {
 
 	public static void sendHtmlEmail(String recieverEmail, String Html) {
 
-		final String username = "mpc@onewoorks-solutions.com";
-		final String password = "mpc@2019";
+		final String username = "flight@mpc.gov.my";
+		final String password = "passwordmis";
 		// Get system properties
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "onewoorks-solutions.com");
-		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.host", "domino01.mpc.gov.my");
+		props.put("mail.smtp.port", "25");
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -82,7 +82,7 @@ public class SendHTMLEmail {
 		try {
 
 			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("mpc@onewoorks-solutions.com", "Admin"));
+			msg.setFrom(new InternetAddress("flight@mpc.gov.my", "Admin"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recieverEmail, "user"));
 
 			msg.setSubject("Testing Subject", "UTF-8");
