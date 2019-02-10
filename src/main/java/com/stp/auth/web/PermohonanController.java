@@ -1,5 +1,6 @@
 package com.stp.auth.web;
 
+import com.onewoorks.MailApi;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -899,6 +900,30 @@ public class PermohonanController {
 				}
 			}
 		}
+                
+                String message = "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+						+ "<img src='C:\\Program Files\\STP"
+						+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+						+ "diterima untuk kelulusan. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+						+ "</div></footer></body></html>";
+                
+                MailApi mailApi = new MailApi();
+                mailApi.message = message;
+                mailApi.sender = "flight@mpc.gov.my";
+                mailApi.subject = "Flight Booking";
+                mailApi.to = emel;
+                mailApi.postMpcSmtp();
 
 		SendHTMLEmail.sendHtmlEmail(emel2,
 				"<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
@@ -917,6 +942,30 @@ public class PermohonanController {
 						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
 						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
 						+ "</div></footer></body></html>");
+                
+                String message2 = "<!DOCTYPE html><html><body><style type='text/css'>#imageSize"
+						+ " {width: 100%;height:3%;}#footer{background:rgba(226,226,226,1);background:-moz-linear-gradient(left,"
+						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+						+ "-webkit-gradient(left top, right top,color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), "
+						+ "color-stop(51%, rgba(209,209,209,1)),color-stop(100%,rgba(254,254,254,1)));background:-webkit-linear-gradient(left,"
+						+ " rgba(226,226,226,1) 0%, rgba(219,219,219,1)50%,rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%);background: "
+						+ "-o-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1)51%,rgba(254,254,254,1)"
+						+ "100%);background: -ms-linear-gradient(left, rgba(226,226,226,1)0%,rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, "
+						+ "rgba(254,254,254,1) 100%);background: linear-gradient(toright,rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba"
+						+ "(209,209,209,1) 51%, rgba(254,254,254,1)100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e2e2e2',"
+						+ " endColorstr='#fefefe', GradientType=1 );width:100%;height:3%;}</style>"
+						+ "<img src='C:\\Program Files\\STP"
+						+ "mpc-header.png'id='imageSize'/><p>Assalamuaikum dan Salam Sejahtera,Terdapat permohonan baru "
+						+ "diterima. Sila log masuk <a href=''>disini</a>untuk melihat maklumat permohonan.Sekian, terimakasih."
+						+ "</p><p>Maklumat Hubungan:<a href='mailto:flight@mpc.gov.my'>flight@mpc.gov.my</a>.</p><footer><divid='footer'>"
+						+ "</div></footer></body></html>";
+                
+                MailApi mailApi2 = new MailApi();
+                mailApi2.message = message2;
+                mailApi2.sender = "flight@mpc.gov.my";
+                mailApi2.subject = "Flight Booking";
+                mailApi2.to = emel2;
+                mailApi2.postMpcSmtp();
 
 		return "redirect:/permohonanTiket";
 	}
